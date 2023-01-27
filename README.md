@@ -45,6 +45,34 @@
 
 ## ERD
 
-![Getting Started]()
+![ErD](https://user-images.githubusercontent.com/117604017/215015580-112c7897-6aba-460e-9b41-147e41cd4cde.png)
+
+## RESTful Routing Chart
+
+![REST](https://user-images.githubusercontent.com/117604017/215015669-251c52e1-777e-4b09-97bb-9f79551e3060.png)
+
+## Wireframes of User Views
+
+- Home
+
+![home](https://user-images.githubusercontent.com/117604017/215015823-c59fac89-16d7-44db-8821-35f42dba3b7e.png)
+
+- Menu
+
+![menu](https://user-images.githubusercontent.com/117604017/215015868-fdd7af56-e6d4-4b5c-b723-ae79a80f9001.png)
+
+- Account
+
+![account](https://user-images.githubusercontent.com/117604017/215015920-6bd50d18-d071-41b6-ab40-98c9a6a34598.png)
+
+- Login 
+
+![login](https://user-images.githubusercontent.com/117604017/215015964-ec7c7d90-aa0f-4fed-a887-daaf5f398584.png)
+
+- Profile
+
+![profile](https://user-images.githubusercontent.com/117604017/215015996-1923685f-4450-4b1a-9a37-b2a74e6ad4a5.png)
+
+
 
 
