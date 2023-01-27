@@ -43,7 +43,7 @@
 - Restaurants have profiles.
 - Full CRUD on restaurant menus.
 
-## ERD
+## Entity Relationship Diagram
 
 ![ErD](https://user-images.githubusercontent.com/117604017/215015580-112c7897-6aba-460e-9b41-147e41cd4cde.png)
 
