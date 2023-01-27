@@ -26,7 +26,7 @@ const handleFormSubmit = async event => {
     event.preventDefault()
     try {
         // take the form data and send it to the server with axios.put
-        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/users/update`, formData, {})
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1`, formData, {})
         console.log(response.data)
         // decide what to do with response data
     } catch (error) {
