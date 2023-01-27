@@ -1,6 +1,6 @@
 # FOOD DELIVERY APP
 
-## Introducing our new food delivery app! Browse through a variety of restaurants, select your favorite dishes from their menus, and easily place your order for delivery. Create an account to save your order history and track your current deliveries. The platform is easy to use and offers all the functionality you need to get your meals delivered to your door. With our app, you can enjoy delicious food from your favorite restaurants without ever leaving your home.
+##  Introducing our new food delivery app! Browse through a variety of restaurants, select your favorite dishes from their menus, and easily place your order for delivery. Create an account to save your order history and track your current deliveries. The platform is easy to use and offers all the functionality you need to get your meals delivered to your door. With our app, you can enjoy delicious food from your favorite restaurants without ever leaving your home.
 
 ## Project Idea and Description
 - Create an e-commerce site that allows user to order food, choose a restaurant, and complete a checkout.
