@@ -1,9 +1,9 @@
+
+
 function Confirmed() {
     return ( 
         <>
-            <div>
-                <h3>You order is confirmed! Prepare for delicious food.</h3>
-            </div>
+            <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>        
         </>
      );
 }
