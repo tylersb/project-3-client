@@ -33,7 +33,9 @@ export default function Navbar({ currentUser, handleLogout }) {
 			<Link to="/">
 				<p>User App</p>
 			</Link>
-
+			<Link to='/checkout'>
+				<p>Checkout</p>
+			</Link>
 			{currentUser ? loggedIn : loggedOut}
 		</nav>
 	)
