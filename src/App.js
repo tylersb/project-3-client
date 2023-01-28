@@ -11,6 +11,7 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import './App.css'
+import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 
 function App() {
@@ -54,6 +55,11 @@ function App() {
           <Route 
             path="/"
             element={<Welcome />}
+          /> 
+
+          <Route 
+            path="/Menu"
+            element={<Menu />}
           />
 
           <Route 

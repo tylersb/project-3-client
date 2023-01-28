@@ -6,10 +6,10 @@ export default function Menu() { // state is menuItems, setMenuItems is the func
     const [menuItems, setMenuItems] = useState([])
     const [selectedItem, setSelectedItem] = useState(null)
     const [cart, setCart] = useState([])
-}
+
 
 useEffect(() => {
-    axios.get('/api-v1/menu').then(response => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants`).then(response => {
         setMenuItems(response.data) //updates the state of menuItems with data from the server
     })
 }, [])
@@ -40,13 +40,13 @@ return (
             <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
           </div>
         ))}
-        
+      
       </div>
       {selectedItem && <p>Selected: {selectedItem.name}</p>} 
     </div>
   );
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
-      
+}      
 
 
 
