@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 //thinking I'll import props from menu page?
 function Checkout(props) {
     //sample array
