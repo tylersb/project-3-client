@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 //thinking I'll import props from menu page?
@@ -20,9 +21,8 @@ function Checkout(props) {
     }
     //holds array of checkout items
     let [checkoutItems, setCheckoutItems] = useState(checkoutArray)
-    let [productsOnly, setProductsOnly] = useState(checkoutArray.products)
 
-
+    const navigate = useNavigate()
     //checkout submit function
    function handleSubmit(e) {
         e.preventDefault()
@@ -30,6 +30,7 @@ function Checkout(props) {
             axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
                 .then(response => {
                     console.log(response)
+                    navigate('/orderconfirmed')
                 })
                 .catch(console.warn)
     }

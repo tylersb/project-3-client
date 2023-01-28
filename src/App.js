@@ -1,8 +1,7 @@
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate
+  Route
 } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Login from './components/pages/Login'
@@ -11,6 +10,7 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
+import Confirmed from './components/pages/Confirmed'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 
@@ -80,10 +80,8 @@ function App() {
             element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
           />
 
-          <Route 
-          path="/checkout"
-          element={<Checkout currentUser={currentUser} />}
-          />
+          <Route path="/checkout" element={<Checkout currentUser={currentUser} />} />
+          <Route path="/orderconfirmed" element={<Confirmed currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>
