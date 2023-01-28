@@ -10,6 +10,7 @@ import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
+import Checkout from './components/pages/Checkout'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 
@@ -77,6 +78,11 @@ function App() {
           <Route 
             path="/profile"
             element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+          />
+
+          <Route 
+          path="/checkout"
+          element={<Checkout currentUser={currentUser} />}
           />
         </Routes>
       </div>
