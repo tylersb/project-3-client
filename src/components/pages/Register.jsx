@@ -9,6 +9,10 @@ export default function Register({ currentUser, setCurrentUser }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [msg, setMsg] = useState('')
+	const [street, setStreet] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [zip, setZip] = useState('')
 
 	// submit event handler
 	const handleSubmit = async e => {
@@ -18,7 +22,13 @@ export default function Register({ currentUser, setCurrentUser }) {
 			const reqBody = {
 				name,
 				email, 
-				password
+				password,
+				address: {
+					street,
+					city,
+					state,
+					zip
+				}
 			}
 			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, reqBody)
 
@@ -77,6 +87,39 @@ export default function Register({ currentUser, setCurrentUser }) {
 					placeholder='password...'
 					onChange={e => setPassword(e.target.value)}
 					value={password}
+				/>
+				<h4>Delivery Address</h4>
+				<label htmlFor='street'>Street:</label>
+				<input 
+					type="text"
+					id="street"
+					placeholder='123 Street...'
+					onChange={e => setStreet(e.target.value)}
+					value={street}
+				/>
+				<label htmlFor='city'>City:</label>
+				<input 
+					type="text"
+					id="city"
+					placeholder='Los Angeles'
+					onChange={e => setCity(e.target.value)}
+					value={city}
+				/>
+				<label htmlFor='state'>State:</label>
+				<input 
+					type="text"
+					id="state"
+					placeholder='California'
+					onChange={e => setState(e.target.value)}
+					value={state}
+				/>
+				<label htmlFor='zip'>Zip Code:</label>
+				<input 
+					type="number"
+					id="zip"
+					placeholder='12345'
+					onChange={e => setZip(e.target.value)}
+					value={zip}
 				/>
 
 				<button type="submit">Register</button>
