@@ -16,6 +16,23 @@ import OrderDetails from './components/pages/OrderDetails'
 function App() {
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
+  const [cart, setCart] = useState([]) // cart state
+
+  // create a function to add menu items to cart
+  const handleAddToCart = (item) => {
+    if (cart.find((cartItem) => cartItem._id === item._id)) {
+      const newCart = cart.map((cartItem) => {
+        if (cartItem._id === item._id) {
+          return { ...cartItem, quantity: cartItem.quantity + 1 }
+        } else {
+          return cartItem
+        }
+      })
+      setCart(newCart)
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }])
+    }
+  }
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -51,7 +68,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/menu" element={<Menu />} />
+            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} />} />
             <Route
               path="/register"
               element={
@@ -91,13 +108,19 @@ function App() {
               }
             />
 
-          <Route path="/checkout" element={<Checkout currentUser={currentUser} />} />
-          <Route path="/orderconfirmed" element={<Confirmed currentUser={currentUser} />} />
-        </Routes>
-      </div>
-    </Router>
+            <Route
+              path="/checkout"
+              element={<Checkout cart={cart} currentUser={currentUser} />}
+            />
+            <Route
+              path="/orderconfirmed"
+              element={<Confirmed currentUser={currentUser} />}
+            />
+          </Routes>
+        </div>
+      </Router>
     </>
-  );
+  )
 }
 
 export default App
