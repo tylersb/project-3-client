@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
 import Confirmed from './components/pages/OrderDetails'
 import './App.css'
+import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import OrderDetails from './components/pages/OrderDetails'
@@ -50,7 +51,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Welcome />} />
-
+            <Route path="/menu" element={<Menu />} />
             <Route
               path="/register"
               element={
