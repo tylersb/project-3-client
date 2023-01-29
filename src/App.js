@@ -11,7 +11,7 @@ import './App.css'
 import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
-import OrderDetails from './components/pages/OrderDetails'
+import NotFound from './components/pages/NotFound'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -116,6 +116,8 @@ function App() {
               path="/orderconfirmed"
               element={<Confirmed currentUser={currentUser} />}
             />
+            {/* Catch all routes that are not defined above. Keep as bottom route */}
+          <Route path="*" element={ <NotFound />} />
           </Routes>
         </div>
       </Router>
