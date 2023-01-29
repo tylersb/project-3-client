@@ -6,11 +6,12 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
-import Confirmed from './components/pages/Confirmed'
+import Confirmed from './components/pages/OrderDetails'
 import './App.css'
 import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
+import OrderDetails from './components/pages/OrderDetails'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -90,19 +91,13 @@ function App() {
               }
             />
 
-            <Route
-              path="/checkout"
-              element={<Checkout currentUser={currentUser} />}
-            />
-            <Route
-              path="/orderconfirmed"
-              element={<Confirmed currentUser={currentUser} />}
-            />
-          </Routes>
-        </div>
-      </Router>
+          <Route path="/checkout" element={<Checkout currentUser={currentUser} />} />
+          <Route path="/orderconfirmed" element={<Confirmed currentUser={currentUser} />} />
+        </Routes>
+      </div>
+    </Router>
     </>
-  )
+  );
 }
 
 export default App

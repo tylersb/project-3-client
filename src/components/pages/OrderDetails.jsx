@@ -1,6 +1,7 @@
 
 
-function Confirmed() {
+function OrderDetails() {
+
     return ( 
         <>
             <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>        
@@ -8,4 +9,4 @@ function Confirmed() {
      );
 }
 
-export default Confirmed;
+export default OrderDetails;
