@@ -35,6 +35,10 @@ export default function Navbar({ currentUser, handleLogout }) {
       <Link to="/">
         <p>Home</p>
       </Link>
+
+	  <Link to="/menu">
+		<p>Menu</p>
+	  </Link>
       {currentUser ? loggedIn : loggedOut}
     </nav>
   )
