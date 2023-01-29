@@ -12,11 +12,21 @@ import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
+import axios from 'axios'
 
 function App() {
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
   const [cart, setCart] = useState([]) // cart state
+  const [restaurant, setRestaurant] = useState([]) // restaurant state
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
+      .then((response) => {
+        setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
+      })
+  }, [])
 
   // create a function to add menu items to cart
   const handleAddToCart = (item) => {
@@ -68,7 +78,6 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} />} />
             <Route
               path="/register"
               element={
@@ -107,10 +116,10 @@ function App() {
                 />
               }
             />
-
+            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} restaurant={restaurant} />} />
             <Route
               path="/checkout"
-              element={<Checkout cart={cart} currentUser={currentUser} />}
+              element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
             />
             <Route
               path="/orderconfirmed"

@@ -4,16 +4,8 @@ import axios from 'axios'
 
 export default function Menu(props) {
   // state is menuItems, setMenuItems is the function to update state, same applies to selectedItem, and cart
-  const [menuItems, setMenuItems] = useState([])
+  const [menuItems, setMenuItems] = useState(props.restaurant)
   const [selectedItem, setSelectedItem] = useState(null)
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
-      .then((response) => {
-        setMenuItems(response.data[0]) //updates the state of menuItems with data from the server
-      })
-  }, [])
 
   const handleSelection = (item) => {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
