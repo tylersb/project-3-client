@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import UseAddress from "../partials/UseAddress";
+import UpdateAddress from "../partials/UpdateAddress";
 
 //thinking I'll import props from menu page?
 function Checkout(props) {
@@ -27,11 +29,11 @@ function Checkout(props) {
     //holds array of checkout items
     let [checkoutItems, setCheckoutItems] = useState(checkoutArray)
     let [totalPrice, setTotalPrice] = useState('')
-    const [user, setUser] = useState(props.currentUser);
-    const [street, setStreet] = useState(user ? user.address.street : '')
-    const [city, setCity] = useState(user ? user.address.city : '')
-    const [state, setState] = useState(user ? user.address.state : '')
-    const [zip, setZip] = useState(user ? user.address.zip : '')
+    const [user, setUser] = useState(props.currentUser?.address);
+    const [street, setStreet] = useState(user ? user.street : '')
+    const [city, setCity] = useState(user ? user.city : '')
+    const [state, setState] = useState(user ? user.state : '')
+    const [zip, setZip] = useState(user ? user.zip : '')
 
     // console.log(totalPrice)
     //currently returns null because /get /users doesn't have access to res.locals
@@ -93,7 +95,6 @@ function Checkout(props) {
                 return item
             }
         })
-        console.log(addQuantity)
         //sets new state of array
         setCheckoutItems({ ...checkoutItems, products: addQuantity })
     }
@@ -132,44 +133,20 @@ function Checkout(props) {
         )
     }) 
 
+    ////// Address functions \\\\\
+
+    //render pre-filled address
+
+
     return (
         <>
             <div>
                 <h1>Checkout Component</h1>
                 {items}
-                
             </div>
             <div>
                 <h3>Confirm Delivery Address:</h3>
-               
-                  <>
-                    <input 
-                        type="text" 
-                        name="deliveryStreet" 
-                        value={street} 
-                        onChange={(e) =>setStreet(e.target.value) }
-                        />
-                    <input 
-                        type="text" 
-                        name="deliveryCity" 
-                        value={city} 
-                        onChange={(e) =>setCity(e.target.value) }
-                        />
-                    <input 
-                        type="text" 
-                        name="deliveryState" 
-                        value={state} 
-                        onChange={(e) =>setState(e.target.value) }
-                        />
-                    <input 
-                        type="text" 
-                        name="deliveryZip" 
-                        value={zip} 
-                        onChange={(e) =>setZip(e.target.value) }
-                        />
-                    </>
-               <button type="submit">Update Address</button>
-               <button type="submit">Confirm Delivery Address</button>
+               { user ? <UseAddress user={user} /> : <UpdateAddress user={user}/> }
             </div>
 
             <form onSubmit={handleSubmit}>
