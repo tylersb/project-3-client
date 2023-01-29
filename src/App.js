@@ -1,18 +1,16 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate
-} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
+import Checkout from './components/pages/Checkout'
+import Confirmed from './components/pages/Confirmed'
 import './App.css'
 import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
+import CssBaseline from '@mui/material/CssBaseline'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -42,52 +40,69 @@ function App() {
   }
 
   return (
-    <Router>
-      <header>
-        <Navbar 
-          currentUser={currentUser}
-          handleLogout={handleLogout}
-        />
-      </header>
+    <>
+      <CssBaseline />
+      <Router>
+        <header>
+          <Navbar currentUser={currentUser} handleLogout={handleLogout} />
+        </header>
 
-      <div className="App">
-        <Routes>
-          <Route 
-            path="/"
-            element={<Welcome />}
-          /> 
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route
+              path="/register"
+              element={
+                <Register
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
 
-          <Route 
-            path="/Menu"
-            element={<Menu />}
-          />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
 
-          <Route 
-            path="/register"
-            element={<Register currentUser={currentUser} setCurrentUser={setCurrentUser} />}
-          />
-
-          <Route 
-            path="/login"
-            element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />}
-          />
-
-          {/*optionally conditionally render auth locked routes */}
-          {/* 
+            {/*optionally conditionally render auth locked routes */}
+            {/* 
 			<Route 
 			   path="/profile" 
                element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
             /> 
 		  */}
 
-          <Route 
-            path="/profile"
-            element={<Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
-          />
-        </Routes>
-      </div>
-    </Router>
-  );
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleLogout={handleLogout}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+
+            <Route
+              path="/checkout"
+              element={<Checkout currentUser={currentUser} />}
+            />
+            <Route
+              path="/orderconfirmed"
+              element={<Confirmed currentUser={currentUser} />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </>
+  )
 }
 
-export default App;
+export default App
