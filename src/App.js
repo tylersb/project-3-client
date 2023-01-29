@@ -6,33 +6,67 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
-import Confirmed from './components/pages/OrderDetails'
+import OrderDetails from './components/pages/OrderDetails'
 import './App.css'
 import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
+import axios from 'axios'
 
 function App() {
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
   const [cart, setCart] = useState([]) // cart state
+  const [restaurant, setRestaurant] = useState([]) // restaurant state
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
+      .then((response) => {
+        setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
+      })
+  }, [])
 
   // create a function to add menu items to cart
   const handleAddToCart = (item) => {
-    if (cart.find((cartItem) => cartItem._id === item._id)) {
+    if (cart.find((cartItem) => cartItem.name === item.name)) {
       const newCart = cart.map((cartItem) => {
-        if (cartItem._id === item._id) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 }
+        if (cartItem.name === item.name) {
+            return { 
+              name : cartItem.name,
+              price : cartItem.price,
+              quantity : cartItem.quantity + 1
+            }
         } else {
-          return cartItem
+          return {
+            name: item.name,
+            price: item.price,
+            quantity: 1
+          }
         }
       })
       setCart(newCart)
     } else {
-      setCart([...cart, { ...item, quantity: 1 }])
+      setCart([...cart, {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      }])
     }
   }
+
+
+  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
+  //       } else {
+  //         return cartItem
+  //       }
+  //     })
+  //     setCart(newCart)
+  //   } else {
+  //     setCart([...cart, { ...item, quantity: 1 }])
+  //   }
+  // }
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -68,7 +102,6 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} />} />
             <Route
               path="/register"
               element={
@@ -107,14 +140,14 @@ function App() {
                 />
               }
             />
-
+            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} restaurant={restaurant} />} />
             <Route
               path="/checkout"
-              element={<Checkout cart={cart} currentUser={currentUser} />}
+              element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
             />
             <Route
-              path="/orderconfirmed"
-              element={<Confirmed currentUser={currentUser} />}
+              path="/orderconfirmed/:id"
+              element={<OrderDetails currentUser={currentUser} />}
             />
             {/* Catch all routes that are not defined above. Keep as bottom route */}
           <Route path="*" element={ <NotFound />} />
