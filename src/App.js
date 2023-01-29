@@ -10,7 +10,7 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
-import Confirmed from './components/pages/Confirmed'
+import Confirmed from './components/pages/OrderDetails'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 
