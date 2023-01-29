@@ -26,12 +26,14 @@ function Checkout(props) {
     }
     //holds array of checkout items
     let [checkoutItems, setCheckoutItems] = useState(checkoutArray)
+    let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(props.currentUser);
     const [street, setStreet] = useState(user ? user.address.street : '')
     const [city, setCity] = useState(user ? user.address.city : '')
     const [state, setState] = useState(user ? user.address.state : '')
     const [zip, setZip] = useState(user ? user.address.zip : '')
 
+    // console.log(totalPrice)
     //currently returns null because /get /users doesn't have access to res.locals
     const getUser = async () => {
         await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
@@ -111,7 +113,7 @@ function Checkout(props) {
                 return item
             }
         })
-        setCheckoutItems({ ...checkoutItems, products: removeQuantity })
+        setCheckoutItems({ ...checkoutItems, products: removeQuantity })        
     }
 
     //items that appear in checkout basket
@@ -121,18 +123,22 @@ function Checkout(props) {
             <div key={`item-${idx}`}>
                 <p>Item: {item.name}</p>
                 <p>Price: {item.price}</p>
+                <p>Total price: {item.price*item.quantity}</p>
                 <p>Quantity: {item.quantity}</p>
                 <button onClick={() => { handleAddItem(idx, item.quantity) }}>Add Quantity</button>
                 <button onClick={() => { handleRemoveItem(idx, item.quantity) }}>Remove Quantity</button>
                 <button onClick={() => { handleDelete(idx) }}>Delete Item</button>
             </div>
         )
-    })
+    }) 
 
     return (
         <>
-            <h1>Checkout Component</h1>
-            {items}
+            <div>
+                <h1>Checkout Component</h1>
+                {items}
+                
+            </div>
             <div>
                 <h3>Confirm Delivery Address:</h3>
                
