@@ -30,19 +30,43 @@ function App() {
 
   // create a function to add menu items to cart
   const handleAddToCart = (item) => {
-    if (cart.find((cartItem) => cartItem._id === item._id)) {
+    if (cart.find((cartItem) => cartItem.name === item.name)) {
       const newCart = cart.map((cartItem) => {
-        if (cartItem._id === item._id) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 }
+        if (cartItem.name === item.name) {
+            return { 
+              name : cartItem.name,
+              price : cartItem.price,
+              quantity : cartItem.quantity + 1
+            }
         } else {
-          return cartItem
+          return {
+            name: item.name,
+            price: item.price,
+            quantity: 1
+          }
         }
       })
       setCart(newCart)
     } else {
-      setCart([...cart, { ...item, quantity: 1 }])
+      setCart([...cart, {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      }])
     }
   }
+
+
+  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
+  //       } else {
+  //         return cartItem
+  //       }
+  //     })
+  //     setCart(newCart)
+  //   } else {
+  //     setCart([...cart, { ...item, quantity: 1 }])
+  //   }
+  // }
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
