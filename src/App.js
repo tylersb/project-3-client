@@ -13,6 +13,7 @@ import Checkout from './components/pages/Checkout'
 import Confirmed from './components/pages/OrderDetails'
 import './App.css'
 import jwt_decode from 'jwt-decode'
+import OrderDetails from './components/pages/OrderDetails'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -81,7 +82,7 @@ function App() {
           />
 
           <Route path="/checkout" element={<Checkout currentUser={currentUser} />} />
-          <Route path="/orderconfirmed" element={<Confirmed currentUser={currentUser} />} />
+          <Route path="/orderconfirmed/:id" element={<OrderDetails currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>

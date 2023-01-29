@@ -1,6 +1,6 @@
-import 
 
-function Confirmed() {
+
+function OrderDetails() {
 
     return ( 
         <>
@@ -9,4 +9,4 @@ function Confirmed() {
      );
 }
 
-export default Confirmed;
+export default OrderDetails;
