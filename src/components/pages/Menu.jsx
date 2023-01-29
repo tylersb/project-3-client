@@ -7,6 +7,7 @@ export default function Menu(props) {
   const [menuItems, setMenuItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(null)
 
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)

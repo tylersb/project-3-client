@@ -1,16 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import UseAddress from "../partials/UseAddress";
 import UpdateAddress from "../partials/UpdateAddress";
 
-//thinking I'll import props from menu page?
-function Checkout(props) {
-    console.log(props.currentUser)
+
+function Checkout({cart, currentUser}) {
+    console.log(currentUser)
     //sample array
     const checkoutArray = {
-        userId: props.currentUser?.id,
+        userId: currentUser?.id,
         restaurantId: "63d4186dde15026503afc76c",
         products:
             [
@@ -27,34 +26,39 @@ function Checkout(props) {
                 }]
     }
     //holds array of checkout items
-    let [checkoutItems, setCheckoutItems] = useState(checkoutArray)
-    let [totalPrice, setTotalPrice] = useState('')
-    const [user, setUser] = useState(props.currentUser?.address);
-    const [street, setStreet] = useState(user ? user.street : '')
-    const [city, setCity] = useState(user ? user.city : '')
-    const [state, setState] = useState(user ? user.state : '')
-    const [zip, setZip] = useState(user ? user.zip : '')
+    let [checkoutItems, setCheckoutItems] = useState(
+        {
+            userId: currentUser?.id,
+            restaurantId: "63d4186dde15026503afc76c",
+            products: cart,
+            address: address
+        })
+    // let [totalPrice, setTotalPrice] = useState('')
+    const [user, setUser] = useState(currentUser?.address);
+    const [address, setAddress] =useState(
+        {
+            street,
+            city,
+            state,
+            zip
+        }
+    )
+    // const [street, setStreet] = useState(user ? user.street : '')
+    // const [city, setCity] = useState(user ? user.city : '')
+    // const [state, setState] = useState(user ? user.state : '')
+    // const [zip, setZip] = useState(user ? user.zip : '')
 
-    // console.log(totalPrice)
-    //currently returns null because /get /users doesn't have access to res.locals
-    const getUser = async () => {
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
-            .then(response => {
-                console.log(response, "axios")
-                return response.data
-            })
-            .catch(console.warn)
-    }
-  
+
     // const navigate = useNavigate()
 
     //checkout submit function
     async function handleSubmit(e) {
         e.preventDefault()
         // post order to the db with state items as order
+        console.log(checkoutItems)
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
             .then(response => {
-                console.log(response)
+                console.log('this is post data', response.data)
             })
             .catch(console.warn)
 
