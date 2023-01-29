@@ -6,7 +6,7 @@ import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
 import Navbar from './components/Navbar'
 import Checkout from './components/pages/Checkout'
-import Confirmed from './components/pages/OrderDetails'
+import OrderDetails from './components/pages/OrderDetails'
 import './App.css'
 import Menu from './components/pages/Menu'
 import jwt_decode from 'jwt-decode'
@@ -146,8 +146,8 @@ function App() {
               element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
             />
             <Route
-              path="/orderconfirmed"
-              element={<Confirmed currentUser={currentUser} />}
+              path="/orderconfirmed/:id"
+              element={<OrderDetails currentUser={currentUser} />}
             />
             {/* Catch all routes that are not defined above. Keep as bottom route */}
           <Route path="*" element={ <NotFound />} />
