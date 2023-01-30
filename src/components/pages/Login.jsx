@@ -3,9 +3,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 export default function Login({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -48,32 +48,36 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div>
+		<Box>
 			<h1>Login to Your Account:</h1>
 
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
+				<Typography>
 				<label htmlFor='email'>Email:</label>
-				<input 
+				<TextField id="outlined-basic" variant="outlined" color="primary" required 
 					type="email"
-					id="email"
+					
 					placeholder='your email...'
 					onChange={e => setEmail(e.target.value)}
 					value={email}
 				/>
+				</Typography>
 
 				<label htmlFor='password'>Password:</label>
-				<input 
+				<Typography>
+				<TextField id="outlined-basic" variant="outlined" color="primary" required 
 					type="password"
-					id="password"
+					
 					placeholder='password...'
 					onChange={e => setPassword(e.target.value)}
 					value={password}
 				/>
+				</Typography>
 
-				<button type="submit">Login</button>
+				<Button variant="outlined" type="submit">Login</Button>
 			</form>
-		</div>
+		</Box>
 	)
 }
