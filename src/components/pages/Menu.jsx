@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Reviews from '../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
+import { width } from '@mui/system'
 
 // create function component Menu
 export default function Menu(props) {
@@ -25,8 +26,10 @@ export default function Menu(props) {
               >
                 {item.name} - ${item.price}
               </span>
-              <IconButton color="primary" aria-label="add to shopping cart"
-              onClick={() =>
+              <IconButton
+                color="primary"
+                aria-label="add to shopping cart"
+                onClick={() =>
                   props.handleAddToCart({
                     name: item.name,
                     price: item.price
@@ -43,7 +46,12 @@ export default function Menu(props) {
   })
 
   return (
-    <div>
+    <div
+      style={{
+        margin: '0 auto',
+        width: '40vw',
+      }}
+    >
       <h1>Menu</h1>
       <div>{menu}</div>
       {selectedItem && <p>Selected: {selectedItem.name}</p>}
