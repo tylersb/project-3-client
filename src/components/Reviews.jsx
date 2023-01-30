@@ -12,6 +12,7 @@ export default function Reviews(props) {
     comment: ''
   })
   const [avgRating, setAvgRating] = useState(0)
+  
 
   useEffect(() => {
     const fetchReviews = async () => {
