@@ -194,14 +194,15 @@ function App() {
               }
             />
             <Route
-              path="/orders/:id"
-              element={<OrderDetails 
+              path="/orders/:id/confirmed"
+              element={
+              <OrderDetails 
               currentUser={currentUser} />}
             />
 
+            <Route path="/orders/:id" element={<Order />} />
 
             {/* Catch all routes that are not defined above. Keep as bottom route */}
-            <Route path="/orders/:id" element={<Order />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

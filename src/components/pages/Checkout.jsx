@@ -29,7 +29,7 @@ function Checkout ({cart, currentUser, restaurant}) {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
             .then(response => {
                 console.log(response)
-                navigate(`/orders/${response.data._id}`)
+                navigate(`/orders/${response.data._id}/confirmed`)
             })
             .catch(console.warn)
     }
