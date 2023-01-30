@@ -1,87 +1,64 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UseAddress from "../partials/UseAddress";
 import UpdateAddress from "../partials/UpdateAddress";
 
-
-function Checkout({cart, currentUser}) {
-    console.log(currentUser)
-    //sample array
-    const checkoutArray = {
-        userId: currentUser?.id,
-        restaurantId: "63d4186dde15026503afc76c",
-        products:
-            [
-                {
-                    name: 'Pepperoni Pizza',
-                    price: 15,
-                    quantity: 2
-                },
-
-                {
-                    name: 'Chocolate Milk',
-                    price: 2,
-                    quantity: 2
-                }]
-    }
+function Checkout ({cart, currentUser, restaurant, totalPrice}) {
+    // console.log(currentUser, "currentUser")
+    // console.log(cart, "cart")
+    // console.log(restaurant, "restaurant")
+    // console.log(order, "order")
     //holds array of checkout items
-    let [checkoutItems, setCheckoutItems] = useState(checkoutArray)
-    let [totalPrice, setTotalPrice] = useState('')
+    // let [checkoutItems, setCheckoutItems] = useState(cart)
+    // let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
-    const [street, setStreet] = useState(user ? user.street : '')
-    const [city, setCity] = useState(user ? user.city : '')
-    const [state, setState] = useState(user ? user.state : '')
-    const [zip, setZip] = useState(user ? user.zip : '')
+    // const [address]
+    // const [street, setStreet] = useState(user ? user.street : '')
+    // const [city, setCity] = useState(user ? user.city : '')
+    // const [state, setState] = useState(user ? user.state : '')
+    // const [zip, setZip] = useState(user ? user.zip : '')
+    let [checkoutItems, setCheckoutItems] = useState({
+        userId: currentUser?.id,
+        restaurantId: restaurant?._id,
+        products: cart,
+        dropOffAddress: currentUser.address,
+        name: currentUser?.name
+      })
 
-    // console.log(totalPrice)
-    //currently returns null because /get /users doesn't have access to res.locals
-    const getUser = async () => {
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`)
-            .then(response => {
-                console.log(response, "axios")
-                return response.data
-            })
-            .catch(console.warn)
-    }
-  
-    // const navigate = useNavigate()
-
+    const navigate = useNavigate()
     //checkout submit function
     async function handleSubmit(e) {
         e.preventDefault()
         // post order to the db with state items as order
+        await setCheckoutItems({
+            restaurantId: restaurant._id,
+            products: cart,
+            dropOffAddress: currentUser.address,
+            totalPrice: totalPrice
+          })
+          console.log('before POST', checkoutItems)
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
             .then(response => {
                 console.log(response)
+                navigate(`/orders/${response.data._id}`)
             })
             .catch(console.warn)
-
-    //attempt to get order, fail b/c don't know iD at this point, can't send in req.params to confirmation page.
-    // await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders`)
-    // .then(response => {
-    //     console.log(response)
-    // })
-    //     .catch(console.warn)
-    // navigate(`/orderconfirmed/${checkoutItems.userId}`)
-  }
+    }
 
   ////// Changing Item quantity and Deleting Items \\\\\
-  //need a delete item function
+  //delete item function
   function handleDelete(index) {
-    console.log(index, 'index')
     const deleteItem = checkoutItems.products.filter((item, idx) => {
-      console.log(idx, 'filter index')
+      console.log('filter index', idx )
       return idx !== index
     })
     //sets new state of array
-    console.log(deleteItem)
     setCheckoutItems({ ...checkoutItems, products: deleteItem })
   }
 
   //add an item function/change quantity
   function handleAddItem(index, quantity) {
-    console.log(checkoutItems.products)
     const addQuantity = checkoutItems.products.map((item, idx) => {
       //checks incoming index against array
       if (idx === index) {
@@ -114,6 +91,7 @@ function Checkout({cart, currentUser}) {
     setCheckoutItems({ ...checkoutItems, products: removeQuantity })
   }
 
+  
   //items that appear in checkout basket
   let items = checkoutItems.products.map((item, idx) => {
     // console.log(item)
@@ -121,42 +99,41 @@ function Checkout({cart, currentUser}) {
       <div key={`item-${idx}`}>
         <p>Item: {item.name}</p>
         <p>Price: {item.price}</p>
-        <p>Total price: {item.price * item.quantity}</p>
         <p>Quantity: {item.quantity}</p>
+        <p>Items total: ${item.price * item.quantity}</p>
         <button
-          onClick={() => {
-            handleAddItem(idx, item.quantity)
-          }}
-        >
+          onClick={() => {handleAddItem(idx, item.quantity)}}>
           Add Quantity
         </button>
         <button
-          onClick={() => {
-            handleRemoveItem(idx, item.quantity)
-          }}
-        >
+          onClick={() => {handleRemoveItem(idx, item.quantity)}}>
           Remove Quantity
         </button>
         <button
-          onClick={() => {
-            handleDelete(idx)
-          }}
-        >
+          onClick={() => {handleDelete(idx)}}>
           Delete Item
         </button>
       </div>
     )
   })
 
-  ////// Address functions \\\\\
-
-  //render pre-filled address
+//   setTotalPrice(checkoutItems?.products.reduce((total, item) => {
+//     return total + item.price * item.quantity
+//   }
+//   , 0))
+   ////// Address functions \\\\\
 
   return (
     <>
       <div>
         <h1>Checkout Component</h1>
         {items}
+        <p>Order Total: ${
+        checkoutItems?.products.reduce((total, item) => {
+          return total + item.price * item.quantity
+        }
+        , 0)
+      }</p>
       </div>
       <div>
         <h3>Confirm Delivery Address:</h3>

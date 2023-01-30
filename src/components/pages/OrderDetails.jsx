@@ -39,6 +39,14 @@ function OrderDetails() {
           )
         })}
       </ul>
+      <div>
+        <h3>Delivery Address</h3>
+              <p>{order?.name}</p>
+              <p>{order?.dropOffAddress.street}</p>
+              <p>{order?.dropOffAddress.city}</p>
+              <p>{order?.dropOffAddress.state}</p>
+              <p>{order?.dropOffAddress.zip}</p>
+      </div>
     </>
   )
 }
