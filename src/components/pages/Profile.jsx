@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import OrderHistory from '../OrderHistory'
 
 export default function Profile({ currentUser, handleLogout }) {
 	// state for the secret message (aka user privilaged data)
@@ -51,6 +52,7 @@ export default function Profile({ currentUser, handleLogout }) {
 			<h2>Here is the secret message that is only availible to users of User App:</h2>
 
 			<h3>{msg}</h3>
+      <OrderHistory userId={currentUser?.id}/>
 		</div>
 	)
 }

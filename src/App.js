@@ -13,50 +13,13 @@ import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
 import axios from 'axios'
+import Order from './components/pages/Order'
 
 function App() {
   // the currently logged in user will be stored up here in state
   const [currentUser, setCurrentUser] = useState(null)
   const [cart, setCart] = useState([]) // cart state
   const [restaurant, setRestaurant] = useState([]) // restaurant state
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
-      .then((response) => {
-        setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
-      })
-  }, [])
-
-  // create a function to add menu items to cart
-  const handleAddToCart = (item) => {
-    // check to see if the item is already in the cart
-    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
-    // if it is, we will increment the quantity
-    if (itemInCart) {
-      const newCart = cart.map((cartItem) => {
-        if (cartItem.name === item.name) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 }
-        } else {
-          return cartItem
-        }
-      })
-      setCart(newCart)
-    } else {
-      setCart([...cart, { ...item, quantity: 1 }])
-    }
-  }
-
-  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
-  //       } else {
-  //         return cartItem
-  //       }
-  //     })
-  //     setCart(newCart)
-  //   } else {
-  //     setCart([...cart, { ...item, quantity: 1 }])
-  //   }
-  // }
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -78,6 +41,39 @@ function App() {
       localStorage.removeItem('jwt')
       // set the user in the App state to be null
       setCurrentUser(null)
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/restaurants`
+        )
+        setRestaurant(response.data[0])
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  // create a function to add menu items to cart
+  const handleAddToCart = (item) => {
+    // check to see if the item is already in the cart
+    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+    // if it is, we will increment the quantity
+    if (itemInCart) {
+      const newCart = cart.map((cartItem) => {
+        if (cartItem.name === item.name) {
+          return { ...cartItem, quantity: cartItem.quantity + 1 }
+        } else {
+          return cartItem
+        }
+      })
+      setCart(newCart)
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }])
     }
   }
 
@@ -157,6 +153,7 @@ function App() {
             />
             {/* Catch all routes that are not defined above. Keep as bottom route */}
             <Route path="*" element={<NotFound />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </div>
       </Router>
