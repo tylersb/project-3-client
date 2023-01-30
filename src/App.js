@@ -13,6 +13,7 @@ import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
 import axios from 'axios'
+import Order from './components/pages/Order'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -20,9 +21,17 @@ function App() {
   const [cart, setCart] = useState([]) // cart state
   const [restaurant, setRestaurant] = useState([]) // restaurant state
 
+
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    street: currentUser?.address.street,
+    city: currentUser?.address.city,
+    state: currentUser?.address.state,
+    zip: currentUser?.address.zip
+  })
+ 
+
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
       .then((response) => {
         setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
       })
@@ -30,33 +39,32 @@ function App() {
 
   // create a function to add menu items to cart
   const handleAddToCart = (item) => {
-    // check to see if the item is already in the cart
-    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
-    // if it is, we will increment the quantity
-    if (itemInCart) {
+    if (cart.find((cartItem) => cartItem.name === item.name)) {
       const newCart = cart.map((cartItem) => {
         if (cartItem.name === item.name) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 }
+            return { 
+              name : cartItem.name,
+              price : cartItem.price,
+              quantity : cartItem.quantity + 1
+            }
         } else {
-          return cartItem
+          return {
+            name: item.name,
+            price: item.price,
+            quantity: 1
+          }
         }
       })
       setCart(newCart)
     } else {
-      setCart([...cart, { ...item, quantity: 1 }])
+      setCart([...cart, {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      }])
     }
   }
 
-  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
-  //       } else {
-  //         return cartItem
-  //       }
-  //     })
-  //     setCart(newCart)
-  //   } else {
-  //     setCart([...cart, { ...item, quantity: 1 }])
-  //   }
-  // }
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -80,6 +88,39 @@ function App() {
       setCurrentUser(null)
     }
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/restaurants`
+        )
+        setRestaurant(response.data[0])
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  // create a function to add menu items to cart
+  // const handleAddToCart = (item) => {
+  //   // check to see if the item is already in the cart
+  //   const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+  //   // if it is, we will increment the quantity
+  //   if (itemInCart) {
+  //     const newCart = cart.map((cartItem) => {
+  //       if (cartItem.name === item.name) {
+  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
+  //       } else {
+  //         return cartItem
+  //       }
+  //     })
+  //     setCart(newCart)
+  //   } else {
+  //     setCart([...cart, { ...item, quantity: 1 }])
+  //   }
+  // }
 
   return (
     <>
@@ -148,14 +189,19 @@ function App() {
                   cart={cart}
                   currentUser={currentUser}
                   restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
                 />
               }
             />
             <Route
-              path="/orderconfirmed/:id"
-              element={<OrderDetails currentUser={currentUser} />}
+              path="/orders/:id"
+              element={<OrderDetails 
+              currentUser={currentUser} />}
             />
+
+
             {/* Catch all routes that are not defined above. Keep as bottom route */}
+            <Route path="/orders/:id" element={<Order />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

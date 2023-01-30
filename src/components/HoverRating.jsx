@@ -16,12 +16,13 @@ const labels = {
   5: 'Excellent+'
 }
 
-function getLabelText(userReview.rating) {
-  return `${userReview.rating} Star${userReview.rating !== 1 ? 's' : ''}, ${labels[userReview.rating]}`
-}
-
 export default function HoverRating({ userReview, setUserReview }) {
   const [hover, setHover] = useState(-1)
+  let rating = userReview?.rating
+
+  function getLabelText(rating) {
+    return `${rating} Star${rating !== 1 ? 's' : ''}, ${labels[rating]}`
+  }
 
   return (
     <Box
@@ -44,8 +45,10 @@ export default function HoverRating({ userReview, setUserReview }) {
         }}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
-      {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+      {userReview.rating !== null && (
+        <Box sx={{ ml: 2 }}>
+          {labels[hover !== -1 ? hover : userReview.rating]}
+        </Box>
       )}
     </Box>
   )
