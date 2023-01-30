@@ -23,9 +23,13 @@ export default function Navbar({ currentUser, handleLogout }) {
   const loggedOut = (
     <>
       {/* if the user is not logged in... */}
-      <Link to="/register">Register</Link>
+      <Link to="/register">
+        <p>Register</p>
+      </Link>
 
-      <Link to="/login">Login</Link>
+      <Link to="/login">
+        <p>Login</p>
+      </Link>
     </>
   )
 
@@ -36,9 +40,9 @@ export default function Navbar({ currentUser, handleLogout }) {
         <p>Home</p>
       </Link>
 
-	  <Link to="/menu">
-		<p>Menu</p>
-	  </Link>
+      <Link to="/menu">
+        <p>Menu</p>
+      </Link>
       {currentUser ? loggedIn : loggedOut}
     </nav>
   )
