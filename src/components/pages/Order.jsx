@@ -28,15 +28,13 @@ export default function Order() {
     return <div>Loading...</div>
   }
 
-  // const orderItems = order.products.map((product) => {
-  //   return (
-  //     <tr key={product._id}>
-  //       <td>{product.name}</td>
-  //       <td>${product.price}</td>
-  //       <td>{product.quantity}</td>
-  //     </tr>
-  //   )
-  // })
+  const dropoff = (
+    <p>
+      Dropoff Address: {order.dropOffAddress?.street},{' '}
+      {order.dropOffAddress?.city}, {order.dropOffAddress?.state},{' '}
+      {order.dropOffAddress?.zip}
+    </p>
+  )
 
   return (
     <div>
@@ -57,6 +55,7 @@ export default function Order() {
           return total + product.price
         }, 0)}
       </p>
+      {order.dropOffAddress ? dropoff : null}
       <p>Order Items:</p>
       <div
         style={{
