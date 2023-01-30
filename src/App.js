@@ -21,6 +21,7 @@ function App() {
   const [cart, setCart] = useState([]) // cart state
   const [restaurant, setRestaurant] = useState([]) // restaurant state
 
+
   const [deliveryAddress, setDeliveryAddress] = useState({
     street: currentUser?.address.street,
     city: currentUser?.address.city,
@@ -28,13 +29,6 @@ function App() {
     zip: currentUser?.address.zip
   })
  
-  // //order schema for submitting orders to backend
-  // const [order, setOrder] = useState({
-  //   restaurantId: restaurant._id,
-  //   products: cart,
-  //   dropOffAddress: deliveryAddress,
-  //   totalPrice: 0
-  // })
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
@@ -71,6 +65,7 @@ function App() {
     }
   }
 
+>>>>>>>>> Temporary merge branch 2
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // check to see if token is in storage
@@ -176,14 +171,32 @@ function App() {
                 />
               }
             />
-            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} restaurant={restaurant} />} />
+            <Route
+              path="/menu"
+              element={
+                <Menu
+                  cart={cart}
+                  currentUser={currentUser}
+                  handleAddToCart={handleAddToCart}
+                  restaurant={restaurant}
+                />
+              }
+            />
             <Route
               path="/checkout"
-              element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
+              element={
+                <Checkout
+                  cart={cart}
+                  currentUser={currentUser}
+                  restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
+                />
+              }
             />
             <Route
               path="/orders/:id"
-              element={<OrderDetails currentUser={currentUser} />}
+              element={<OrderDetails 
+              currentUser={currentUser} />}
             />
 
 
