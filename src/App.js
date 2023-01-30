@@ -30,32 +30,22 @@ function App() {
 
   // create a function to add menu items to cart
   const handleAddToCart = (item) => {
-    if (cart.find((cartItem) => cartItem.name === item.name)) {
+    // check to see if the item is already in the cart
+    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+    // if it is, we will increment the quantity
+    if (itemInCart) {
       const newCart = cart.map((cartItem) => {
         if (cartItem.name === item.name) {
-            return { 
-              name : cartItem.name,
-              price : cartItem.price,
-              quantity : cartItem.quantity + 1
-            }
+          return { ...cartItem, quantity: cartItem.quantity + 1 }
         } else {
-          return {
-            name: item.name,
-            price: item.price,
-            quantity: 1
-          }
+          return cartItem
         }
       })
       setCart(newCart)
     } else {
-      setCart([...cart, {
-        name: item.name,
-        price: item.price,
-        quantity: 1
-      }])
+      setCart([...cart, { ...item, quantity: 1 }])
     }
   }
-
 
   //         return { ...cartItem, quantity: cartItem.quantity + 1 }
   //       } else {
@@ -140,17 +130,33 @@ function App() {
                 />
               }
             />
-            <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} restaurant={restaurant} />} />
+            <Route
+              path="/menu"
+              element={
+                <Menu
+                  cart={cart}
+                  currentUser={currentUser}
+                  handleAddToCart={handleAddToCart}
+                  restaurant={restaurant}
+                />
+              }
+            />
             <Route
               path="/checkout"
-              element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
+              element={
+                <Checkout
+                  cart={cart}
+                  currentUser={currentUser}
+                  restaurant={restaurant}
+                />
+              }
             />
             <Route
               path="/orderconfirmed/:id"
               element={<OrderDetails currentUser={currentUser} />}
             />
             {/* Catch all routes that are not defined above. Keep as bottom route */}
-          <Route path="*" element={ <NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
