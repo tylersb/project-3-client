@@ -31,18 +31,32 @@ export default function OrderHistory(props) {
 
   const orderList = orders.map((order) => {
     return (
-      <li key={order._id}>
+      <div
+        key={order._id}
+        style={{
+          border: '1px solid black',
+          margin: '1rem',
+          padding: '1rem',
+          width: '50%'
+        }}
+      >
         <Link to={`/orders/${order._id}`}>{order._id}</Link>
-      </li>
+      </div>
     )
   })
 
   return (
     <div>
       <h1>Order History</h1>
-      <ul>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
         {orderList}
-      </ul>
+      </div>
     </div>
   )
 }
