@@ -13,6 +13,7 @@ import jwt_decode from 'jwt-decode'
 import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
 import axios from 'axios'
+import Order from './components/pages/Order'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -93,6 +94,39 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/restaurants`
+        )
+        setRestaurant(response.data[0])
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  // create a function to add menu items to cart
+  // const handleAddToCart = (item) => {
+  //   // check to see if the item is already in the cart
+  //   const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+  //   // if it is, we will increment the quantity
+  //   if (itemInCart) {
+  //     const newCart = cart.map((cartItem) => {
+  //       if (cartItem.name === item.name) {
+  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
+  //       } else {
+  //         return cartItem
+  //       }
+  //     })
+  //     setCart(newCart)
+  //   } else {
+  //     setCart([...cart, { ...item, quantity: 1 }])
+  //   }
+  // }
+
   return (
     <>
       <CssBaseline />
@@ -143,16 +177,9 @@ function App() {
               }
             />
             <Route path="/menu" element={<Menu cart={cart} currentUser={currentUser} handleAddToCart={handleAddToCart} restaurant={restaurant} />} />
-
-
             <Route
               path="/checkout"
-              element={<Checkout 
-              cart={cart} 
-              currentUser={currentUser} 
-              restaurant={restaurant} 
-              deliveryAddress={deliveryAddress}
-              />}
+              element={<Checkout cart={cart} currentUser={currentUser} restaurant={restaurant} />}
             />
             <Route
               path="/orders/:id"
@@ -161,7 +188,8 @@ function App() {
 
 
             {/* Catch all routes that are not defined above. Keep as bottom route */}
-          <Route path="*" element={ <NotFound />} />
+            <Route path="/orders/:id" element={<Order />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
