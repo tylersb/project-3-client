@@ -1,9 +1,6 @@
 import TextField from '@mui/material/TextField'
-import { useState } from 'react'
 
 export default function CommentField(props) {
-  const [comment, setComment] = useState('')
-
   return (
     <TextField
       fullWidth
@@ -11,8 +8,10 @@ export default function CommentField(props) {
       label="Leave a comment"
       multiline
       rows={5}
-      value={comment}
-      onChange={(e) => setComment(e.target.value)}
+      value={props.userReview.comment}
+      onChange={(e) => {
+        props.setUserReview({ ...props.userReview, comment: e.target.value })
+      }}
       variant="outlined"
     />
   )
