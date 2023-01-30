@@ -10,6 +10,7 @@ function Checkout ({cart, currentUser, restaurant}) {
     let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
     const [addItemErrorMsg, setItemErrorMsg] = useState('')
+    const [addAddressErrorMsg, setAddressErrorMsg] = useState('')
     const [updateAddress, setUpdateAddress] = useState(false)
     const [deliveryAddress, setDeliveryAddress] = useState({
         street: currentUser?.address.street,
@@ -32,21 +33,25 @@ function Checkout ({cart, currentUser, restaurant}) {
     async function handleSubmit(e) {
 
         e.preventDefault()
-        //if cart has items create order
-        // if ()
-        if (cart.length > 0) {
+        //make sure update address has been confirmed and is all filled in
+        if (updateAddress === false && deliveryAddress.street !== '' &&deliveryAddress.city !== '' && deliveryAddress.state !== '' &&deliveryAddress.zip !== '') {
+            //if cart has items create order
+            if (cart.length > 0) {
 
-        // post order to the db with state items as order
-          console.log('before POST', checkoutItems)
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
-            .then(response => {
-                console.log(response)
-                navigate(`/orders/${response.data._id}/confirmed`)
-            })
-            .catch(console.warn)
+            // post order to the db with state items as order
+            console.log('before POST', checkoutItems)
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
+                .then(response => {
+                    console.log(response)
+                    navigate(`/orders/${response.data._id}/confirmed`)
+                })
+                .catch(console.warn)
 
+            } else {
+                setItemErrorMsg('Add some delicious foods to place your order. Your cart is empty!')
+            }
         } else {
-            setItemErrorMsg('Add some delicious foods to place your order. Your cart is empty!')
+            setAddressErrorMsg('Please enter a valid address to continue')
         }
     }
 
@@ -148,6 +153,11 @@ function Checkout ({cart, currentUser, restaurant}) {
         {addItemErrorMsg && (
             <p className="error">{addItemErrorMsg}</p>
         )} 
+
+        { addAddressErrorMsg && (
+            <p clssName="error"> {addAddressErrorMsg} </p>
+        )}
+
         {items}
         <p>Order Total: ${
         checkoutItems?.products.reduce((total, item) => {
