@@ -69,7 +69,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 				<Typography>
 				<TextField id="outlined-basic" variant="outlined" color="primary" required 
 					type="password"
-					
+				
 					placeholder='password...'
 					onChange={e => setPassword(e.target.value)}
 					value={password}

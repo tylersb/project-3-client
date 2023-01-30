@@ -60,12 +60,14 @@ export default function Register({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div>
+		<Box>
+			<Typography variant="h2">
 			<h1>Register for an account:</h1>
-
+			</Typography>
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
+				<Typography>
 				<label htmlFor='name'>Name:</label>
 				<input 
 					type="text"
@@ -74,7 +76,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 					onChange={e => setName(e.target.value)}
 					value={name}
 				/>
-
+				</Typography>
 				<label htmlFor='email'>Email:</label>
 				<input 
 					type="email"
@@ -128,6 +130,6 @@ export default function Register({ currentUser, setCurrentUser }) {
 
 				<button type="submit">Register</button>
 			</form>
-		</div>
+		</Box>
 	)
 }
