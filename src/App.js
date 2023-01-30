@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
@@ -14,6 +14,9 @@ import CssBaseline from '@mui/material/CssBaseline'
 import NotFound from './components/pages/NotFound'
 import axios from 'axios'
 import Order from './components/pages/Order'
+import { ThemeProvider, createTheme } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { ColorModeContext } from './components/contexts/ColorModeContext'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -21,22 +24,42 @@ function App() {
   const [cart, setCart] = useState([]) // cart state
   const [restaurant, setRestaurant] = useState([]) // restaurant state
 
-
   const [deliveryAddress, setDeliveryAddress] = useState({
-    street: currentUser?.address.street,
-    city: currentUser?.address.city,
-    state: currentUser?.address.state,
-    zip: currentUser?.address.zip
+    street: currentUser?.address?.street,
+    city: currentUser?.address?.city,
+    state: currentUser?.address?.state,
+    zip: currentUser?.address?.zip
   })
- 
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const [mode, setMode] = useState()
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
+    setMode(prefersDarkMode ? 'dark' : 'light')
+  }, [prefersDarkMode])
+
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
+      }
+    }),
+    []
+  )
+
+  const theme = createTheme({
+    palette: {
+      mode: mode
+    }
+  })
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
       .then((response) => {
         setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
       })
   }, [])
-
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -95,36 +118,38 @@ function App() {
   }
 
   return (
-    <>
-      <CssBaseline />
-      <Router>
-        <header>
-          <Navbar currentUser={currentUser} handleLogout={handleLogout} />
-        </header>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <header>
+            <Navbar currentUser={currentUser} handleLogout={handleLogout} />
+          </header>
 
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route
-              path="/register"
-              element={
-                <Register
-                  currentUser={currentUser}
-                  setCurrentUser={setCurrentUser}
-                />
-              }
-            />
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route
+                path="/register"
+                element={
+                  <Register
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
 
-            <Route
-              path="/login"
-              element={
-                <Login
-                  currentUser={currentUser}
-                  setCurrentUser={setCurrentUser}
-                />
-              }
-            />
+              <Route
+                path="/login"
+                element={
+                  <Login
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
 
+<<<<<<< HEAD
             <Route
               path="/profile"
               element={
@@ -176,15 +201,62 @@ function App() {
               <OrderDetails 
               currentUser={currentUser} />}
             />
+=======
+              {/*optionally conditionally render auth locked routes */}
+              {/* 
+			<Route 
+			   path="/profile" 
+               element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
+            /> 
+		  */}
 
-            <Route path="/orders/:id" element={<Order />} />
+              <Route
+                path="/profile"
+                element={
+                  <Profile
+                    handleLogout={handleLogout}
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+              <Route
+                path="/menu"
+                element={
+                  <Menu
+                    cart={cart}
+                    currentUser={currentUser}
+                    handleAddToCart={handleAddToCart}
+                    restaurant={restaurant}
+                  />
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <Checkout
+                    cart={cart}
+                    currentUser={currentUser}
+                    restaurant={restaurant}
+                    deliveryAddress={deliveryAddress}
+                  />
+                }
+              />
+              <Route
+                path="/orders/:id/confirmed"
+                element={<OrderDetails currentUser={currentUser} />}
+              />
+>>>>>>> main
 
-            {/* Catch all routes that are not defined above. Keep as bottom route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </Router>
-    </>
+              <Route path="/orders/:id" element={<Order />} />
+
+              {/* Catch all routes that are not defined above. Keep as bottom route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </Router>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   )
 }
 
