@@ -3,9 +3,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 export default function Login({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -48,32 +48,38 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div>
-			<h1>Login to Your Account:</h1>
+		<Box>
+			<Typography gutterBottom variant="h3" align="center">
+			Login to Your Account
+			</Typography>
+		
+			
 
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
-				<label htmlFor='email'>Email:</label>
-				<input 
-					type="email"
-					id="email"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
+				<TextField id="outlined-basic" variant="outlined" color="primary" required/>
+					<input 
+						type="email"
+						id="email"
+						placeholder='your email...'
+						onChange={e => setEmail(e.target.value)}
+						value={email}
 				/>
 
-				<label htmlFor='password'>Password:</label>
-				<input 
-					type="password"
-					id="password"
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
+				<TextField id="outlined-basic" variant="outlined" color="primary" required/>	
+					<input 
+						type="password"
+						id="password"
+						placeholder='password...'
+						onChange={e => setPassword(e.target.value)}
+						value={password}
 				/>
-
-				<button type="submit">Login</button>
+				<Typography>
+				<Button variant="outlined" type="submit">Login</Button>
+				</Typography>
 			</form>
-		</div>
+			
+		</Box>
 	)
 }
