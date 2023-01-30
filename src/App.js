@@ -23,10 +23,10 @@ function App() {
 
 
   const [deliveryAddress, setDeliveryAddress] = useState({
-    street: currentUser?.address.street,
-    city: currentUser?.address.city,
-    state: currentUser?.address.state,
-    zip: currentUser?.address.zip
+    street: currentUser?.address?.street,
+    city: currentUser?.address?.city,
+    state: currentUser?.address?.state,
+    zip: currentUser?.address?.zip
   })
  
 
