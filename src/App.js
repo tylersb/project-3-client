@@ -37,34 +37,6 @@ function App() {
       })
   }, [])
 
-  // create a function to add menu items to cart
-  const handleAddToCart = (item) => {
-    if (cart.find((cartItem) => cartItem.name === item.name)) {
-      const newCart = cart.map((cartItem) => {
-        if (cartItem.name === item.name) {
-            return { 
-              name : cartItem.name,
-              price : cartItem.price,
-              quantity : cartItem.quantity + 1
-            }
-        } else {
-          return {
-            name: item.name,
-            price: item.price,
-            quantity: 1
-          }
-        }
-      })
-      setCart(newCart)
-    } else {
-      setCart([...cart, {
-        name: item.name,
-        price: item.price,
-        quantity: 1
-      }])
-    }
-  }
-
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -104,23 +76,23 @@ function App() {
   }, [])
 
   // create a function to add menu items to cart
-  // const handleAddToCart = (item) => {
-  //   // check to see if the item is already in the cart
-  //   const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
-  //   // if it is, we will increment the quantity
-  //   if (itemInCart) {
-  //     const newCart = cart.map((cartItem) => {
-  //       if (cartItem.name === item.name) {
-  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
-  //       } else {
-  //         return cartItem
-  //       }
-  //     })
-  //     setCart(newCart)
-  //   } else {
-  //     setCart([...cart, { ...item, quantity: 1 }])
-  //   }
-  // }
+  const handleAddToCart = (item) => {
+    // check to see if the item is already in the cart
+    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+    // if it is, we will increment the quantity
+    if (itemInCart) {
+      const newCart = cart.map((cartItem) => {
+        if (cartItem.name === item.name) {
+          return { ...cartItem, quantity: cartItem.quantity + 1 }
+        } else {
+          return cartItem
+        }
+      })
+      setCart(newCart)
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }])
+    }
+  }
 
   return (
     <>
