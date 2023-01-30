@@ -7,6 +7,7 @@ export default function Menu(props) {
   // state is menuItems, setMenuItems is the function to update state, same applies to selectedItem, and cart
   const [selectedItem, setSelectedItem] = useState(null)
 
+
   const handleSelection = (item) => {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
   }

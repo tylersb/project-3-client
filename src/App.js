@@ -21,6 +21,50 @@ function App() {
   const [cart, setCart] = useState([]) // cart state
   const [restaurant, setRestaurant] = useState([]) // restaurant state
 
+
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    street: currentUser?.address.street,
+    city: currentUser?.address.city,
+    state: currentUser?.address.state,
+    zip: currentUser?.address.zip
+  })
+ 
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
+      .then((response) => {
+        setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
+      })
+  }, [])
+
+  // create a function to add menu items to cart
+  const handleAddToCart = (item) => {
+    if (cart.find((cartItem) => cartItem.name === item.name)) {
+      const newCart = cart.map((cartItem) => {
+        if (cartItem.name === item.name) {
+            return { 
+              name : cartItem.name,
+              price : cartItem.price,
+              quantity : cartItem.quantity + 1
+            }
+        } else {
+          return {
+            name: item.name,
+            price: item.price,
+            quantity: 1
+          }
+        }
+      })
+      setCart(newCart)
+    } else {
+      setCart([...cart, {
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      }])
+    }
+  }
+
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // check to see if token is in storage
@@ -144,13 +188,17 @@ function App() {
                   cart={cart}
                   currentUser={currentUser}
                   restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
                 />
               }
             />
             <Route
-              path="/orderconfirmed/:id"
-              element={<OrderDetails currentUser={currentUser} />}
+              path="/orders/:id"
+              element={<OrderDetails 
+              currentUser={currentUser} />}
             />
+
+
             {/* Catch all routes that are not defined above. Keep as bottom route */}
             <Route path="/orders/:id" element={<Order />} />
             <Route path="*" element={<NotFound />} />

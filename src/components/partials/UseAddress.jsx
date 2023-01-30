@@ -36,7 +36,7 @@ function UseAddress({user}) {
             onChange={(e) =>setZip(e.target.value) }
             disabled
             />
-            <button onClick={() => {<UpdateAddress/>}}></button>
+            <button onClick={() => {<UpdateAddress/>}}>Update Address</button>
         </>
      );
 }
