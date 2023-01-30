@@ -4,9 +4,9 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import SubHeaderNavigation from './SubHeaderNavimport ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import SubHeaderNavigation from './SubHeaderNavimport'
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
-igation'
 
 export default function Navbar({ currentUser, handleLogout }) {
   const loggedIn = (
