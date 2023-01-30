@@ -49,37 +49,35 @@ export default function Login({ currentUser, setCurrentUser }) {
 
 	return (
 		<Box>
-			<Typography gutterBottom variant="h3" align="center">
-			Login to Your Account
-			</Typography>
-		
-			
+			<h1>Login to Your Account:</h1>
 
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
-				<TextField id="outlined-basic" variant="outlined" color="primary" required/>
-					<input 
-						type="email"
-						id="email"
-						placeholder='your email...'
-						onChange={e => setEmail(e.target.value)}
-						value={email}
-				/>
-
-				<TextField id="outlined-basic" variant="outlined" color="primary" required/>	
-					<input 
-						type="password"
-						id="password"
-						placeholder='password...'
-						onChange={e => setPassword(e.target.value)}
-						value={password}
-				/>
 				<Typography>
-				<Button variant="outlined" type="submit">Login</Button>
+				<label htmlFor='email'>Email:</label>
+				<TextField id="outlined-basic" variant="outlined" color="primary" required 
+					type="email"
+					
+					placeholder='your email...'
+					onChange={e => setEmail(e.target.value)}
+					value={email}
+				/>
 				</Typography>
+
+				<label htmlFor='password'>Password:</label>
+				<Typography>
+				<TextField id="outlined-basic" variant="outlined" color="primary" required 
+					type="password"
+					
+					placeholder='password...'
+					onChange={e => setPassword(e.target.value)}
+					value={password}
+				/>
+				</Typography>
+
+				<Button variant="outlined" type="submit">Login</Button>
 			</form>
-			
 		</Box>
 	)
 }
