@@ -25,10 +25,10 @@ function App() {
   const [restaurant, setRestaurant] = useState([]) // restaurant state
 
   const [deliveryAddress, setDeliveryAddress] = useState({
-    street: currentUser?.address.street,
-    city: currentUser?.address.city,
-    state: currentUser?.address.state,
-    zip: currentUser?.address.zip
+    street: currentUser?.address?.street,
+    city: currentUser?.address?.city,
+    state: currentUser?.address?.state,
+    zip: currentUser?.address?.zip
   })
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
