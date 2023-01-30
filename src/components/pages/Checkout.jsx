@@ -5,26 +5,19 @@ import UseAddress from "../partials/UseAddress";
 import UpdateAddress from "../partials/UpdateAddress";
 
 function Checkout ({cart, currentUser, restaurant}) {
-    // console.log(currentUser, "currentUser")
-    // console.log(cart, "cart")
-    // console.log(restaurant, "restaurant")
-    // console.log(order, "order")
     //holds array of checkout items
     // let [checkoutItems, setCheckoutItems] = useState(cart)
     let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
     // const [address]
-    // const [street, setStreet] = useState(user ? user.street : '')
-    // const [city, setCity] = useState(user ? user.city : '')
-    // const [state, setState] = useState(user ? user.state : '')
-    // const [zip, setZip] = useState(user ? user.zip : '')
+
     let [checkoutItems, setCheckoutItems] = useState({
         userId: currentUser?.id,
         restaurantId: restaurant?._id,
         products: cart,
         dropOffAddress: currentUser.address,
         name: currentUser?.name,
-        totalPrice: 5000
+        totalPrice: 
       })
 
     const navigate = useNavigate()
