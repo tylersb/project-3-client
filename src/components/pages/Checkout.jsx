@@ -15,7 +15,7 @@ function Checkout ({cart, currentUser, restaurant}) {
         userId: currentUser?.id,
         restaurantId: restaurant?._id,
         products: cart,
-        dropOffAddress: currentUser.address,
+        dropOffAddress: currentUser?.address,
         name: currentUser?.name,
         totalPrice: null
       })
