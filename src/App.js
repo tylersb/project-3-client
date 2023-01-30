@@ -149,46 +149,58 @@ function App() {
                 }
               />
 
-              {/*optionally conditionally render auth locked routes */}
-              {/* 
-			<Route 
-			   path="/profile" 
-               element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
-            /> 
-		  */}
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleLogout={handleLogout}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+            <Route
+              path="/menu"
+              element={
+                <Menu
+                  cart={cart}
+                  currentUser={currentUser}
+                  handleAddToCart={handleAddToCart}
+                  restaurant={restaurant}
+                />
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <Checkout
+                  cart={cart}
+                  currentUser={currentUser}
+                  restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
+                />
+              }
+            />
+            <Route
+              path="/cartnav"
+              element={
+                <Checkout
+                  cart={cart}
+                  currentUser={currentUser}
+                  restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
+                />
+              }
+            />
 
-              <Route
-                path="/profile"
-                element={
-                  <Profile
-                    handleLogout={handleLogout}
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                  />
-                }
-              />
-              <Route
-                path="/menu"
-                element={
-                  <Menu
-                    cart={cart}
-                    currentUser={currentUser}
-                    handleAddToCart={handleAddToCart}
-                    restaurant={restaurant}
-                  />
-                }
-              />
-              <Route
-                path="/checkout"
-                element={
-                  <Checkout
-                    cart={cart}
-                    currentUser={currentUser}
-                    restaurant={restaurant}
-                    deliveryAddress={deliveryAddress}
-                  />
-                }
-              />
+
+            <Route
+              path="/orders/:id/confirmed"
+              element={
+              <OrderDetails 
+              currentUser={currentUser} />}
+            />
+
               <Route
                 path="/orders/:id/confirmed"
                 element={<OrderDetails currentUser={currentUser} />}

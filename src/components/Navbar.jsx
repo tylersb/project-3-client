@@ -4,7 +4,9 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import SubHeaderNavigation from './SubHeaderNavigation'
+import SubHeaderNavigation from './SubHeaderNavimport'
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+
 
 export default function Navbar({ currentUser, handleLogout }) {
   const loggedIn = (
@@ -28,6 +30,14 @@ export default function Navbar({ currentUser, handleLogout }) {
             </p>
           </Link>
         </Button>
+
+			{/* shopping cart button */}
+			<Link to='/checkout' >
+				<ShoppingBagOutlinedIcon
+					fontSize='large'
+					color='primary'
+				/>
+			</Link>
       </Typography>
     </>
   )
