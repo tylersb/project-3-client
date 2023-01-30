@@ -22,7 +22,7 @@ function Checkout ({cart, currentUser, restaurant}) {
         userId: currentUser?.id,
         restaurantId: restaurant?._id,
         products: cart,
-        dropOffAddress: currentUser?.address,
+        dropOffAddress: deliveryAddress,
         name: currentUser?.name,
         totalPrice: null
       })
@@ -33,6 +33,7 @@ function Checkout ({cart, currentUser, restaurant}) {
 
         e.preventDefault()
         //if cart has items create order
+        // if ()
         if (cart.length > 0) {
 
         // post order to the db with state items as order
@@ -134,7 +135,9 @@ function Checkout ({cart, currentUser, restaurant}) {
    }
 
    function handleConfirmAddress(deliveryAddress) {
+    console.log(deliveryAddress)
     setDeliveryAddress(deliveryAddress)
+    setCheckoutItems({...checkoutItems, dropOffAddress: deliveryAddress})
     setUpdateAddress(false)
    }
 
@@ -157,7 +160,7 @@ function Checkout ({cart, currentUser, restaurant}) {
         <h3>Confirm Delivery Address:</h3>
         {updateAddress ? 
         <UpdateAddress user={user} handleConfirmAddress={handleConfirmAddress}/> : 
-        <UseAddress user={user} handleUpdateAddress={handleUpdateAddress}/>}
+        <UseAddress user={user} deliveryAddress={deliveryAddress} handleUpdateAddress={handleUpdateAddress}/>}
       </div>
 
       <form onSubmit={handleSubmit}>
