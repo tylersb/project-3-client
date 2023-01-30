@@ -9,7 +9,14 @@ function Checkout ({cart, currentUser, restaurant}) {
     // let [checkoutItems, setCheckoutItems] = useState(cart)
     let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
-    // const [address]
+    const [addItemErrorMsg, setItemErrorMsg] = useState('')
+    const [updateAddress, setUpdateAddress] = useState(false)
+    const [deliveryAddress, setDeliveryAddress] = useState({
+        street: currentUser?.address.street,
+        city: currentUser?.address.city,
+        state: currentUser?.address.state,
+        zip: currentUser?.address.zip
+      })
 
     let [checkoutItems, setCheckoutItems] = useState({
         userId: currentUser?.id,
@@ -23,7 +30,11 @@ function Checkout ({cart, currentUser, restaurant}) {
     const navigate = useNavigate()
     //checkout submit function
     async function handleSubmit(e) {
+
         e.preventDefault()
+        //if cart has items create order
+        if (cart.length > 0) {
+
         // post order to the db with state items as order
           console.log('before POST', checkoutItems)
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
@@ -32,6 +43,10 @@ function Checkout ({cart, currentUser, restaurant}) {
                 navigate(`/orders/${response.data._id}/confirmed`)
             })
             .catch(console.warn)
+
+        } else {
+            setItemErrorMsg('Add some delicious foods to place your order. Your cart is empty!')
+        }
     }
 
   ////// Changing Item quantity and Deleting Items \\\\\
@@ -113,11 +128,23 @@ function Checkout ({cart, currentUser, restaurant}) {
 }
 
    ////// Address functions \\\\\
+   //toggles which address component to show
+   function handleUpdateAddress() {
+    setUpdateAddress(true)
+   }
+
+   function handleConfirmAddress(deliveryAddress) {
+    setDeliveryAddress(deliveryAddress)
+    setUpdateAddress(false)
+   }
 
   return (
     <>
       <div>
         <h1>Checkout Component</h1>
+        {addItemErrorMsg && (
+            <p className="error">{addItemErrorMsg}</p>
+        )} 
         {items}
         <p>Order Total: ${
         checkoutItems?.products.reduce((total, item) => {
@@ -128,7 +155,9 @@ function Checkout ({cart, currentUser, restaurant}) {
       </div>
       <div>
         <h3>Confirm Delivery Address:</h3>
-        {user ? <UseAddress user={user} /> : <UpdateAddress user={user} />}
+        {updateAddress ? 
+        <UpdateAddress user={user} handleConfirmAddress={handleConfirmAddress}/> : 
+        <UseAddress user={user} handleUpdateAddress={handleUpdateAddress}/>}
       </div>
 
       <form onSubmit={handleSubmit}>

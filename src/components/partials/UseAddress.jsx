@@ -1,7 +1,7 @@
 import { useState } from "react"
 import UpdateAddress from "./UpdateAddress"
 
-function UseAddress({user}) {
+function UseAddress({user, handleUpdateAddress}) {
     const [street, setStreet] = useState(user ? user.street : '')
     const [city, setCity] = useState(user ? user.city : '')
     const [state, setState] = useState(user ? user.state : '')
@@ -36,7 +36,7 @@ function UseAddress({user}) {
             onChange={(e) =>setZip(e.target.value) }
             disabled
             />
-            <button onClick={() => {<UpdateAddress/>}}>Update Address</button>
+            <button onClick={() => handleUpdateAddress()}>Update Address</button>
         </>
      );
 }
