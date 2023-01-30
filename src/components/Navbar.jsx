@@ -13,19 +13,23 @@ export default function Navbar({ currentUser, handleLogout }) {
 	
       {/* if the user is logged in... */}
 	  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+	  	<Button variant ="contained" color="inherit">
 			<Link to="/profile">
 				<p>Profile</p>
 			</Link>
-
-			<Link to="/checkout">
-				<p>Checkout</p>
-			</Link>
-
-			<Link to="/">
-				<p>
-					<span onClick={handleLogout}>Logout</span>
-				</p>
-			</Link>
+		</Button>
+		<Button variant ="contained" color="inherit">
+				<Link to="/checkout">
+					<p>Checkout</p>
+				</Link>
+			</Button>
+			<Button variant ="contained" color="inherit">	
+					<Link to="/">
+						<p>
+							<span onClick={handleLogout}>Logout</span>
+						</p>
+					</Link>
+			</Button>
 			</Typography>
 	
     </>
@@ -33,10 +37,15 @@ export default function Navbar({ currentUser, handleLogout }) {
 
   const loggedOut = (
     <>
+	<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+	  	<Button variant ="contained" color="inherit">
       {/* if the user is not logged in... */}
       <Link to="/register">Register</Link>
-
+	  </Button>
+	  <Button variant ="contained" color="inherit">
       <Link to="/login">Login</Link>
+	  </Button>
+	</Typography>  
     </>
   )
 
@@ -47,13 +56,16 @@ export default function Navbar({ currentUser, handleLogout }) {
 				<Toolbar>
 					{/* user always sees this section */}
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+					<Button variant ="contained" color="inherit">
 						<Link to="/">
 							<p>Home</p>
 						</Link>
-
+					</Button>
+					<Button variant ="contained" color="inherit">
 						<Link to="/menu">
 							<p>Menu</p>
 						</Link>
+					</Button>
 					</Typography>
 					{currentUser ? loggedIn : loggedOut}
 				</Toolbar>
