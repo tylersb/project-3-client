@@ -65,6 +65,7 @@ function App() {
     }
   }
 
+
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // check to see if token is in storage
@@ -103,23 +104,23 @@ function App() {
   }, [])
 
   // create a function to add menu items to cart
-  const handleAddToCart = (item) => {
-    // check to see if the item is already in the cart
-    const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
-    // if it is, we will increment the quantity
-    if (itemInCart) {
-      const newCart = cart.map((cartItem) => {
-        if (cartItem.name === item.name) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 }
-        } else {
-          return cartItem
-        }
-      })
-      setCart(newCart)
-    } else {
-      setCart([...cart, { ...item, quantity: 1 }])
-    }
-  }
+  // const handleAddToCart = (item) => {
+  //   // check to see if the item is already in the cart
+  //   const itemInCart = cart.find((cartItem) => cartItem.name === item.name)
+  //   // if it is, we will increment the quantity
+  //   if (itemInCart) {
+  //     const newCart = cart.map((cartItem) => {
+  //       if (cartItem.name === item.name) {
+  //         return { ...cartItem, quantity: cartItem.quantity + 1 }
+  //       } else {
+  //         return cartItem
+  //       }
+  //     })
+  //     setCart(newCart)
+  //   } else {
+  //     setCart([...cart, { ...item, quantity: 1 }])
+  //   }
+  // }
 
   return (
     <>
