@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-function UpdateAddress({user}) {
-    const [street, setStreet] = useState(user ? user.street : '')
-    const [city, setCity] = useState(user ? user.city : '')
-    const [state, setState] = useState(user ? user.state : '')
-    const [zip, setZip] = useState(user ? user.zip : '')
+function UpdateAddress({user, handleConfirmAddress}) {
+    const [street, setStreet] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [zip, setZip] = useState('')
     return ( 
         <>
                 <input 
@@ -31,7 +31,16 @@ function UpdateAddress({user}) {
                     value={zip} 
                     onChange={(e) =>setZip(e.target.value) }
                     />
-                <button type="submit" >Confirm Delivery Address</button>
+                <button 
+                type="submit"
+                onClick={() => handleConfirmAddress({
+                    street,
+                    city,
+                    state, 
+                    zip
+                })}>
+                    Confirm Delivery Address
+                </button>
                 </>
      );
 }

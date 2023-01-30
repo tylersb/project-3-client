@@ -9,13 +9,21 @@ function Checkout ({cart, currentUser, restaurant}) {
     // let [checkoutItems, setCheckoutItems] = useState(cart)
     let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
-    // const [address]
+    const [addItemErrorMsg, setItemErrorMsg] = useState('')
+    const [addAddressErrorMsg, setAddressErrorMsg] = useState('')
+    const [updateAddress, setUpdateAddress] = useState(false)
+    const [deliveryAddress, setDeliveryAddress] = useState({
+        street: currentUser?.address.street,
+        city: currentUser?.address.city,
+        state: currentUser?.address.state,
+        zip: currentUser?.address.zip
+      })
 
     let [checkoutItems, setCheckoutItems] = useState({
         userId: currentUser?.id,
         restaurantId: restaurant?._id,
         products: cart,
-        dropOffAddress: currentUser?.address,
+        dropOffAddress: deliveryAddress,
         name: currentUser?.name,
         totalPrice: null
       })
@@ -23,15 +31,28 @@ function Checkout ({cart, currentUser, restaurant}) {
     const navigate = useNavigate()
     //checkout submit function
     async function handleSubmit(e) {
+
         e.preventDefault()
-        // post order to the db with state items as order
-          console.log('before POST', checkoutItems)
-        await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
-            .then(response => {
-                console.log(response)
-                navigate(`/orders/${response.data._id}/confirmed`)
-            })
-            .catch(console.warn)
+        //make sure update address has been confirmed and is all filled in
+        if (updateAddress === false && deliveryAddress.street !== '' &&deliveryAddress.city !== '' && deliveryAddress.state !== '' &&deliveryAddress.zip !== '') {
+            //if cart has items create order
+            if (cart.length > 0) {
+
+            // post order to the db with state items as order
+            console.log('before POST', checkoutItems)
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
+                .then(response => {
+                    console.log(response)
+                    navigate(`/orders/${response.data._id}/confirmed`)
+                })
+                .catch(console.warn)
+
+            } else {
+                setItemErrorMsg('Add some delicious foods to place your order. Your cart is empty!')
+            }
+        } else {
+            setAddressErrorMsg('Please enter a valid address to continue')
+        }
     }
 
   ////// Changing Item quantity and Deleting Items \\\\\
@@ -113,11 +134,30 @@ function Checkout ({cart, currentUser, restaurant}) {
 }
 
    ////// Address functions \\\\\
+   //toggles which address component to show
+   function handleUpdateAddress() {
+    setUpdateAddress(true)
+   }
+
+   function handleConfirmAddress(deliveryAddress) {
+    console.log(deliveryAddress)
+    setDeliveryAddress(deliveryAddress)
+    setCheckoutItems({...checkoutItems, dropOffAddress: deliveryAddress})
+    setUpdateAddress(false)
+   }
 
   return (
     <>
       <div>
         <h1>Checkout Component</h1>
+        {addItemErrorMsg && (
+            <p className="error">{addItemErrorMsg}</p>
+        )} 
+
+        { addAddressErrorMsg && (
+            <p clssName="error"> {addAddressErrorMsg} </p>
+        )}
+
         {items}
         <p>Order Total: ${
         checkoutItems?.products.reduce((total, item) => {
@@ -128,7 +168,9 @@ function Checkout ({cart, currentUser, restaurant}) {
       </div>
       <div>
         <h3>Confirm Delivery Address:</h3>
-        {user ? <UseAddress user={user} /> : <UpdateAddress user={user} />}
+        {updateAddress ? 
+        <UpdateAddress user={user} handleConfirmAddress={handleConfirmAddress}/> : 
+        <UseAddress user={user} deliveryAddress={deliveryAddress} handleUpdateAddress={handleUpdateAddress}/>}
       </div>
 
       <form onSubmit={handleSubmit}>
