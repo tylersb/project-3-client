@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+
 import index from '../index.css';
 export default function Navbar({ currentUser, handleLogout }) {
   const loggedIn = (
@@ -30,6 +32,14 @@ export default function Navbar({ currentUser, handleLogout }) {
 						</p>
 					</Link>
 			</Button>
+
+			{/* shopping cart button */}
+			<Link to='/checkout' >
+				<ShoppingBagOutlinedIcon
+					fontSize='large'
+					color='primary'
+				/>
+			</Link>
 			</Typography>
 	
     </>

@@ -158,6 +158,19 @@ function App() {
               }
             />
             <Route
+              path=""
+              element={
+                <Checkout
+                  cart={cart}
+                  currentUser={currentUser}
+                  restaurant={restaurant}
+                  deliveryAddress={deliveryAddress}
+                />
+              }
+            />
+
+
+            <Route
               path="/orders/:id/confirmed"
               element={
               <OrderDetails 
