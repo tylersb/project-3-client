@@ -65,7 +65,7 @@ function App() {
     }
   }
 
->>>>>>>>> Temporary merge branch 2
+
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // check to see if token is in storage
