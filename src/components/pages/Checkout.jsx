@@ -17,7 +17,7 @@ function Checkout ({cart, currentUser, restaurant}) {
         products: cart,
         dropOffAddress: currentUser.address,
         name: currentUser?.name,
-        totalPrice: 
+        totalPrice: null
       })
 
     const navigate = useNavigate()
