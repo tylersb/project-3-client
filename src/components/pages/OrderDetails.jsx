@@ -27,6 +27,7 @@ function OrderDetails() {
         }
         , 0)
       }</p>
+      <>{order?.totalPrice}</>
       <h3>Order Items</h3>
       <ul>
         {order?.products.map((item) => {

@@ -4,14 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import UseAddress from "../partials/UseAddress";
 import UpdateAddress from "../partials/UpdateAddress";
 
-function Checkout ({cart, currentUser, restaurant, totalPrice}) {
+function Checkout ({cart, currentUser, restaurant}) {
     // console.log(currentUser, "currentUser")
     // console.log(cart, "cart")
     // console.log(restaurant, "restaurant")
     // console.log(order, "order")
     //holds array of checkout items
     // let [checkoutItems, setCheckoutItems] = useState(cart)
-    // let [totalPrice, setTotalPrice] = useState('')
+    let [totalPrice, setTotalPrice] = useState('')
     const [user, setUser] = useState(currentUser?.address);
     // const [address]
     // const [street, setStreet] = useState(user ? user.street : '')
@@ -23,7 +23,8 @@ function Checkout ({cart, currentUser, restaurant, totalPrice}) {
         restaurantId: restaurant?._id,
         products: cart,
         dropOffAddress: currentUser.address,
-        name: currentUser?.name
+        name: currentUser?.name,
+        totalPrice: 5000
       })
 
     const navigate = useNavigate()
@@ -31,12 +32,6 @@ function Checkout ({cart, currentUser, restaurant, totalPrice}) {
     async function handleSubmit(e) {
         e.preventDefault()
         // post order to the db with state items as order
-        await setCheckoutItems({
-            restaurantId: restaurant._id,
-            products: cart,
-            dropOffAddress: currentUser.address,
-            totalPrice: totalPrice
-          })
           console.log('before POST', checkoutItems)
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/orders`, checkoutItems)
             .then(response => {
@@ -117,10 +112,13 @@ function Checkout ({cart, currentUser, restaurant, totalPrice}) {
     )
   })
 
-//   setTotalPrice(checkoutItems?.products.reduce((total, item) => {
-//     return total + item.price * item.quantity
-//   }
-//   , 0))
+ function handleSetTotalPrice() {
+  setTotalPrice(checkoutItems?.products.reduce((total, item) => {
+    return total + item.price * item.quantity
+  }
+  , 0))
+}
+
    ////// Address functions \\\\\
 
   return (
