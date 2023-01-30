@@ -18,7 +18,10 @@ export default function Menu(props) {
           {section.products.map((item) => (
             <div key={item._id}>
               <button onClick={() => handleSelection(item)}>{item.name}</button>
-              <button onClick={() => props.handleAddToCart(item)}>Add to Cart</button>
+              <button onClick={() => props.handleAddToCart({
+                name: item.name,
+                price: item.price
+              })}>Add to Cart</button>
             </div>
           ))}
         </div>

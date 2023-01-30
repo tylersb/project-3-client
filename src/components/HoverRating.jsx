@@ -16,12 +16,11 @@ const labels = {
   5: 'Excellent+'
 }
 
-function getLabelText(value) {
-  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`
+function getLabelText(userReview.rating) {
+  return `${userReview.rating} Star${userReview.rating !== 1 ? 's' : ''}, ${labels[userReview.rating]}`
 }
 
-export default function HoverRating(props) {
-  const [value, setValue] = useState(props.rating || 0 )
+export default function HoverRating({ userReview, setUserReview }) {
   const [hover, setHover] = useState(-1)
 
   return (
@@ -34,11 +33,11 @@ export default function HoverRating(props) {
     >
       <Rating
         name="hover-feedback"
-        value={value}
+        value={userReview.rating}
         precision={0.5}
         getLabelText={getLabelText}
         onChange={(e, newValue) => {
-          setValue(newValue)
+          setUserReview({ ...userReview, rating: newValue })
         }}
         onChangeActive={(e, newHover) => {
           setHover(newHover)
