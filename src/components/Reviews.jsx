@@ -2,6 +2,7 @@ import HoverRating from './HoverRating'
 import CommentField from './CommentField'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Button from '@mui/material/Button'
 
 export default function Reviews(props) {
   const [reviews, setReviews] = useState([])
@@ -63,10 +64,16 @@ export default function Reviews(props) {
   return (
     <div>
       <h1>Reviews</h1>
-      <h2>Average Rating: {avgRating}</h2>
+      <h4
+        style={{
+          textAlign: 'left'
+        }}
+      >
+        Average Rating: {avgRating}
+      </h4>
       <HoverRating userReview={userReview} setUserReview={setUserReview} />
       <CommentField userReview={userReview} setUserReview={setUserReview} />
-      <button onClick={handleSubmission}>Submit</button>
+      <Button onClick={handleSubmission}>Submit</Button>
     </div>
   )
 }
