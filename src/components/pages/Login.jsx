@@ -49,13 +49,14 @@ export default function Login({ currentUser, setCurrentUser }) {
 
 	return (
 		<Box>
-			<h1>Login to Your Account:</h1>
-
+			<Typography variant="h3">
+				Login to Your Account:
+			</Typography>
 			<p>{msg}</p>
 
 			<form onSubmit={handleSubmit}>
 				<Typography>
-				<label htmlFor='email'>Email:</label>
+				
 				<TextField id="outlined-basic" variant="outlined" color="primary" required 
 					type="email"
 					
@@ -65,7 +66,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 				/>
 				</Typography>
 
-				<label htmlFor='password'>Password:</label>
+				
 				<Typography>
 				<TextField id="outlined-basic" variant="outlined" color="primary" required 
 					type="password"
