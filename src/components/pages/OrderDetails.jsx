@@ -23,38 +23,35 @@ function OrderDetails() {
     fetchOrder(id)
   }, [id])
 
+  const products = order?.products.map((product) => {
+    return (
+      <div key={product._id}>
+        <span>${product.price}</span> <span>{product.name}</span> (
+        {product.quantity})
+      </div>
+    )
+  })
+
   return (
     <>
       <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>
-      <h3>Order Details</h3>
+      <div>
+        Delivery Address: <span>{order?.dropOffAddress.street}</span>,{' '}
+        <span>{order?.dropOffAddress.city}</span>,{' '}
+        <span>{order?.dropOffAddress.state}</span>,{' '}
+        <span>{order?.dropOffAddress.zip}</span>
+      </div>
       <p>Order Number: {order?._id}</p>
+      <h3>Order Items</h3>
+      {products}
       <p>
         Order Total: $
         {order?.products.reduce((acc, item) => {
           return acc + item.price * item.quantity
         }, 0)}
       </p>
-      <>{order?.totalPrice}</>
-      <h3>Order Items</h3>
-      <ul>
-        {order?.products.map((item) => {
-          return (
-            <li key={item._id}>
-              <p>{item.name}</p>
-              <p>${item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-            </li>
-          )
-        })}
-      </ul>
       <div>
-        <h3>Delivery Address</h3>
-        <p>{order?.name}</p>
-        <p>{order?.dropOffAddress.street}</p>
-        <p>{order?.dropOffAddress.city}</p>
-        <p>{order?.dropOffAddress.state}</p>
-        <p>{order?.dropOffAddress.zip}</p>
-        <ScrollDialog order={order} fetchOrder={fetchOrder}/>
+        <ScrollDialog order={order} setOrder={setOrder} />
       </div>
     </>
   )

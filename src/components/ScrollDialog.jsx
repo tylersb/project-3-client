@@ -2,9 +2,8 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -56,17 +55,24 @@ export default function ScrollDialog(props) {
   }
 
   const handleOrderUpdate = async () => {
-    axios.put(`${process.env.REACT_APP_SERVER_URL}/orders/${props.order._id}`, {
-      _id: props.order._id,
-      products: updatedProducts
-    })
-    props.fetchOrder(props.order._id)
-    setOpen(false)
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/orders/${props.order._id}`,
+        {
+          _id: props.order._id,
+          products: updatedProducts
+        }
+      )
+      props.setOrder(response.data)
+      setOpen(false)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const products = updatedProducts.map((product, index) => {
     return (
-      <div key={index}>
+      <Fragment key={index}>
         <span>${product.price}</span> <span>{product.name}</span> (
         {product.quantity})
         <br />
@@ -100,12 +106,12 @@ export default function ScrollDialog(props) {
           />
         </Box>
         <br />
-      </div>
+      </Fragment>
     )
   })
 
   return (
-    <div>
+    <>
       <Button onClick={handleClickOpen('paper')}>Edit Order</Button>
       <Dialog
         open={open}
@@ -115,20 +121,12 @@ export default function ScrollDialog(props) {
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">Order Details</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            {products}
-          </DialogContentText>
-        </DialogContent>
+        <DialogContent dividers={scroll === 'paper'}>{products}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleOrderUpdate}>Save</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   )
 }
