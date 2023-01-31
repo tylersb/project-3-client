@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ScrollDialog from '../ScrollDialog'
+import AlertDialog from '../AlertDialog'
 
 function OrderDetails() {
   const [order, setOrder] = useState(null)
@@ -23,6 +24,17 @@ function OrderDetails() {
     fetchOrder(id)
   }, [id])
 
+  const handleOrderDelete = async () => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/orders/${order._id}`
+      )
+      setOrder(null)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const products = order?.products.map((product) => {
     return (
       <div key={product._id}>
@@ -32,15 +44,22 @@ function OrderDetails() {
     )
   })
 
+  if (!order) return <h2>Order not found</h2>
+
+  const deliveryAddress = order?.dropOffAddress ? (
+    <div>
+    Delivery Address: <span>{order?.dropOffAddress?.street}</span>,{' '}
+    <span>{order?.dropOffAddress?.city}</span>,{' '}
+    <span>{order?.dropOffAddress?.state}</span>,{' '}
+    <span>{order?.dropOffAddress?.zip}</span>
+  </div>
+  ) : null
+    
+
   return (
     <>
       <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>
-      <div>
-        Delivery Address: <span>{order?.dropOffAddress.street}</span>,{' '}
-        <span>{order?.dropOffAddress.city}</span>,{' '}
-        <span>{order?.dropOffAddress.state}</span>,{' '}
-        <span>{order?.dropOffAddress.zip}</span>
-      </div>
+      {deliveryAddress}
       <p>Order Number: {order?._id}</p>
       <h3>Order Items</h3>
       {products}
@@ -52,6 +71,9 @@ function OrderDetails() {
       </p>
       <div>
         <ScrollDialog order={order} setOrder={setOrder} />
+        <br />
+        <br />
+        <AlertDialog orderId={order?._id} value={'Cancel Order'} />
       </div>
     </>
   )
