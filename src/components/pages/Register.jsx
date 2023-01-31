@@ -2,6 +2,10 @@ import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 export default function Register({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -56,14 +60,15 @@ export default function Register({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<div>
+		<Box component="div" sx={{ p: 2, m: 20, border: '1px dashed grey', width: '35%' }}>
+
 			<h1>Register for an account:</h1>
 
 			<p>{msg}</p>
-
+			<div style={{ width: '80%', margin: '0 auto' }}>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor='name'>Name:</label>
-				<input 
+				<TextField 
 					type="text"
 					id="name"
 					placeholder='your username...'
@@ -72,7 +77,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 				/>
 
 				<label htmlFor='email'>Email:</label>
-				<input 
+				<TextField  
 					type="email"
 					id="email"
 					placeholder='your email...'
@@ -81,7 +86,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 				/>
 
 				<label htmlFor='password'>Password:</label>
-				<input 
+				<TextField  
 					type="password"
 					id="password"
 					placeholder='password...'
@@ -90,7 +95,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 				/>
 				<h4>Delivery Address</h4>
 				<label htmlFor='street'>Street:</label>
-				<input 
+				<TextField  
 					type="text"
 					id="street"
 					placeholder='123 Street...'
@@ -98,7 +103,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={street}
 				/>
 				<label htmlFor='city'>City:</label>
-				<input 
+				<TextField  
 					type="text"
 					id="city"
 					placeholder='Los Angeles'
@@ -106,7 +111,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={city}
 				/>
 				<label htmlFor='state'>State:</label>
-				<input 
+				<TextField  
 					type="text"
 					id="state"
 					placeholder='California'
@@ -114,7 +119,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={state}
 				/>
 				<label htmlFor='zip'>Zip Code:</label>
-				<input 
+				<TextField  
 					type="number"
 					id="zip"
 					placeholder='12345'
@@ -122,8 +127,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={zip}
 				/>
 
-				<button type="submit">Register</button>
+				<Button variant="outlined" type="submit">Register</Button>
 			</form>
-		</div>
+			</div>
+		</Box>
 	)
 }
