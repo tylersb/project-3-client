@@ -26,7 +26,11 @@ export default function Reviews(props) {
     const totalRating = response.data.reduce((acc, review) => {
       return acc + review.rating
     }, 0)
-    setAvgRating(totalRating / response.data.length)
+    if (response.data.length === 0) {
+      setAvgRating('No reviews yet')
+    } else {
+      setAvgRating(totalRating / response.data.length)
+    }
     const foundReview = response.data.find(
       (review) => review.userId === props.currentUser?.id
     )
