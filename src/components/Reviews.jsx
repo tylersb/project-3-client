@@ -34,16 +34,16 @@ export default function Reviews(props) {
       setUserReview(foundReview)
     } else {
       setUserReview({
+        ...userReview,
         userId: props.currentUser?.id,
-        restaurantId: props.restaurantId,
-        ...userReview
+        restaurantId: props.restaurantId
       })
     }
   }
 
   useEffect(() => {
     fetchReviews()
-  }, [props.restaurantId])
+  }, [props.restaurantId, props.currentUser])
 
   const handleSubmission = async (e) => {
     try {
