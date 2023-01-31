@@ -24,17 +24,6 @@ function OrderDetails() {
     fetchOrder(id)
   }, [id])
 
-  const handleOrderDelete = async () => {
-    try {
-      await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}/orders/${order._id}`
-      )
-      setOrder(null)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   const products = order?.products.map((product) => {
     return (
       <div key={product._id}>
