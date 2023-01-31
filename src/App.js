@@ -17,6 +17,7 @@ import Order from './components/pages/Order'
 import { ThemeProvider, createTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { ColorModeContext } from './components/contexts/ColorModeContext'
+import Layout from './components/partials/Layout'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -120,6 +121,7 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
+        <Layout >
         <CssBaseline />
         <Router>
           <header>
@@ -213,6 +215,7 @@ function App() {
             </Routes>
           </div>
         </Router>
+        </Layout>
       </ThemeProvider>
     </ColorModeContext.Provider>
   )

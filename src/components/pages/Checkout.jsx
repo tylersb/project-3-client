@@ -1,13 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UseAddress from "../partials/UseAddress";
 import UpdateAddress from "../partials/UpdateAddress";
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
+import { Button, Typography, Grid, Container, Card, CardContent, Table, TableBody, TableContainer, Paper } from '@mui/material';
 import CardComponent from "../partials/CardComponent";
+
 
 function Checkout({ cart, currentUser, restaurant }) {
     let [totalPrice, setTotalPrice] = useState('')
@@ -40,7 +38,7 @@ function Checkout({ cart, currentUser, restaurant }) {
         //make sure update address has been confirmed and is all filled in
         if (updateAddress === false && deliveryAddress.street !== '' && deliveryAddress.city !== '' && deliveryAddress.state !== '' && deliveryAddress.zip !== '') {
             //if cart has items create order
-            if (cart.length > 0) {
+            if (checkoutItems.products.length > 0) {
 
                 // post order to the db with state items as order
                 console.log('before POST', checkoutItems)
@@ -128,45 +126,70 @@ function Checkout({ cart, currentUser, restaurant }) {
     let items = checkoutItems.products.map((item, idx) => {
         // console.log(item)
         return (
-        <Grid item key={`item${idx}`}>
-            <CardComponent item={item} handleAddItem={handleAddItem} handleRemoveItem={handleRemoveItem} handleDelete={handleDelete} idx={idx} />
-        </Grid>
+            <Grid item key={`item${idx}`}>
+                <CardComponent
+                    item={item}
+                    handleAddItem={handleAddItem}
+                    handleRemoveItem={handleRemoveItem}
+                    handleDelete={handleDelete} idx={idx} />
+            </Grid>
         )
     })
-    
+
 
     return (
         <>
-        <Container>
-            
+            <Container>
+
                 <div className="itemSection">
-                    <h1>Checkout Component</h1>
+                    <Typography variant="h3" gutterBottom>Checkout </Typography>
 
                     {addItemErrorMsg && (
-                        <p className="error">{addItemErrorMsg}</p>)}
+                        <Typography className="error">{addItemErrorMsg}</Typography>)}
 
                     {addAddressErrorMsg && (
-                        <p className="error"> {addAddressErrorMsg} </p>)}
+                        <Typography className="error"> {addAddressErrorMsg} </Typography>)}
 
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        Order Details
-                    </Typography>
-                    <Grid container spacing={3}>
-                        {items}
-                    </Grid>
-                    <p>Order Total: ${
-                        checkoutItems?.products.reduce((total, item) => {
-                            return total + item.price * item.quantity
-                        }, 0)
-                    }</p>
+                    {/* Checkout Items */}
+                    <Card elevation={3} style={{ marginBottom: "5px"}}>
+                        <CardContent>
+                            <TableContainer component={Paper}>
+                                <Table size="small" aria-label="a dense table">
+                                    <TableBody>
+                                        <Typography variant="h4" color="text.secondary" gutterBottom>
+                                            Order Details
+                                        </Typography>
+                                        {items}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </CardContent>
+                    </Card>
+
+
+                    {/* Order Total */}
+                    <Card style={{ marginBottom: "5px"}}>
+                        <CardContent>
+                            <Typography variant="h5">Order Total: ${
+                                checkoutItems?.products.reduce((total, item) => {
+                                    return total + item.price * item.quantity
+                                }, 0)
+                            }</Typography>
+                        </CardContent>
+                    </Card>
                 </div>
 
-                <div className="deliveryAddress">
-                    <h3>Confirm Delivery Address:</h3>
-                    {updateAddress ?
-                        <UpdateAddress user={user} handleConfirmAddress={handleConfirmAddress} /> :
-                        <UseAddress user={user} deliveryAddress={deliveryAddress} handleUpdateAddress={handleUpdateAddress} />}
-                </div>
+                {/* Delivery Address */}
+                <Card elevation={3} style={{ marginBottom: "5px", textAlign: "center"}}>
+                    <CardContent>
+                        <div className="deliveryAddress">
+                            <Typography variant="h4">Delivery Address:</Typography>
+                            {updateAddress ?
+                                <UpdateAddress user={user} handleConfirmAddress={handleConfirmAddress} /> :
+                                <UseAddress user={user} deliveryAddress={deliveryAddress} handleUpdateAddress={handleUpdateAddress} />}
+                        </div>
+                    </CardContent>
+                </Card>
 
                 <form onSubmit={handleSubmit}>
                     <Button
@@ -175,8 +198,8 @@ function Checkout({ cart, currentUser, restaurant }) {
                         Checkout
                     </Button>
                 </form>
-           
-        </Container>
+
+            </Container>
         </>
     )
 }

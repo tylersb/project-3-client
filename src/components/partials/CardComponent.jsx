@@ -1,39 +1,42 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 
-function CardComponent({item, handleAddItem, handleRemoveItem, handleDelete, idx}) {
-    return ( 
+
+function CardComponent({ item, handleAddItem, handleRemoveItem, handleDelete, idx }) {
+    return (
         <>
-        <Card elevation={3}>
-            <CardHeader
-                action={<DeleteIcon onClick={() => { handleDelete(idx) }} />} 
-                title={item.name} 
-                subheader={item.price}
-                />
-                <CardContent>
-                <Stack
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="baseline"
-                    spacing={1}
-                >
-                    <Typography>Quantity: </Typography>
-                    <RemoveCircleOutlinedIcon onClick={() => { handleRemoveItem(idx, item.quantity) }} />
-                    <p>{item.quantity}</p>
-                    <AddCircleOutlinedIcon onClick={() => { handleAddItem(idx, item.quantity) }} />
-                </Stack>
-                <p>Items total: ${item.price * item.quantity}</p>
-            </CardContent>
-        </Card>
+            <TableRow
+                key={item.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+                <TableCell component="th" scope="row">
+                    <DeleteIcon onClick={() => { handleDelete(idx) }} />
+                </TableCell>
+                <TableCell align="right">{item.name}</TableCell>
+                <TableCell align="right">{item.price}</TableCell>
+                <TableCell align="right">
+                    <Stack
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="baseline"
+                        spacing={1}
+                    >
+                        <RemoveCircleOutlinedIcon onClick={() => { handleRemoveItem(idx, item.quantity) }} />
+                        <Typography>{item.quantity}</Typography>
+                        <AddCircleOutlinedIcon onClick={() => { handleAddItem(idx, item.quantity) }} />
+                    </Stack>
+                </TableCell>
+                <TableCell align="right">Subtotal: ${item.price * item.quantity}</TableCell>
+            </TableRow>
         </>
-     );
+    );
 }
+
+
 
 export default CardComponent;
