@@ -1,9 +1,9 @@
 import TextField from '@mui/material/TextField'
 
-function AddMoreProduct({ products, setProducts }) {
+export default function AddMoreProduct() {
   return (
     <div className="menuProduct">
-      <label htmlFor="Products">Product Name:</label>
+      {/* <label htmlFor="Products">Product Name:</label>
       <TextField
         type="text"
         variant="filled"
@@ -31,9 +31,7 @@ function AddMoreProduct({ products, setProducts }) {
           setProducts({ ...products, description: e.target.value })
         }
         value={products?.description}
-      />
+      /> */}
     </div>
   )
 }
-
-export default AddMoreProduct
