@@ -73,6 +73,11 @@ export default function Navbar({ currentUser, handleLogout }) {
                   <p>Menu</p>
                 </Link>
               </Button>
+              <Button variant="contained" color="inherit">
+                <Link to="/newrestaurant">
+                  <p>Add New Restaurant</p>
+                </Link>
+              </Button>
             </Typography>
             {currentUser ? loggedIn : loggedOut}
       <SubHeaderNavigation />
