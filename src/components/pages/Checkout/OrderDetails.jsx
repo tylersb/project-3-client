@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import ScrollDialog from '../ScrollDialog'
-import AlertDialog from '../AlertDialog'
+import ScrollDialog from '../../ScrollDialog'
+import AlertDialog from '../../AlertDialog'
 
 function OrderDetails() {
   const [order, setOrder] = useState(null)

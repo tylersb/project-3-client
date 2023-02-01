@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import DenseTable from '../DenseTable'
+import DenseTable from '../../DenseTable'
 
 export default function Order() {
   const [order, setOrder] = useState(null)
