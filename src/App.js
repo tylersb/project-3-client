@@ -219,56 +219,56 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         {/* <Layout> */}
-          <CssBaseline />
-          <Router>
-            <header>
-              <Navbar currentUser={currentUser} handleLogout={handleLogout} />
-            </header>
+        <CssBaseline />
+        <Router>
+          <header>
+            <Navbar currentUser={currentUser} handleLogout={handleLogout} />
+          </header>
 
-            <div className="App">
-              <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route
-                  path="/register"
-                  element={
-                    <Register
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route
+                path="/register"
+                element={
+                  <Register
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+
+              <Route
+                path="/login"
+                element={
+                  <Login
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+
+              <Route
+                path="/profile"
+                element={
+                  <Profile
+                    handleLogout={handleLogout}
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
+                }
+              />
+
+              <Route
+                path="/restaurant/:restaurantId"
+                element={
+                <Menu
+                  cart={cart}
+                  currentUser={currentUser}
+                  handleAddToCart={handleAddToCart}
+                  />}
                 />
 
-                <Route
-                  path="/login"
-                  element={
-                    <Login
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-
-                <Route
-                  path="/profile"
-                  element={
-                    <Profile
-                      handleLogout={handleLogout}
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                    />
-                  }
-                />
-                <Route
-                  path="/menu"
-                  element={
-                    <Menu
-                      cart={cart}
-                      currentUser={currentUser}
-                      handleAddToCart={handleAddToCart}
-                      restaurant={restaurant}
-                    />
-                  }
-                />
                 <Route
                   path="/checkout"
                   element={
@@ -310,9 +310,9 @@ function App() {
 
                 {/* Catch all routes that are not defined above. Keep as bottom route */}
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-          </Router>
+            </Routes>
+          </div>
+        </Router>
         {/* </Layout> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
