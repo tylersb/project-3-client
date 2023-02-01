@@ -42,7 +42,7 @@ function RestaurantCard({restaurant}) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={restaurant?.restaurantName}
+        title={restaurant.restaurantName ? restaurant.restaurantName : "Hello"}
         // subheader={{restaurant?.address.street}, {restaurant?.address.city}, {restaurant?.address.state},{restaurant?.address.zip}}
       />
       <CardMedia
@@ -76,13 +76,13 @@ function RestaurantCard({restaurant}) {
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            {restaurant?.menu[0].sectionName}
+            {restaurant.menu[0] ? restaurant.menu[0].sectionName : "hello"}
           </Typography>
           <Typography paragraph>
-          {restaurant?.menu[1].sectionName}
+          {restaurant.menu[1] ? restaurant.menu[1].sectionName : null}
           </Typography>
           <Typography paragraph>
-            {restaurant?.restaurantDescription}
+            {restaurant.restaurantDescription ? restaurant.restaurantDescription : "Hello"}
           </Typography>
           <Typography>
             Maybe more content?
