@@ -51,7 +51,7 @@ export default function Welcome() {
 				<Button 
 				size="small"
 				color='secondary'>
-					<Link to="/menu">Menu</Link>
+					<Link to="/restaurants">Browse Restaurants</Link>
 				</Button>
 			</CardActions>
 		</Card>
