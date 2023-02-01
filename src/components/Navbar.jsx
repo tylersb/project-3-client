@@ -73,7 +73,7 @@ export default function Navbar({ currentUser, handleLogout }) {
           click: handleCloseUserMenu
         },
         {
-          name: 'Register',
+          name: 'Sign Up',
           link: '/register',
           click: handleCloseUserMenu
         }

@@ -60,7 +60,7 @@ function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPh
 				/>
 				<label htmlFor='phone'>Phone:</label>
 				<TextField  
-					type="phone"
+					type="Number"
 					id="phone"
 					variant="filled"
 					placeholder='your phone...'

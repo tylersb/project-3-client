@@ -17,7 +17,6 @@ function MenuCreate({products, setProducts, setMenu,  menu, handleSubmit}) {
         <h1>Menu Information:</h1>
 
         <div style={{ width: '80%', margin: '0 auto' }}>
-        <form onSubmit={handleSubmit}>
             <div className='MenuSection'>
                 <label htmlFor='SectionName'>Section Name:</label>
                 <TextField 
@@ -94,8 +93,7 @@ function MenuCreate({products, setProducts, setMenu,  menu, handleSubmit}) {
             </Button>
             }
 
-            <Button variant="outlined" type="submit">Register</Button>
-        </form>
+            <Button variant="outlined" type="submit" onClick={(e) =>{handleSubmit(e)}}>Register</Button>
         </div>
     </Box>
     );
