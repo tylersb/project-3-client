@@ -19,6 +19,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { ColorModeContext } from './components/contexts/ColorModeContext'
 import Layout from './components/partials/Layout'
 import RegisterRestaurant from './components/pages/RestaurantComponents/RegisterRestaurant'
+import AllRestaurants from './components/pages/RestaurantComponents/AllRestaurants'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -193,6 +194,14 @@ function App() {
                   currentUser={currentUser}
                   restaurant={restaurant}
                   deliveryAddress={deliveryAddress}
+                />
+              }
+            />
+            <Route
+              path="/restaurants"
+              element={
+                <AllRestaurants
+                  currentUser={currentUser}
                 />
               }
             />

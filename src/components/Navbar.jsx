@@ -48,6 +48,10 @@ export default function Navbar({ currentUser, handleLogout }) {
     {
       name: 'Add Restaurant',
       link: '/newrestaurant'
+    },
+    {
+      name: 'All Restaurants',
+      link: '/restaurants'
     }
   ]
 

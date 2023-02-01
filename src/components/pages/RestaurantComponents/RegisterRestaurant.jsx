@@ -51,7 +51,6 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 				},
 				menu
 			}
-			console.log('req bf post', reqBody)
 			await axios.post(`${process.env.REACT_APP_SERVER_URL}/restaurants`, reqBody)
 			.then(response => {
 				console.log("axios response",response)
