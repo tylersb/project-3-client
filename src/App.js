@@ -50,11 +50,113 @@ function App() {
     []
   )
 
-  const theme = createTheme({
+  const lightTheme = createTheme({
     palette: {
-      mode: mode
+      mode: 'light',
+      primary: {
+        light: '#fdd835',
+        main: '#fbc02d',
+        dark: '#c49000'
+      },
+      secondary: {
+        light: '#ffa726',
+        main: '#fb8c00',
+        dark: '#ef6c00'
+      },
+      action: {
+        active: '#fb8c00'
+      },
+      background: {
+        default: '#fff',
+        paper: '#fff'
+      }
+    },
+    typography: {
+      fontFamily: 'Open Sans, sans-serif',
+      h1: {
+        fontWeight: 400,
+        fontSize: '2.5rem'
+      },
+      h2: {
+        fontWeight: 400,
+        fontSize: '2rem'
+      },
+      h3: {
+        fontWeight: 400,
+        fontSize: '1.5rem'
+      },
+      body1: {
+        fontWeight: 300,
+        fontSize: '1rem'
+      },
+      body2: {
+        fontWeight: 300,
+        fontSize: '1rem'
+      }
+    },
+    overrides: {
+      MuiCssBaseline: {
+        '@global': {
+          '@font-face': ['Open Sans']
+        }
+      }
     }
   })
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        light: '#c49000',
+        main: '#fbc02d',
+        dark: '#fdd835'
+      },
+      secondary: {
+        light: '#ef6c00',
+        main: '#fb8c00',
+        dark: '#ffa726'
+      },
+      action: {
+        active: '#fb8c00'
+      },
+      background: {
+        default: '#333',
+        paper: '#333'
+      }
+    },
+    typography: {
+      fontFamily: 'Open Sans, sans-serif',
+      h1: {
+        fontWeight: 400,
+        fontSize: '2.5rem'
+      },
+      h2: {
+        fontWeight: 400,
+        fontSize: '2rem'
+      },
+      h3: {
+        fontWeight: 400,
+        fontSize: '1.5rem'
+      },
+      body1: {
+        fontWeight: 300,
+        fontSize: '1rem'
+      },
+      body2: {
+        fontWeight: 300,
+        fontSize: '1rem'
+      }
+    },
+    overrides: {
+      MuiCssBaseline: {
+        '@global': {
+          '@font-face': ['Open Sans']
+        }
+      }
+    }
+  })
+
+  const theme = mode === 'light' ? lightTheme : darkTheme
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -78,7 +180,6 @@ function App() {
       setCurrentUser(null)
     }
   }
-
 
   // useEffect to get the restaurant data
   useEffect(() => {
@@ -117,112 +218,102 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Layout >
-        <CssBaseline />
-        <Router>
-          <header>
-            <Navbar currentUser={currentUser} handleLogout={handleLogout} />
-          </header>
+        {/* <Layout> */}
+          <CssBaseline />
+          <Router>
+            <header>
+              <Navbar currentUser={currentUser} handleLogout={handleLogout} />
+            </header>
 
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Welcome />} />
-              <Route
-                path="/register"
-                element={
-                  <Register
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                  />
-                }
-              />
-
-              <Route
-                path="/login"
-                element={
-                  <Login
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                  />
-                }
-              />
-
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  handleLogout={handleLogout}
-                  currentUser={currentUser}
-                  setCurrentUser={setCurrentUser}
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route
+                  path="/register"
+                  element={
+                    <Register
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/menu"
-              element={
-                <Menu
-                  cart={cart}
-                  currentUser={currentUser}
-                  handleAddToCart={handleAddToCart}
-                  restaurant={restaurant}
-                />
-              }
-            />
-            <Route
-              path="/checkout"
-              element={
-                <Checkout
-                  cart={cart}
-                  currentUser={currentUser}
-                  restaurant={restaurant}
-                  deliveryAddress={deliveryAddress}
-                />
-              }
-            />
 
-            <Route
-              path="/cartnav"
-              element={
-                <Checkout
-                  cart={cart}
-                  currentUser={currentUser}
-                  restaurant={restaurant}
-                  deliveryAddress={deliveryAddress}
+                <Route
+                  path="/login"
+                  element={
+                    <Login
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/restaurants"
-              element={
-                <AllRestaurants
-                  currentUser={currentUser}
+
+                <Route
+                  path="/profile"
+                  element={
+                    <Profile
+                      handleLogout={handleLogout}
+                      currentUser={currentUser}
+                      setCurrentUser={setCurrentUser}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/newrestaurant"
-              element={
-                <RegisterRestaurant
-                  currentUser={currentUser}
+                <Route
+                  path="/menu"
+                  element={
+                    <Menu
+                      cart={cart}
+                      currentUser={currentUser}
+                      handleAddToCart={handleAddToCart}
+                      restaurant={restaurant}
+                    />
+                  }
                 />
-              }
-            />
+                <Route
+                  path="/checkout"
+                  element={
+                    <Checkout
+                      cart={cart}
+                      currentUser={currentUser}
+                      restaurant={restaurant}
+                      deliveryAddress={deliveryAddress}
+                    />
+                  }
+                />
 
-            <Route
-              path="/orders/:id/confirmed"
-              element={
-              <OrderDetails 
-              currentUser={currentUser} />}
-            />
+                <Route
+                  path="/cartnav"
+                  element={
+                    <Checkout
+                      cart={cart}
+                      currentUser={currentUser}
+                      restaurant={restaurant}
+                      deliveryAddress={deliveryAddress}
+                    />
+                  }
+                />
+                <Route
+                  path="/restaurants"
+                  element={<AllRestaurants currentUser={currentUser} />}
+                />
+                <Route
+                  path="/newrestaurant"
+                  element={<RegisterRestaurant currentUser={currentUser} />}
+                />
 
-              <Route path="/orders/:id" element={<Order />} />
+                <Route
+                  path="/orders/:id/confirmed"
+                  element={<OrderDetails currentUser={currentUser} />}
+                />
 
-              {/* Catch all routes that are not defined above. Keep as bottom route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </Router>
-        </Layout>
+                <Route path="/orders/:id" element={<Order />} />
+
+                {/* Catch all routes that are not defined above. Keep as bottom route */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </Router>
+        {/* </Layout> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
   )
