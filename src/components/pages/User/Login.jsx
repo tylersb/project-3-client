@@ -3,7 +3,7 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import { TextField, Card, Grid, CardContent, Container } from '@mui/material';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
@@ -19,7 +19,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 		try {
 			// post fortm data to the backend
 			const reqBody = {
-				email, 
+				email,
 				password
 			}
 			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, reqBody)
@@ -40,7 +40,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 				setMsg(err.response.data.msg)
 			}
 		}
- 	}
+	}
 
 	// conditionally render a navigate component
 	if (currentUser) {
@@ -48,37 +48,46 @@ export default function Login({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<Box>
-			<Typography variant="h3">
-				Login to Your Account:
-			</Typography>
-			<p>{msg}</p>
+		<Container>
+			<Grid container m={3}>
+				<Card p={2} elevate={2} style={{ maxWidth: 600, margin: "0 auto" }}>
+					<CardContent >
+						<Typography variant="h3">
+							Login to Your Account
+						</Typography>
+						<p>{msg}</p>
 
-			<form onSubmit={handleSubmit}>
-				<Typography>
-				
-				<TextField id="outlined-basic" variant="outlined" color="primary" required 
-					type="email"
-					
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
-				</Typography>
+						<form onSubmit={handleSubmit}>
+							<Typography >
+								<TextField
+									variant="filled"
+									color="primary"
+									required
+									type="email"
+									placeholder='Email'
+									onChange={e => setEmail(e.target.value)}
+									value={email}
+								/>
+							</Typography>
 
-				
-				<Typography>
-				<TextField id="outlined-basic" variant="outlined" color="primary" required 
-					type="password"
-				
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
-				/>
-				</Typography>
 
-				<Button variant="outlined" type="submit">Login</Button>
-			</form>
-		</Box>
+							<Typography m={2}>
+								<TextField
+									variant="filled"
+									color="primary"
+									required
+									type="password"
+									placeholder='Password'
+									onChange={e => setPassword(e.target.value)}
+									value={password}
+								/>
+							</Typography>
+
+							<Button variant="outlined" type="submit">Login</Button>
+						</form>
+					</CardContent>
+				</Card>
+			</Grid>
+		</Container>
 	)
 }
