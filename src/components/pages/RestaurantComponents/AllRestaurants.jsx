@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RestaurantCard from './partials/RestaurantCard'
+import Stack from '@mui/material/Stack';
 
 function AllRestaurants() {
     const [allRestaurants, setAllRestaurants] = useState([])
@@ -20,9 +21,16 @@ function AllRestaurants() {
     return ( 
         <>
         <h1>Hello</h1>
+        <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="baseline"
+            spacing={1}
+        >
         {allRestaurants.map(restaurant =>{
             return <RestaurantCard allRestaurants={restaurant} key={restaurant._id}/>
         })}
+        </Stack>
         </>
      );
 }
