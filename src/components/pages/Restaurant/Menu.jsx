@@ -4,6 +4,9 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
 import { width, height } from '@mui/system'
 import { useParams } from 'react-router-dom'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
 import axios from 'axios'
 
 // create function component Menu
@@ -35,11 +38,22 @@ export default function Menu(props) {
 
   const menu = restaurant.menu?.map((section, idx) => {
     return (
-      <div key={section._id}>
-        <h3>{section.sectionName}</h3>
-        <div>
+      <div key={section._id} style={{ 
+        display: "flex", 
+        flexDirection: "column", 
+        alignItems: "center", 
+        margin: "1rem"
+        }}>
+        <Card style={{ width: "80%" }}>
+          <CardContent>
+            <Typography variant="h5">{section.sectionName}</Typography> 
           {section.products.map((item) => (
-            <div key={item._id}>
+            <div key={item._id} style={{
+               display: "flex", 
+               justifyContent: "space-between", 
+               alignItems: "center", 
+               margin: "0.5rem 0"
+               }}>
               <span
                 onClick={() => handleSelection(item)}
                 style={{ cursor: 'pointer' }}
@@ -60,21 +74,25 @@ export default function Menu(props) {
               </IconButton>
             </div>
           ))}
-        </div>
+        </CardContent>
+       </Card>   
       </div>
+      
     )
   })
 
   return (
     <div
       style={{
-        margin: '0 auto',
-        width: '40vw',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", 
+        margin: '1rem',
       }}
     >
       <h1>Menu</h1>
       <div>{menu}</div>
-      {selectedItem && <p>Selected: {selectedItem.name}</p>}
+      {selectedItem && <p style={{ margin: "1rem 0"}}>Selected: {selectedItem.name}</p>}
       <Reviews
         restaurantId={restaurant._id}
         currentUser={props.currentUser}
