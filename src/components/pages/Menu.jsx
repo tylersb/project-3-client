@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Reviews from '../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
-import { width } from '@mui/system'
 
 // create function component Menu
 export default function Menu(props) {
@@ -27,7 +26,7 @@ export default function Menu(props) {
                 {item.name} - ${item.price}
               </span>
               <IconButton
-                color="primary"
+                color="success"
                 aria-label="add to shopping cart"
                 onClick={() =>
                   props.handleAddToCart({
