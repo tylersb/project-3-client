@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
 
-function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName}) {
+function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName, restaurantDescription, setRestaurantDescription}) {
 	const [address, setAddress] = useState({
 		street: '',
 		city: '',
@@ -36,6 +36,17 @@ function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPh
 					placeholder='Pizza Galore'
 					onChange={e => setAccountHolderName(e.target.value)}
 					value={accountHolderName}
+				/>
+				<label htmlFor='restaurantDescription'>Restaurant Description:</label>
+				<TextField 
+					type="text"
+					variant="filled"
+					id="restaurantDescription"
+					multiline
+					rows={4}
+					defaultValue='A real Italian Pizzeria with only the bestest, freshesht ingredients'
+					onChange={e => setRestaurantDescription(e.target.value)}
+					value={restaurantDescription}
 				/>
 
 				<label htmlFor='email'>Email:</label>

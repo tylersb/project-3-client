@@ -7,6 +7,7 @@ import MenuCreate from './MenuCreate';
 export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 	// state for the controlled form
 	const [restaurantName, setRestaurantName] = useState('')
+	const [restaurantDescription, setRestaurantDescription] = useState('')
 	const [accountHolderName, setAccountHolderName] = useState('')
 	const [address, setAddress] = useState({
 		street: '',
@@ -39,6 +40,7 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 			const reqBody = {
 				restaurantName,
                 accountHolderName,
+				restaurantDescription,
 				email, 
                 phone,
 				address: {
@@ -101,6 +103,8 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 				setAccountHolderName={setAccountHolderName}
 				restaurantName={restaurantName}
 				setRestaurantName={setRestaurantName}
+				restaurantDescription={restaurantDescription}
+				setRestaurantDescription={setRestaurantDescription}
 			/>
 			}
 		</div>
