@@ -44,6 +44,10 @@ export default function Navbar({ currentUser, handleLogout }) {
     {
       name: 'Checkout',
       link: '/checkout'
+    },
+    {
+      name: 'Add Restaurant',
+      link: '/newrestaurant'
     }
   ]
 

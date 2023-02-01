@@ -27,7 +27,7 @@ function Checkout({ cart, currentUser, restaurant }) {
         name: currentUser?.name,
         products: cart,
         dropOffAddress: deliveryAddress,
-        totalPrice: 10
+        totalPrice: totalPrice
     })
 
     const navigate = useNavigate()
@@ -105,8 +105,7 @@ function Checkout({ cart, currentUser, restaurant }) {
     function handleSetTotalPrice() {
         setTotalPrice(checkoutItems?.products.reduce((total, item) => {
             return total + item.price * item.quantity
-        }
-            , 0))
+        }, 0))
     }
 
     ////// Address functions \\\\\

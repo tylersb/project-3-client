@@ -18,6 +18,7 @@ import { ThemeProvider, createTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { ColorModeContext } from './components/contexts/ColorModeContext'
 import Layout from './components/partials/Layout'
+import RegisterRestaurant from './components/pages/RestaurantComponents/RegisterRestaurant'
 
 function App() {
   // the currently logged in user will be stored up here in state
@@ -183,6 +184,7 @@ function App() {
                 />
               }
             />
+
             <Route
               path="/cartnav"
               element={
@@ -194,7 +196,14 @@ function App() {
                 />
               }
             />
-
+            <Route
+              path="/newrestaurant"
+              element={
+                <RegisterRestaurant
+                  currentUser={currentUser}
+                />
+              }
+            />
 
             <Route
               path="/orders/:id/confirmed"
@@ -202,11 +211,6 @@ function App() {
               <OrderDetails 
               currentUser={currentUser} />}
             />
-
-              <Route
-                path="/orders/:id/confirmed"
-                element={<OrderDetails currentUser={currentUser} />}
-              />
 
               <Route path="/orders/:id" element={<Order />} />
 

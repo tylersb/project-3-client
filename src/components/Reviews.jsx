@@ -13,6 +13,7 @@ export default function Reviews(props) {
     rating: 0,
     comment: ''
   })
+  console.log(userReview)
   const [avgRating, setAvgRating] = useState(0)
 
   const navigate = useNavigate()
