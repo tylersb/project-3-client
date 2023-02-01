@@ -17,6 +17,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 	const [city, setCity] = useState('')
 	const [state, setState] = useState('')
 	const [zip, setZip] = useState('')
+	const [phone, setPhone] = useState('')
 
 	// submit event handler
 	const handleSubmit = async e => {
@@ -27,6 +28,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 				name,
 				email,
 				password,
+				phoneNumber: phone,
 				address: {
 					street,
 					city,
@@ -121,11 +123,11 @@ export default function Register({ currentUser, setCurrentUser }) {
 								fullWidth
 								style={{ display: "block" }}
 								required
-								onChange={e => setPassword(e.target.value)}
-								value={password}
+								onChange={e => setPhone(e.target.value)}
+								value={phone}
 							/>
 						</Typography>
-						<h4>Delivery Address</h4>
+						<Typography variant="h5">Delivery Address</Typography>
 						<Typography m={2}>
 							<TextField
 								variant="filled"
