@@ -7,13 +7,14 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+import {IconButton, Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 
 
 const ExpandMore = styled((props) => {
@@ -37,11 +38,6 @@ function RestaurantCard({restaurant}) {
   return (
     <Card sx={{ width: "40%", margin: "0 auto" }}>
       <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={restaurant.restaurantName ? restaurant.restaurantName : "Hello"}
         // subheader={{restaurant?.address.street}, {restaurant?.address.city}, {restaurant?.address.state},{restaurant?.address.zip}}
       />
@@ -53,7 +49,9 @@ function RestaurantCard({restaurant}) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Yum yum food
+          <Button>
+            <Link to={"/restaurant/" + restaurant._id}>See Menu</Link>
+          </Button>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -82,7 +80,7 @@ function RestaurantCard({restaurant}) {
           {restaurant.menu[1] ? restaurant.menu[1].sectionName : null}
           </Typography>
           <Typography paragraph>
-            {restaurant.restaurantDescription ? restaurant.restaurantDescription : "Hello"}
+            {restaurant.restaurantDescription ? restaurant.restaurantDescription : "Hello description"}
           </Typography>
           <Typography>
             Maybe more content?
