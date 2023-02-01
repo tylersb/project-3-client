@@ -29,7 +29,8 @@ export default function HoverRating({ userReview, setUserReview }) {
       sx={{
         width: 200,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        mb: 1
       }}
     >
       <Rating

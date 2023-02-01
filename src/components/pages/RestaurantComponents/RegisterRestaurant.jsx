@@ -76,10 +76,10 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 		setAccountInfoComplete(true)
 	}
 
-	// conditionally render a navigate component
-	if (currentUser) {
-		return <Navigate to="/profile" />
-	}
+	// // conditionally render a navigate component
+	// if (currentUser) {
+	// 	return <Navigate to="/profile" />
+	// }
 
 	return (
 		<div>
