@@ -51,7 +51,7 @@ export default function Navbar({ currentUser, handleLogout }) {
     }
   ]
 
-  // condtiional rendering for user menu
+  // conditional rendering for user menu
   let settings = []
   currentUser
     ? (settings = [
