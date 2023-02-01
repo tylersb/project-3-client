@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ScrollDialog from '../../ScrollDialog'
 import AlertDialog from '../../AlertDialog'
+import { Grid, Paper, Container, Button } from '@mui/material';
 
 function OrderDetails() {
   const [order, setOrder] = useState(null)
@@ -37,33 +38,50 @@ function OrderDetails() {
 
   const deliveryAddress = order?.dropOffAddress ? (
     <div>
-    Delivery Address: <span>{order?.dropOffAddress?.street}</span>,{' '}
-    <span>{order?.dropOffAddress?.city}</span>,{' '}
-    <span>{order?.dropOffAddress?.state}</span>,{' '}
-    <span>{order?.dropOffAddress?.zip}</span>
-  </div>
+      Delivery Address: <span>{order?.dropOffAddress?.street}</span>,{' '}
+      <span>{order?.dropOffAddress?.city}</span>,{' '}
+      <span>{order?.dropOffAddress?.state}</span>,{' '}
+      <span>{order?.dropOffAddress?.zip}</span>
+    </div>
   ) : null
-    
+
 
   return (
     <>
-      <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>
-      {deliveryAddress}
-      <p>Order Number: {order?._id}</p>
-      <h3>Order Items</h3>
-      {products}
-      <p>
-        Order Total: $
-        {order?.products.reduce((acc, item) => {
-          return acc + item.price * item.quantity
-        }, 0)}
-      </p>
-      <div>
-        <ScrollDialog order={order} setOrder={setOrder} />
-        <br />
-        <br />
-        <AlertDialog orderId={order?._id} value={'Cancel Order'} />
-      </div>
+    <Container>
+      <Grid container>
+        <Grid item xs={12} style={{margin: "5px"}}>
+          <Paper style={{margin: "5px", padding: "10px"}}>
+            <h2>Your order is confirmed! Prepare for a delicious delivery!</h2>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} style={{margin: "5px"}}>
+          <Paper style={{margin: "5px", padding: "10px"}}>
+            {deliveryAddress}
+            <p>Order Number: {order?._id}</p>
+            <h3>Order Items</h3>
+            {products}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} style={{margin: "5px"}}>
+          <Paper style={{margin: "5px", padding: "10px"}}>
+            <p>
+              Order Total: $
+              {order?.products.reduce((acc, item) => {
+                return acc + item.price * item.quantity
+              }, 0)}
+            </p>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={12} style={{margin: "5px"}}>
+          <Paper style={{margin: "5px", padding: "10px"}}>
+            <ScrollDialog order={order} setOrder={setOrder} />
+            <AlertDialog orderId={order?._id} value={'Cancel Order'} />
+          </Paper>
+        </Grid>
+      </Grid>
+      </Container>
     </>
   )
 }

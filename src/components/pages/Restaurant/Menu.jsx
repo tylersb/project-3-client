@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import { width, height } from '@mui/system'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import {Grid, Paper, Button} from '@mui/material';
 
 // create function component Menu
 export default function Menu(props) {
