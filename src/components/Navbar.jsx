@@ -37,8 +37,8 @@ export default function Navbar({ currentUser, handleLogout }) {
   // array of pages for nav menu
   const pages = [
     {
-      name: 'Menu',
-      link: '/menu'
+      name: 'All Restaurants',
+      link: '/restaurants'
     },
     {
       name: 'Checkout',
@@ -47,10 +47,6 @@ export default function Navbar({ currentUser, handleLogout }) {
     {
       name: 'Add Restaurant',
       link: '/newrestaurant'
-    },
-    {
-      name: 'All Restaurants',
-      link: '/restaurants'
     }
   ]
 
