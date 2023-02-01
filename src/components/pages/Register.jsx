@@ -60,14 +60,16 @@ export default function Register({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<Box component="div" sx={{ p: 2, m: 20, border: '1px dashed grey', width: '35%' }}>
+		<Box component="div" sx={{ p: 2, m: 20, width: '35%', margin: '0 auto' }}>
 
 			<h1>Register for an account:</h1>
 
 			<p>{msg}</p>
 			<div style={{ width: '80%', margin: '0 auto' }}>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor='name'>Name:</label>
+				<label htmlFor='name' style={{
+          display: 'block'
+        }}>Name:</label>
 				<TextField 
 					type="text"
 					id="name"
@@ -76,7 +78,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={name}
 				/>
 
-				<label htmlFor='email'>Email:</label>
+				<label htmlFor='email' style={{
+          display: 'block'
+        }}>Email:</label>
 				<TextField  
 					type="email"
 					id="email"
@@ -85,7 +89,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={email}
 				/>
 
-				<label htmlFor='password'>Password:</label>
+				<label htmlFor='password' style={{
+          display: 'block'
+        }}>Password:</label>
 				<TextField  
 					type="password"
 					id="password"
@@ -94,7 +100,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					value={password}
 				/>
 				<h4>Delivery Address</h4>
-				<label htmlFor='street'>Street:</label>
+				<label htmlFor='street' style={{
+          display: 'block'
+        }}>Street:</label>
 				<TextField  
 					type="text"
 					id="street"
@@ -102,7 +110,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					onChange={e => setStreet(e.target.value)}
 					value={street}
 				/>
-				<label htmlFor='city'>City:</label>
+				<label htmlFor='city' style={{
+          display: 'block'
+        }}>City:</label>
 				<TextField  
 					type="text"
 					id="city"
@@ -110,7 +120,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					onChange={e => setCity(e.target.value)}
 					value={city}
 				/>
-				<label htmlFor='state'>State:</label>
+				<label htmlFor='state' style={{
+          display: 'block'
+        }}>State:</label>
 				<TextField  
 					type="text"
 					id="state"
@@ -118,7 +130,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 					onChange={e => setState(e.target.value)}
 					value={state}
 				/>
-				<label htmlFor='zip'>Zip Code:</label>
+				<label htmlFor='zip' style={{
+          display: 'block'
+        }}>Zip Code:</label>
 				<TextField  
 					type="number"
 					id="zip"
@@ -126,7 +140,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 					onChange={e => setZip(e.target.value)}
 					value={zip}
 				/>
-
+        <br />
 				<Button variant="outlined" type="submit">Register</Button>
 			</form>
 			</div>
