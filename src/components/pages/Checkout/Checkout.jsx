@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UseAddress from "../partials/UseAddress";
-import UpdateAddress from "../partials/UpdateAddress";
+import UseAddress from "./partials/UseAddress";
+import UpdateAddress from "./partials/UpdateAddress";
 import { Button, Typography, Grid, Container, Card, CardContent, Table, TableBody, TableContainer, Paper } from '@mui/material';
-import CardComponent from "../partials/CardComponent";
+import CardComponent from "./partials/CardComponent";
 
 
 function Checkout({ cart, currentUser, restaurant }) {

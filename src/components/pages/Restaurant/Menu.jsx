@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Reviews from '../Reviews'
+import Reviews from '../../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
 
