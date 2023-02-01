@@ -14,7 +14,7 @@ function MenuCreate({ products, setProducts, setMenu, menu, handleSubmit }) {
         <Grid container m={2}>
             <Card m={3} p={2} elevate={2} style={{ width: "50%", margin: "0 auto" }}>
                 <CardContent p={2}>
-                    <Typography variant="h3">Your Menu Info</Typography>
+                    <Typography variant="h3">Your Menu Information</Typography>
 
                     <div className='MenuSection'>
                         <Typography m={2}>
