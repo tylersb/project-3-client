@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActions, Container, Button, Stack } from '@mui/material';
-import Pizza from '../partials/PizzaYum.jpg'
+import Pizza from './Checkout/partials/PizzaYum.jpg'
 
 
 export default function Welcome() {

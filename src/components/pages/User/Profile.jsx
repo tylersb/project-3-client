@@ -1,4 +1,4 @@
-import OrderHistory from '../OrderHistory'
+import OrderHistory from './OrderHistory'
 
 export default function Profile({ currentUser, handleLogout }) {
   return (
