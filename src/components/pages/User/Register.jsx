@@ -3,9 +3,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import { TextField, Card, Grid, CardContent, Container } from '@mui/material';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+
 
 export default function Register({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -14,9 +14,9 @@ export default function Register({ currentUser, setCurrentUser }) {
 	const [password, setPassword] = useState('')
 	const [msg, setMsg] = useState('')
 	const [street, setStreet] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [zip, setZip] = useState('')
+	const [city, setCity] = useState('')
+	const [state, setState] = useState('')
+	const [zip, setZip] = useState('')
 
 	// submit event handler
 	const handleSubmit = async e => {
@@ -25,7 +25,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 			// post fortm data to the backend
 			const reqBody = {
 				name,
-				email, 
+				email,
 				password,
 				address: {
 					street,
@@ -52,7 +52,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 				setMsg(err.response.data.msg)
 			}
 		}
- 	}
+	}
 
 	// conditionally render a navigate component
 	if (currentUser) {
@@ -60,90 +60,133 @@ export default function Register({ currentUser, setCurrentUser }) {
 	}
 
 	return (
-		<Box component="div" sx={{ p: 2, m: 20, width: '35%', margin: '0 auto' }}>
+		<Grid container m={2}>
+			<Card m={3} p={2} elevate={2} style={{ width: "50%", margin: "0 auto" }}>
+				<CardContent p={2}>
+					<Typography variant="h3">
+						Sign up for an account
+					</Typography>
+					<p>{msg}</p>
 
-			<h1>Register for an account:</h1>
+					<form onSubmit={handleSubmit}>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="text"
+								id="name"
+								label="Name"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setName(e.target.value)}
+								value={name}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="email"
+								id="email"
+								label="Email"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setEmail(e.target.value)}
+								value={email}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="password"
+								id="password"
+								label="Password"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setPassword(e.target.value)}
+								value={password}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="number"
+								id="phone"
+								label="Phone Number"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setPassword(e.target.value)}
+								value={password}
+							/>
+						</Typography>
+						<h4>Delivery Address</h4>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="text"
+								id="street"
+								label="Street Address"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setStreet(e.target.value)}
+								value={street}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="text"
+								id="city"
+								label="City"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setCity(e.target.value)}
+								value={city}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="text"
+								id="state"
+								label="State"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setState(e.target.value)}
+								value={state}
+							/>
+						</Typography>
+						<Typography m={2}>
+							<TextField
+								variant="filled"
+								color="primary"
+								type="number"
+								id="zip"
+								label="Zip"
+								fullWidth
+								style={{ display: "block" }}
+								required
+								onChange={e => setZip(e.target.value)}
+								value={zip}
+							/>
+						</Typography>
+						<Button variant="outlined" type="submit">Register</Button>
+					</form>
+				</CardContent>
+			</Card>
+		</Grid>
 
-			<p>{msg}</p>
-			<div style={{ width: '80%', margin: '0 auto' }}>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='name' style={{
-          display: 'block'
-        }}>Name:</label>
-				<TextField 
-					type="text"
-					id="name"
-					placeholder='your username...'
-					onChange={e => setName(e.target.value)}
-					value={name}
-				/>
-
-				<label htmlFor='email' style={{
-          display: 'block'
-        }}>Email:</label>
-				<TextField  
-					type="email"
-					id="email"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
-
-				<label htmlFor='password' style={{
-          display: 'block'
-        }}>Password:</label>
-				<TextField  
-					type="password"
-					id="password"
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
-				/>
-				<h4>Delivery Address</h4>
-				<label htmlFor='street' style={{
-          display: 'block'
-        }}>Street:</label>
-				<TextField  
-					type="text"
-					id="street"
-					placeholder='123 Street...'
-					onChange={e => setStreet(e.target.value)}
-					value={street}
-				/>
-				<label htmlFor='city' style={{
-          display: 'block'
-        }}>City:</label>
-				<TextField  
-					type="text"
-					id="city"
-					placeholder='Los Angeles'
-					onChange={e => setCity(e.target.value)}
-					value={city}
-				/>
-				<label htmlFor='state' style={{
-          display: 'block'
-        }}>State:</label>
-				<TextField  
-					type="text"
-					id="state"
-					placeholder='California'
-					onChange={e => setState(e.target.value)}
-					value={state}
-				/>
-				<label htmlFor='zip' style={{
-          display: 'block'
-        }}>Zip Code:</label>
-				<TextField  
-					type="number"
-					id="zip"
-					placeholder='12345'
-					onChange={e => setZip(e.target.value)}
-					value={zip}
-				/>
-        <br />
-				<Button variant="outlined" type="submit">Register</Button>
-			</form>
-			</div>
-		</Box>
 	)
 }

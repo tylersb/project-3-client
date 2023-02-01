@@ -50,7 +50,7 @@ export default function Login({ currentUser, setCurrentUser }) {
 	return (
 		<Container>
 			<Grid container m={3}>
-				<Card p={2} elevate={2} style={{ maxWidth: 600, margin: "0 auto" }}>
+				<Card p={2} elevate={2} style={{ width: "40%", margin: "0 auto" }}>
 					<CardContent >
 						<Typography variant="h3">
 							Login to Your Account
