@@ -1,118 +1,159 @@
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 
-function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName, restaurantDescription, setRestaurantDescription}) {
+function AccountInfoCreate({ handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName, restaurantDescription, setRestaurantDescription }) {
 	const [address, setAddress] = useState({
 		street: '',
 		city: '',
 		state: '',
 		zip: ''
 	})
-	return ( 
-        <Box component="div" sx={{ p: 2, m: 20, border: '1px dashed grey', width: '35%' }}>
-			<p>{msg}</p>
+	return (
+		<Grid container m={2}>
+			<Card m={3} p={2} elevate={2} style={{ width: "50%", margin: "0 auto" }}>
+				<CardContent p={2}>
+					<Typography variant="h3">Regiser Your Restaurant</Typography>
 
-			<h1>Restaurant Account Information:</h1>
+					<Typography m={2}>
+						<TextField
+							type="text"
+							variant="filled"
+							id="restaurantName"
+							label="Restaurant Name"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='Pizza Galore'
+							onChange={e => setRestaurantName(e.target.value)}
+							value={restaurantName}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="text"
+							variant="filled"
+							id="accountHolderName"
+							label="Account Holder Name"
+							fullWidth
+							style={{ display: "block" }}
+							placeholder='Mr. Pizza'
+							onChange={e => setAccountHolderName(e.target.value)}
+							value={accountHolderName}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="text"
+							variant="filled"
+							id="restaurantDescription"
+							label="Restaurant Description"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							multiline
+							rows={4}
+							placeholder='A real Italian Pizzeria with only the bestest, freshest ingredients'
+							onChange={e => setRestaurantDescription(e.target.value)}
+							value={restaurantDescription}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="email"
+							id="email"
+							variant="filled"
+							label="Email"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='your email...'
+							onChange={e => setEmail(e.target.value)}
+							value={email}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="Number"
+							id="phone"
+							variant="filled"
+							label="Phone"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='your phone...'
+							onChange={e => setPhone(e.target.value)}
+							value={phone}
+						/>
+					</Typography>
+					<h4>Restaurant Address</h4>
 
-			<div style={{ width: '80%', margin: '0 auto' }}>
-				<label htmlFor='restaurantName'>Restaurant Name:</label>
-				<TextField 
-					type="text"
-					variant="filled"
-					id="restaurantName"
-					placeholder='Pizza Galore'
-					onChange={e => setRestaurantName(e.target.value)}
-					value={restaurantName}
-				/>
-
-				<label htmlFor='accountHolderName'>Account Holder Name:</label>
-				<TextField 
-					type="text"
-					variant="filled"
-					id="accountHolderName"
-					placeholder='Mr. Pizza'
-					onChange={e => setAccountHolderName(e.target.value)}
-					value={accountHolderName}
-				/>
-				<label htmlFor='restaurantDescription'>Restaurant Description:</label>
-				<TextField 
-					type="text"
-					variant="filled"
-					id="restaurantDescription"
-					multiline
-					rows={4}
-					placeholder='A real Italian Pizzeria with only the bestest, freshest ingredients'
-					onChange={e => setRestaurantDescription(e.target.value)}
-					value={restaurantDescription}
-				/>
-
-				<label htmlFor='email'>Email:</label>
-				<TextField  
-					type="email"
-					id="email"
-					variant="filled"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
-				<label htmlFor='phone'>Phone:</label>
-				<TextField  
-					type="Number"
-					id="phone"
-					variant="filled"
-					placeholder='your phone...'
-					onChange={e => setPhone(e.target.value)}
-					value={phone}
-				/>
-				<h4>Restaurant Address</h4>
-				<label htmlFor='street'>Street:</label>
-				<TextField  
-					type="text"
-					id="street"
-					variant="filled"
-					placeholder='123 Street...' 
-					onChange={e => setAddress({...address, street: e.target.value})}
-					value={address.street}
-				/>
-				<label htmlFor='city'>City:</label>
-				<TextField  
-					type="text"
-					id="city"
-					variant="filled"
-					placeholder='Los Angeles'
-					onChange={e => setAddress({...address, city: e.target.value})}
-					value={address.city}
-				/>
-				<label htmlFor='state'>State:</label>
-				<TextField  
-					type="text"
-					id="state"
-					variant="filled"
-					placeholder='California'
-					onChange={e => setAddress({...address, state: e.target.value})}
-					value={address.state}
-				/>
-				<label htmlFor='zip'>Zip Code:</label>
-				<TextField  
-					type="number"
-					id="zip"
-					variant="filled"
-					placeholder='12345'
-					onChange={e => setAddress({...address, zip: e.target.value})}
-					value={address.zip}
-				/>
-				<Button 
-					variant="outlined" 
-					type="submit" 
-					onClick={() => handleAddAddress(address)}>
-					Continue to Menu
-				</Button>
-			</div>
-		</Box>
-     );
+					<Typography m={2}>
+						<TextField
+							type="text"
+							id="street"
+							variant="filled"
+							label="Street"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='123 Street...'
+							onChange={e => setAddress({ ...address, street: e.target.value })}
+							value={address.street}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="text"
+							id="city"
+							variant="filled"
+							label="City"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='Los Angeles'
+							onChange={e => setAddress({ ...address, city: e.target.value })}
+							value={address.city}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="text"
+							id="state"
+							variant="filled"
+							label="State"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							placeholder='California'
+							onChange={e => setAddress({ ...address, state: e.target.value })}
+							value={address.state}
+						/>
+					</Typography>
+					<Typography m={2}>
+						<TextField
+							type="number"
+							id="zip"
+							label="Zip"
+							fullWidth
+							style={{ display: "block" }}
+							required
+							variant="filled"
+							placeholder='12345'
+							onChange={e => setAddress({ ...address, zip: e.target.value })}
+							value={address.zip}
+						/>
+					</Typography>
+					<Button
+						variant="outlined"
+						type="submit"
+						onClick={() => handleAddAddress(address)}>
+						Continue to Menu
+					</Button>
+				</CardContent>
+			</Card>
+		</Grid >
+	);
 }
 
 export default AccountInfoCreate;
