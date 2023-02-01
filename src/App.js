@@ -55,14 +55,6 @@ function App() {
     }
   })
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/restaurants`)
-      .then((response) => {
-        setRestaurant(response.data[0]) // set restaurant state to the first restaurant in the db
-      })
-  }, [])
-
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
     // check to see if token is in storage
@@ -86,6 +78,8 @@ function App() {
     }
   }
 
+
+  // useEffect to get the restaurant data
   useEffect(() => {
     const fetchData = async () => {
       try {

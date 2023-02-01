@@ -15,9 +15,9 @@ export default function SubHeaderNavigation() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        p: 1
       }}
     >
-      {theme.palette.mode} mode
       <IconButton
         sx={{ ml: 1 }}
         onClick={colorMode.toggleColorMode}
@@ -29,6 +29,9 @@ export default function SubHeaderNavigation() {
           <Brightness4Icon />
         )}
       </IconButton>
+      <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+        {theme.palette.mode} mode
+      </Box>
     </Box>
   )
 }
