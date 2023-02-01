@@ -33,7 +33,7 @@ function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPh
 					type="text"
 					variant="filled"
 					id="accountHolderName"
-					placeholder='Pizza Galore'
+					placeholder='Mr. Pizza'
 					onChange={e => setAccountHolderName(e.target.value)}
 					value={accountHolderName}
 				/>
@@ -44,7 +44,7 @@ function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPh
 					id="restaurantDescription"
 					multiline
 					rows={4}
-					defaultValue='A real Italian Pizzeria with only the bestest, freshesht ingredients'
+					placeholder='A real Italian Pizzeria with only the bestest, freshest ingredients'
 					onChange={e => setRestaurantDescription(e.target.value)}
 					value={restaurantDescription}
 				/>
@@ -60,7 +60,7 @@ function AccountInfoCreate({handleAddAddress, msg, email, setEmail, phone, setPh
 				/>
 				<label htmlFor='phone'>Phone:</label>
 				<TextField  
-					type="phone"
+					type="Number"
 					id="phone"
 					variant="filled"
 					placeholder='your phone...'

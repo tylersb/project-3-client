@@ -47,6 +47,10 @@ export default function Navbar({ currentUser, handleLogout }) {
     {
       name: 'Add Restaurant',
       link: '/newrestaurant'
+    },
+    {
+      name: 'All Restaurants',
+      link: '/restaurants'
     }
   ]
 
@@ -72,7 +76,7 @@ export default function Navbar({ currentUser, handleLogout }) {
           click: handleCloseUserMenu
         },
         {
-          name: 'Register',
+          name: 'Sign Up',
           link: '/register',
           click: handleCloseUserMenu
         }

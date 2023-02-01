@@ -48,7 +48,6 @@ function Checkout({ cart, currentUser, restaurant }) {
                         navigate(`/orders/${response.data._id}/confirmed`)
                     })
                     .catch(console.warn)
-
             } else {
                 setItemErrorMsg('Add some delicious foods to place your order. Your cart is empty!')
             }

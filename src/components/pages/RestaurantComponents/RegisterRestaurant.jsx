@@ -23,17 +23,17 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
         name: '',
         price: '',
         description: ''
-		}
-    	)
+		})
 	const [sectionName, setSectionName] = useState({
 		sectionName: '',
-		products: ['']
+		products: [products]
 	})
     const [menu, setMenu] = useState([sectionName])
 	const [accountInfoComplete, setAccountInfoComplete] = useState(false)
 
 	// submit event handler
 	const handleSubmit = async e => {
+		console.log('handleSubmit clicked')
 		e.preventDefault()
 		try {
 			// post fortm data to the backend
@@ -51,8 +51,12 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 				},
 				menu
 			}
-			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/restaurants`, reqBody)
-
+			await axios.post(`${process.env.REACT_APP_SERVER_URL}/restaurants`, reqBody)
+			.then(response => {
+				console.log("axios response",response)
+				// navigate(`/orders/${response.data._id}/confirmed`)
+			})
+			.catch(console.warn)
 		} catch (err) {
 			console.warn(err)
 			if (err.response) {
@@ -67,10 +71,11 @@ export default function RegisterRestaurant({ currentUser, setCurrentUser }) {
 		if(menu.sectionName.includes(section)) {
 			//already have this section name... need to update
 		} else {
-			setSectionName()
+			setSectionName(section)
 		}
 	}
 
+	//returns from AccountInfoCreate component
 	function handleAddAddress(address) {
 		setAddress(address)
 		setAccountInfoComplete(true)
