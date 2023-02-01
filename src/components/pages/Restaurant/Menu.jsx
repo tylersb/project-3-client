@@ -47,7 +47,7 @@ export default function Menu(props) {
                 {item.name} - ${item.price}
               </span>
               <IconButton
-                color="primary"
+                color="success"
                 aria-label="add to shopping cart"
                 onClick={() =>
                   props.handleAddToCart({
