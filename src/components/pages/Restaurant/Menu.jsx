@@ -54,6 +54,7 @@ export default function Menu(props) {
                alignItems: "center", 
                margin: "0.5rem 0"
                }}>
+              <img src={item.image} alt={item.description} style={{ width: "100%", height: "100px" }} />
               <span
                 onClick={() => handleSelection(item)}
                 style={{ cursor: 'pointer' }}
