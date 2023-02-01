@@ -1,5 +1,5 @@
 import OrderHistory from './OrderHistory'
-
+import Typography from '@mui/material/Typography';
 export default function Profile({ currentUser, handleLogout }) {
   return (
     <div>
