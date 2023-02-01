@@ -1,5 +1,4 @@
-import Typography from '@mui/material/Typography';
-import OrderHistory from '../OrderHistory'
+import OrderHistory from './OrderHistory'
 
 export default function Profile({ currentUser, handleLogout }) {
   return (
@@ -11,7 +10,7 @@ export default function Profile({ currentUser, handleLogout }) {
       <p>Username: {currentUser?.name}</p>
       <p>Email: {currentUser?.email}</p>
       <p>
-        Address: {currentUser?.address.street}, {currentUser?.address.city}, {currentUser?.address.state} {currentUser?.address.zip}
+        Address: {currentUser?.address?.street}, {currentUser?.address?.city}, {currentUser?.address?.state} {currentUser?.address?.zip}
       </p>
       </Typography>
       

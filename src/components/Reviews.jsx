@@ -3,6 +3,7 @@ import CommentField from './CommentField'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Button from '@mui/material/Button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Reviews(props) {
   const [reviews, setReviews] = useState([])
@@ -14,6 +15,8 @@ export default function Reviews(props) {
   })
   const [avgRating, setAvgRating] = useState(0)
 
+  const navigate = useNavigate()
+
   const fetchReviews = async () => {
     if (!props.restaurantId) return
     const response = await axios.get(
@@ -23,42 +26,54 @@ export default function Reviews(props) {
     const totalRating = response.data.reduce((acc, review) => {
       return acc + review.rating
     }, 0)
-    setAvgRating(totalRating / response.data.length)
+    if (response.data.length === 0) {
+      setAvgRating('No reviews yet')
+    } else {
+      setAvgRating(totalRating / response.data.length)
+    }
     const foundReview = response.data.find(
-      (review) => review.userId === props.currentUser.id
+      (review) => review.userId === props.currentUser?.id
     )
     if (foundReview) {
       setUserReview(foundReview)
     } else {
       setUserReview({
-        userId: props.currentUser.id,
-        restaurantId: props.restaurantId,
-        ...userReview
+        ...userReview,
+        userId: props.currentUser?.id,
+        restaurantId: props.restaurantId
       })
     }
   }
 
   useEffect(() => {
     fetchReviews()
-  }, [props.restaurantId])
+  }, [props.restaurantId, props.currentUser])
 
   const handleSubmission = async (e) => {
-    e.preventDefault()
-    const foundReview = reviews.find(
-      (review) => review.userId === props.currentUser.id
-    )
-    if (foundReview) {
-      await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/reviews/${foundReview._id}`,
-        userReview
+    try {
+      e.preventDefault()
+      if (!props.currentUser?.id) {
+        navigate('/login')
+        return
+      }
+      const foundReview = reviews.find(
+        (review) => review.userId === props.currentUser.id
       )
-    } else {
-      await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/reviews`,
-        userReview
-      )
+      if (foundReview) {
+        await axios.put(
+          `${process.env.REACT_APP_SERVER_URL}/reviews/${foundReview._id}`,
+          userReview
+        )
+      } else {
+        await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/reviews`,
+          userReview
+        )
+      }
+      fetchReviews()
+    } catch (err) {
+      console.warn(err)
     }
-    fetchReviews()
   }
 
   return (
