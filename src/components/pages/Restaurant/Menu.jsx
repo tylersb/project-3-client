@@ -1,19 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Reviews from '../../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
-import { width } from '@mui/system'
+import { width, height } from '@mui/system'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 // create function component Menu
 export default function Menu(props) {
   // state is menuItems, setMenuItems is the function to update state, same applies to selectedItem, and cart
   const [selectedItem, setSelectedItem] = useState(null)
+  const [restaurant, setRestaurant] = useState('')
+  const { restaurantId } = useParams()
+
+  const fetchRestaurant = async (restaurantId) => {
+    try {
+      axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants/${restaurantId}`)
+        .then(response => {
+          setRestaurant(response.data)
+          console.log(response.data)
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchRestaurant(restaurantId)
+  }, [restaurantId])
 
   const handleSelection = (item) => {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
   }
 
-  const menu = props.restaurant.menu?.map((section, idx) => {
+  const menu = restaurant.menu?.map((section, idx) => {
     return (
       <div key={section._id}>
         <h3>{section.sectionName}</h3>
@@ -56,7 +76,7 @@ export default function Menu(props) {
       <div>{menu}</div>
       {selectedItem && <p>Selected: {selectedItem.name}</p>}
       <Reviews
-        restaurantId={props.restaurant._id}
+        restaurantId={restaurant._id}
         currentUser={props.currentUser}
       />
     </div>

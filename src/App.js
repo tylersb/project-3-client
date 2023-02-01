@@ -158,13 +158,12 @@ function App() {
               }
             />
             <Route
-              path="/menu"
+              path="/restaurant/:restaurantId"
               element={
                 <Menu
                   cart={cart}
                   currentUser={currentUser}
                   handleAddToCart={handleAddToCart}
-                  restaurant={restaurant}
                 />
               }
             />
