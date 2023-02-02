@@ -6,6 +6,8 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActions, Container, Button, Stack } from '@mui/material'
 import Pizza from './Checkout/partials/PizzaYum.jpg'
+import Tacos from './User/Tacos.jpg'
+import Salad from './User/Salad.jpg'
 
 export default function Welcome() {
   return (
@@ -27,8 +29,8 @@ export default function Welcome() {
         alignItems="baseline"
         spacing={1}
       >
-        <Card sx={{ width: '40%', mt: '10px', height: '30%' }}>
-          <CardMedia component="img" height="140" image={Pizza} alt="pizza" />
+        <Card sx={{ width: '50%', mt: '10px', height: '30%' }}>
+          <CardMedia component="img" height="200" image={Tacos} alt="pizza" />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Find Restaurants
@@ -41,6 +43,7 @@ export default function Welcome() {
           <CardActions>
             <Button
               size="small"
+              variant='contained'
               color="secondary"
               component={Link}
               to="/restaurants"
@@ -49,8 +52,8 @@ export default function Welcome() {
             </Button>
           </CardActions>
         </Card>
-        <Card sx={{ width: '40%', mt: '10px' }}>
-          <CardMedia component="img" height="140" image={Pizza} alt="pizza" />
+        <Card sx={{ width: '50%', mt: '10px' }}>
+          <CardMedia component="img" height="200" image={Salad} alt="pizza" />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Sign Up For an Account
@@ -60,7 +63,12 @@ export default function Welcome() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" component={Link} to="/signup">
+            <Button 
+            size="small" 
+            variant='contained'
+            color="secondary"
+            component={Link} 
+            to="/signup">
               Sign up here
             </Button>
           </CardActions>

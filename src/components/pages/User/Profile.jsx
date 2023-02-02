@@ -10,6 +10,7 @@ import Burger from './Burger.jpg'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import SubHeaderNavigation from '../../SubHeaderNavigation';
 
 export default function Profile({ currentUser, handleLogout }) {
   const [orders, setOrders] = useState([])
@@ -59,6 +60,19 @@ export default function Profile({ currentUser, handleLogout }) {
             <Typography>{currentUser?.address?.city}, {currentUser?.address?.state} {currentUser?.address?.zip}</Typography>
             <Typography color="secondary">Phone:</Typography>
             <Typography>{currentUser?.phone}</Typography>
+            <Typography variant='h5' mt={5} color="secondary">
+              Account Settings
+            </Typography>
+            <Typography variant='h6' mt={2} mb={2}>
+              Own a restaurant? Join us!
+              <Button to="/newrestaurant" variant='contained'>
+                Add Your Restaurant
+              </Button>
+            </Typography>
+            <Typography variant='h6' mt={4} mb={2}>
+              Our Theme can match your mood. 
+            <SubHeaderNavigation />
+            </Typography>
           </CardContent>
         </Card>
       </div>

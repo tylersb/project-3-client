@@ -157,6 +157,7 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         <Typography variant="h4" color="text.secondary" gutterBottom>
                                             Order Details
                                         </Typography>
+
                                         {items.length > 0 ? items : 
                                         <div>
                                         <Typography variant="h6" color="text.secondary" gutterBottom>
@@ -166,6 +167,7 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         Go find some grub!
                                         </Typography>
                                         </div>}
+                                        
                                     </TableBody>
                                 </Table>
                             </TableContainer>
