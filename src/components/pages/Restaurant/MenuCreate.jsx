@@ -219,7 +219,12 @@ export default function MenuCreate({
         section={section}
         product={product}
       />
-      <Button onClick={() => {handleSubmitRestaurant()}}>Register Restaurant</Button>
+      <Button 
+      onClick={() => {handleSubmitRestaurant()}}
+      variant='contained'
+      m={2}>
+        Register Restaurant
+        </Button>
       </Card>
     </Grid>
   )
