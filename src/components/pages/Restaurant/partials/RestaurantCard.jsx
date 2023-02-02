@@ -36,7 +36,7 @@ function RestaurantCard({ restaurant }) {
   }
 
   return (
-    <Card sx={{ width: '40%', margin: '0 auto' }}>
+    <Card sx={{ margin: '0 auto' }}>
       <CardHeader
         title={restaurant.restaurantName ? restaurant.restaurantName : 'Hello'}
         // subheader={{restaurant?.address.street}, {restaurant?.address.city}, {restaurant?.address.state},{restaurant?.address.zip}}
