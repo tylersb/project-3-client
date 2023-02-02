@@ -9,7 +9,8 @@ export default function MenuCreate({
   setMenu,
   menu,
   activeStep,
-  setActiveStep
+  setActiveStep,
+  handleSubmitRestaurant
 }) {
   const [section, setSection] = useState({
     sectionName: '',
@@ -218,6 +219,12 @@ export default function MenuCreate({
         section={section}
         product={product}
       />
+      <Button 
+      onClick={() => {handleSubmitRestaurant()}}
+      variant='contained'
+      m={2}>
+        Register Restaurant
+        </Button>
       </Card>
     </Grid>
   )

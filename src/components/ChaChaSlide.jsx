@@ -10,7 +10,8 @@ export default function ChaChaSlide({
   menu,
   setMenu,
   activeStep,
-  setActiveStep
+  setActiveStep,
+  handleSubmitRestaurant
 }) {
   const [checked, setChecked] = useState(false)
   const containerRef = useRef(null)
@@ -46,6 +47,7 @@ export default function ChaChaSlide({
                 restaurantInfo={restaurantInfo}
                 setRestaurantInfo={setRestaurantInfo}
                 ChaChaRealSmooth={handleChange}
+                
               />
             </Box>
           </Slide>
@@ -63,6 +65,7 @@ export default function ChaChaSlide({
                 setMenu={setMenu}
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
+                handleSubmitRestaurant={handleSubmitRestaurant}
               />
             </Box>
           </Slide>

@@ -25,7 +25,7 @@ export default function Menu(props) {
         .get(`${process.env.REACT_APP_SERVER_URL}/restaurants/${restaurantId}`)
         .then((response) => {
           setRestaurant(response.data)
-          console.log(response.data)
+          // console.log(response.data)
         })
     } catch (err) {
       console.log(err)

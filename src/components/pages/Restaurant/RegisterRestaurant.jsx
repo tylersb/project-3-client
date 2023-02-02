@@ -22,7 +22,6 @@ export default function RegisterRestaurant({ currentUser }) {
   const [activeStep, setActiveStep] = useState(0)
 
   const handleSubmit = async (e) => {
-    e?.preventDefault()
     try {
       const payload = {
         restaurantName: restaurantInfo.restaurantName,
@@ -79,7 +78,9 @@ export default function RegisterRestaurant({ currentUser }) {
           setMenu={setMenu}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
+          handleSubmitRestaurant={handleSubmit}
         />
+       
       </div>
     </>
   )

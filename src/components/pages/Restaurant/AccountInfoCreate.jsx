@@ -6,7 +6,8 @@ export default function AccountInfoCreate({
   setRestaurantInfo,
   setActiveStep,
   activeStep,
-  ChaChaRealSmooth
+  ChaChaRealSmooth,
+
 }) {
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -210,6 +211,7 @@ export default function AccountInfoCreate({
             <Button variant="outlined" type="submit">
               Continue to Menu
             </Button>
+            
           </form>
         </CardContent>
       </Card>
