@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import AccountInfoCreate from './AccountInfoCreate'
-import MenuCreate from './MenuCreate'
 import CustomizedStepper from '../../CustomizedStepper'
 import ChaChaSlide from '../../ChaChaSlide'
+import axios from 'axios'
 
 export default function RegisterRestaurant({ currentUser }) {
   // state for the controlled form
@@ -22,12 +21,56 @@ export default function RegisterRestaurant({ currentUser }) {
   const [menu, setMenu] = useState([])
   const [activeStep, setActiveStep] = useState(0)
 
+  const handleSubmit = async (e) => {
+    e?.preventDefault()
+    try {
+      const payload = {
+        restaurantName: restaurantInfo.restaurantName,
+        restaurantDescription: restaurantInfo.restaurantDescription,
+        accountHolderName: restaurantInfo.accountHolderName,
+        email: restaurantInfo.email,
+        phone: restaurantInfo.phone,
+        address: {
+          street: restaurantInfo.address.street,
+          city: restaurantInfo.address.city,
+          state: restaurantInfo.address.state,
+          zip: restaurantInfo.address.zip
+        },
+        menu: menu
+      }
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/restaurants`,
+        payload
+      )
+      setMenu([])
+      setRestaurantInfo({
+        restaurantName: '',
+        restaurantDescription: '',
+        accountHolderName: '',
+        email: '',
+        phone: '',
+        address: {
+          street: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // if (activeStep === 1) {
+  //   setActiveStep(0)
+  //   handleSubmit()
+  // }
+
   return (
     <>
       <br />
-      <CustomizedStepper 
-        activeStep={activeStep}
-      />
+      <CustomizedStepper activeStep={activeStep} />
       <div>
         <ChaChaSlide
           restaurantInfo={restaurantInfo}
@@ -36,8 +79,7 @@ export default function RegisterRestaurant({ currentUser }) {
           setMenu={setMenu}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
-         />
-
+        />
       </div>
     </>
   )

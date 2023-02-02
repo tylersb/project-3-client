@@ -3,7 +3,7 @@ import Collapse from '@mui/material/Collapse'
 import List from '@mui/material/List'
 import { TransitionGroup } from 'react-transition-group'
 import { useState, useEffect } from 'react'
-import Menu from './Menu'
+import Menu from './MenuArray'
 import Section from './Section'
 import Product from './Product'
 import { IconButton, ListItem, ListItemText } from '@mui/material'
@@ -56,7 +56,6 @@ export default function TransitionFood({ menu, section, product }) {
   }, [menu, section, product])
 
   const [currentMenu, setCurrentMenu] = useState([])
-  console.log(currentMenu)
 
   // const handleAddCurrentMenu = () => {
   //   const nextHiddenItem = FRUITS.find((i) => !currentMenu.includes(i))

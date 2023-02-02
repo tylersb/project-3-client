@@ -63,7 +63,7 @@ export default function Menu(props) {
                   margin: '0.5rem 0'
                 }}
               >
-                <img
+                {/* <img
                   src={item.image}
                   alt={item.description}
                   style={{
@@ -71,7 +71,7 @@ export default function Menu(props) {
                     height: '100px',
                     borderRadius: '10px'
                   }}
-                />
+                /> */}
                 <span
                   onClick={() => handleSelection(item)}
                   style={{ cursor: 'pointer' }}

@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import Switch from '@mui/material/Switch'
 import Slide from '@mui/material/Slide'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import { useState, useRef } from 'react'
 import AccountInfoCreate from './pages/Restaurant/AccountInfoCreate'
 import MenuCreate from './pages/Restaurant/MenuCreate'
@@ -12,7 +11,8 @@ export default function ChaChaSlide({
   menu,
   setMenu,
   activeStep,
-  setActiveStep
+  setActiveStep,
+  handleSubmit
 }) {
   const [checked, setChecked] = useState(false)
   const containerRef = useRef(null)
@@ -24,10 +24,6 @@ export default function ChaChaSlide({
   return (
     <Box ref={containerRef}>
       <Box>
-        {/* <FormControlLabel
-          control={<Switch checked={checked} onChange={handleChange} />}
-          label="Show from target"
-        /> */}
         <Box
           sx={{
             w: '50vw'
@@ -35,7 +31,7 @@ export default function ChaChaSlide({
         >
           <Slide
             direction="right"
-            in={checked}
+            in={!checked}
             container={containerRef.current}
             appear={false}
             unmountOnExit
@@ -53,9 +49,9 @@ export default function ChaChaSlide({
           </Slide>
           <Slide
             direction="left"
-            in={!checked}
+            in={checked}
             container={containerRef.current}
-            // mountOnEnter
+            mountOnEnter
             appear={true}
             {...(checked ? { timeout: 600 } : {})}
           >
