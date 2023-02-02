@@ -1,0 +1,40 @@
+.container {
+    position: absolute;
+    padding: 3%;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    'restaurantInfo menu'
+    'reviews menu '
+    'checkout checkout '
+    ;
+    grid-template-columns: 1fr 2fr ;
+}
+
+
+.restaurantInfo {
+    grid-area: restaurantInfo;
+}
+.menu{
+    grid-area: menu;
+}
+.reviews{
+    grid-area: reviews;
+}
+.checkout{
+    grid-area:  checkout ;
+}
+
+@media only screen and (max-width: 600px)   {
+    .container {
+      grid-gap: 20px;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+      "restaurantInfo   "
+      "menu"
+      "checkout"
+      "reviews";
+      max-width: 600px;
+    }
+  }

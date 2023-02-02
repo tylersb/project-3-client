@@ -1,7 +1,4 @@
 import OrderHistory from './OrderHistory'
-<<<<<<< HEAD
-import Typography from '@mui/material/Typography';
-=======
 import { Typography } from '@mui/material';
 import './Profile.css'
 import Card from '@mui/material/Card';
@@ -15,7 +12,6 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'
 import SubHeaderNavigation from '../../SubHeaderNavigation';
 
->>>>>>> main
 export default function Profile({ currentUser, handleLogout }) {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
