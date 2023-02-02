@@ -2,6 +2,7 @@ import { useState } from 'react'
 import CustomizedStepper from '../../CustomizedStepper'
 import ChaChaSlide from '../../ChaChaSlide'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function RegisterRestaurant({ currentUser }) {
   // state for the controlled form
@@ -20,6 +21,8 @@ export default function RegisterRestaurant({ currentUser }) {
   })
   const [menu, setMenu] = useState([])
   const [activeStep, setActiveStep] = useState(0)
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     try {
@@ -55,7 +58,10 @@ export default function RegisterRestaurant({ currentUser }) {
           zip: ''
         }
       })
-      console.log(response.data)
+      if (response.data._id) {
+        navigate(`/restaurants/${response.data._id}`)
+      }
+      navigate('/restaurants/')
     } catch (error) {
       console.log(error)
     }
@@ -80,7 +86,6 @@ export default function RegisterRestaurant({ currentUser }) {
           setActiveStep={setActiveStep}
           handleSubmitRestaurant={handleSubmit}
         />
-       
       </div>
     </>
   )
