@@ -89,7 +89,7 @@ export default function Profile({ currentUser, handleLogout }) {
           <Box m={3}>
           <Card  >
             <CardMedia
-              sx={{ height: 140 }}
+              sx={{ height: 500 }}
               image={Burger}
               title="Burger"
             />

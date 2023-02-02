@@ -4,6 +4,7 @@ import Slide from '@mui/material/Slide'
 import { useState, useRef } from 'react'
 import AccountInfoCreate from './pages/Restaurant/AccountInfoCreate'
 import MenuCreate from './pages/Restaurant/MenuCreate'
+import Accordian from './Accordians'
 
 export default function ChaChaSlide({
   restaurantInfo,
@@ -38,13 +39,14 @@ export default function ChaChaSlide({
             {...(checked ? { timeout: 300 } : {})}
           >
             <Box>
-              <AccountInfoCreate
+              {/* <AccountInfoCreate
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
                 restaurantInfo={restaurantInfo}
                 setRestaurantInfo={setRestaurantInfo}
                 ChaChaRealSmooth={handleChange}
-              />
+              /> */}
+              <Accordian />
             </Box>
           </Slide>
           <Slide
@@ -60,6 +62,18 @@ export default function ChaChaSlide({
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
               />
+            </Box>
+          </Slide>
+          <Slide
+            direction="left"
+            in={checked}
+            container={containerRef.current}
+            mountOnEnter
+            appear={true}
+            {...(checked ? { timeout: 600 } : {})}
+          >
+            <Box>
+              <Accordian />
             </Box>
           </Slide>
         </Box>
