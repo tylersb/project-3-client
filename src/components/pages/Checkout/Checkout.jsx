@@ -140,7 +140,7 @@ function Checkout({ cart, currentUser, restaurant }) {
             <Container>
 
                 <div className="itemSection">
-                    <Typography variant="h3" gutterBottom>Checkout </Typography>
+                    <Typography variant="h1" gutterBottom m={3}>Checkout </Typography>
 
                     {addItemErrorMsg && (
                         <Typography className="error">{addItemErrorMsg}</Typography>)}
