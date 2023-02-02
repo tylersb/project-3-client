@@ -25,9 +25,9 @@ export default function RegisterRestaurant({ currentUser }) {
   return (
     <>
       <br />
-      <CustomizedStepper 
+      {/* <CustomizedStepper 
         activeStep={activeStep}
-      />
+      /> */}
       <div>
         <ChaChaSlide
           restaurantInfo={restaurantInfo}

@@ -25,6 +25,7 @@ function AllRestaurants() {
             direction="row"
             justifyContent="center"
             alignItems="baseline"
+            
             spacing={1}
         >
         {allRestaurants?.map(restaurant =>{

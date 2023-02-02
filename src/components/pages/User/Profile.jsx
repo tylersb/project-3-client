@@ -1,7 +1,7 @@
 import OrderHistory from './OrderHistory'
 import { Typography } from '@mui/material';
 import './Profile.css'
-import Card from '@mui/material/Card';
+import {Card, Grid, Stack, Box } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -44,8 +44,10 @@ export default function Profile({ currentUser, handleLogout }) {
   })
 
   return (
-    <div className='container'>
-      <div className='leftDrawer'>
+    <Box style={{margin: "0 auto"}}>
+      <Grid container spacing={2} m={3}>
+      {/* <div className='leftDrawer'> */}
+        <Grid item xs={12} md={3} >
         <Card>
           <CardContent>
             <Typography variant='h5' color="secondary">
@@ -65,8 +67,10 @@ export default function Profile({ currentUser, handleLogout }) {
             </Typography>
             <Typography variant='h6' mt={2} mb={2}>
               Own a restaurant? Join us!
-              <Button to="/newrestaurant" variant='contained'>
+              <Button variant='contained'>
+                <Link to='/newrestaurant'>
                 Add Your Restaurant
+                </Link>
               </Button>
             </Typography>
             <Typography variant='h6' mt={4} mb={2}>
@@ -75,12 +79,15 @@ export default function Profile({ currentUser, handleLogout }) {
             </Typography>
           </CardContent>
         </Card>
-      </div>
+      {/* </div> */}
+      </Grid>
 
+      {/* <div className='browseRestaurants'> */}
 
-      <div className='browseRestaurants'>
+      <Grid item xs={12} md={6} ml={4}>
         <Link to='/restaurants'>
-          <Card >
+          <Box m={3}>
+          <Card  >
             <CardMedia
               sx={{ height: 140 }}
               image={Burger}
@@ -97,12 +104,17 @@ export default function Profile({ currentUser, handleLogout }) {
               </Button>
             </CardActions>
           </Card>
+          </Box>
         </Link>
-      </div>
+        {/* </Grid> */}
+      {/* </div> */}
 
 
-      <div className='pastOrders'>
-        <Card>
+      {/* <div className='pastOrders'> */}
+
+      {/* <Grid item xs={12} md={6} ml={4}> */}
+      <Box m={3}>
+        <Card mt={3}>
           <CardContent>
             {orderList.length > 0 ? orderList : 
              <Typography gutterBottom variant="h5" component="div">
@@ -113,7 +125,11 @@ export default function Profile({ currentUser, handleLogout }) {
            </Typography>
           </CardContent>
         </Card>
-      </div>
-    </div>
-  )
+        </Box>
+        </Grid>
+
+      {/* </div> */}
+      </Grid>
+      </Box>
+      )
 }

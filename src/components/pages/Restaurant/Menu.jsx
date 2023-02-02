@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Reviews from '../../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import './Menu.css'
 import Checkout from '../Checkout/Checkout'
+import { Button } from '@mui/material'
 
 // create function component Menu
 export default function Menu(props) {
@@ -79,6 +80,7 @@ export default function Menu(props) {
                   {item.name} - ${item.price}
                   <Typography>{item.description}</Typography>
                 </span>
+                
                 <IconButton
                   color="success"
                   aria-label="add to shopping cart"
@@ -90,6 +92,7 @@ export default function Menu(props) {
                   }
                 >
                   <AddShoppingCartIcon />
+                  <Typography>Add to order</Typography>
                 </IconButton>
               </div>
             ))}
@@ -116,6 +119,13 @@ export default function Menu(props) {
       </div>
       <div className="menu">
         <div>{menu}</div>
+        <Button
+      color='secondary'
+      variant='contained'>
+        <Link to='/Checkout'>
+          Checkout
+        </Link>
+      </Button>
       </div>
       <div className="reviews">
         {selectedItem && (
@@ -125,17 +135,11 @@ export default function Menu(props) {
           restaurantId={restaurant._id}
           currentUser={props.currentUser}
         />
+      
       </div>
-      <div className="checkout">
-        <Checkout
-          cart={props.cart}
-          currentUser={props.currentUser}
-          restaurant={restaurant}
-        />
-      </div>
-    </div>
+      
 
-    // </div>
+    </div>
   )
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
 }
