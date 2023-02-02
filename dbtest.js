@@ -1,5 +1,5 @@
 const db = require('./models')
-​
+
 const seedDb = async () => {
   try {
     const dummyRestaurant = await db.Restaurant.create({
