@@ -39,14 +39,14 @@ export default function ChaChaSlide({
             {...(checked ? { timeout: 300 } : {})}
           >
             <Box>
-              {/* <AccountInfoCreate
+              <AccountInfoCreate
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
                 restaurantInfo={restaurantInfo}
                 setRestaurantInfo={setRestaurantInfo}
                 ChaChaRealSmooth={handleChange}
-              /> */}
-              <Accordian />
+              />
+              {/* <Accordian /> */}
             </Box>
           </Slide>
           <Slide

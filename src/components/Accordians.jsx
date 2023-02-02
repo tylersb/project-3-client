@@ -65,7 +65,6 @@ const sections = [
   }
 ]
 
-const menu = sections.map
 
 export default function Accordions() {
   const [expanded, setExpanded] = useState('panel1')
@@ -73,6 +72,36 @@ export default function Accordions() {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false)
   }
+
+  const menu = sections.map((section, idx) => {
+    return (
+      <Accordion
+          expanded={expanded === `panel${idx + 1}`}
+          onChange={handleChange(`panel${idx + 1}`)}
+        >
+          <AccordionSummary aria-controls={`panel${idx + 1}-content`} id={`panel${idx + 1}d-header`}>
+            <Typography>
+              {section.sectionName}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              {
+                section.products.map((product, idx) => {
+                  return (
+                    <div key={idx}>
+                      <h3>{product.name}</h3>
+                      <p>{product.price}</p>
+                      <p>{product.description}</p>
+                    </div>
+                  )
+                })
+              }
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+    )}
+  )
 
   return (
     <div>
