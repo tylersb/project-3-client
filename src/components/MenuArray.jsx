@@ -1,6 +1,6 @@
 import Section from './Section'
 
-export default function Menu({ menu, section, currentProduct }) {
+export default function MenuArray({ menu, section, currentProduct }) {
   return (
     <div>
       {menu.map((s) => {
@@ -8,7 +8,6 @@ export default function Menu({ menu, section, currentProduct }) {
           <Section
             key={s.sectionName}
             section={s}
-            currentProduct={currentProduct}
           />
         )
       })}

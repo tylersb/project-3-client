@@ -11,6 +11,9 @@ import VideoLabelIcon from '@mui/icons-material/VideoLabel'
 import StepConnector, {
   stepConnectorClasses
 } from '@mui/material/StepConnector'
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -136,9 +139,9 @@ function ColorlibStepIcon(props) {
   const { active, completed, className } = props
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />
+    1: <ContactPhoneIcon />,
+    2: <FastfoodIcon />,
+    3: <DoneAllIcon />
   }
 
   return (
@@ -169,10 +172,11 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node
 }
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
+const steps = ['Enter your contact info', 'Interactively Create a Menu', 'Confirm your application']
 
 export default function CustomizedStepper({
   activeStep,
+  handleSubmit
 }) {
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
@@ -182,7 +186,11 @@ export default function CustomizedStepper({
         connector={<ColorlibConnector />}
       >
         {steps.map((label) => (
-          <Step key={label}>
+          <Step key={label} onClick={
+            () => {
+              handleSubmit()
+            }
+          }>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>
         ))}

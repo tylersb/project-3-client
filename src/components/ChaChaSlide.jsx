@@ -1,7 +1,5 @@
 import Box from '@mui/material/Box'
-import Switch from '@mui/material/Switch'
 import Slide from '@mui/material/Slide'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import { useState, useRef } from 'react'
 import AccountInfoCreate from './pages/Restaurant/AccountInfoCreate'
 import MenuCreate from './pages/Restaurant/MenuCreate'
@@ -35,7 +33,7 @@ export default function ChaChaSlide({
         >
           <Slide
             direction="right"
-            in={checked}
+            in={!checked}
             container={containerRef.current}
             appear={false}
             unmountOnExit
@@ -53,14 +51,16 @@ export default function ChaChaSlide({
           </Slide>
           <Slide
             direction="left"
-            in={!checked}
+            in={checked}
             container={containerRef.current}
-            // mountOnEnter
+            mountOnEnter
             appear={true}
             {...(checked ? { timeout: 600 } : {})}
           >
             <Box>
-              <MenuCreate menu={menu} setMenu={setMenu} 
+              <MenuCreate
+                menu={menu}
+                setMenu={setMenu}
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
               />
