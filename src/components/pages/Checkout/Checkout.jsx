@@ -157,8 +157,8 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         <Typography variant="h4" color="text.secondary" gutterBottom>
                                             Order Details
                                         </Typography>
-                                        <Box style={{margin: "0 auto"}}>
-                                        <Grid container>
+                                        {/* <Box style={{margin: "0 auto"}}> */}
+                                        {/* <Grid container> */}
                                         {items.length > 0 ? items : 
                                         <div>
                                         <Typography variant="h6" color="text.secondary" gutterBottom>
@@ -168,8 +168,8 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         Go find some grub!
                                         </Typography>
                                         </div>}
-                                        </Grid>
-                                        </Box>
+                                        {/* </Grid> */}
+                                        {/* </Box> */}
                                         
                                     </TableBody>
                                 </Table>
