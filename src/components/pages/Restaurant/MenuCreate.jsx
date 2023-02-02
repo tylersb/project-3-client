@@ -1,121 +1,224 @@
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import { Button, Card, CardContent, Grid } from '@mui/material';
-import { useState } from 'react';
-import AddSection from './partials/AddSection';
-import AddProduct from './partials/AddProduct';
+import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
+import { Button, Card, CardContent, Grid } from '@mui/material'
+import { useState } from 'react'
+import Transitionfood from '../../TransitionFood'
 
-function MenuCreate({ products, setProducts, setMenu, menu, handleSubmit }) {
 
-    const [addSection, setAddSection] = useState(false)
-    const [addProduct, setAddProduct] = useState(false)
+export default function MenuCreate({
+  setMenu,
+  menu,
+  activeStep,
+  setActiveStep
+}) {
+  const [section, setSection] = useState({
+    sectionName: '',
+    products: []
+  })
+  const [product, setProduct] = useState({
+    name: '',
+    price: '',
+    description: ''
+  })
+  const [isEditingProduct, setIsEditingProduct] = useState(false)
 
-    return (
-        <Grid container m={2}>
-            <Card m={3} p={2} elevate={2} style={{ width: "50%", margin: "0 auto" }}>
-                <CardContent p={2}>
-                    <Typography variant="h3">Your Menu Information</Typography>
+  const currentProduct =
+    product.name.length + product.price.length + product.description.length <
+    1 ? null : (
+      <div>
+        <h5>
+          {product.price.length > 0 ? '($' + product.price + ')' : ''}{' '}
+          {product.name}
+        </h5>
+        <h5>{product.description}</h5>
+      </div>
+    )
 
-                    <div className='MenuSection'>
-                        <Typography m={2}>
-                            <TextField
-                                type="text"
-                                variant="filled"
-                                id="SectionName"
-                                label="Menu Section"
-                                fullWidth
-                                style={{ display: "block" }}
-                                required
-                                placeholder='Main Course'
-                                onChange={e => setMenu({ ...menu, sectionName: e.target.value })}
-                                value={menu.sectionName}
-                            />
-                        </Typography>
+  const sectionHead = (
+    <div>
+      <h3>{section.sectionName}</h3>
+      {section.products.length > 0 ? (
+        <div>
+          {section.products.map((product) => {
+            return (
+              <div key={product.name}>
+                <h5>
+                  {product.price.length > 0 ? '($' + product.price + ')' : ''}{' '}
+                  {product.name}
+                </h5>
+                <h5>{product.description}</h5>
+              </div>
+            )
+          })}
+          {currentProduct}
+        </div>
+      ) : (
+        currentProduct
+      )}
+    </div>
+  )
+
+  const emptyMenu = menu.length < 1
+
+  const menuItems = (
+    <div>
+      {menu.map((s) => {
+        return (
+          <div key={s.sectionName}>
+            <h3>{s.sectionName}</h3>
+            {s.products.length < 1
+              ? null
+              : s.products.map((product) => {
+                  return (
+                    <div key={product.name}>
+                      <h5>
+                        {product.price.length > 0
+                          ? '($' + product.price + ')'
+                          : ''}{' '}
+                        {product.name}
+                      </h5>
+                      <h5>{product.description}</h5>
                     </div>
-                    <Grid m={3}>
-                        <Typography m={2}>
-                            <TextField
-                                type="text"
-                                variant="filled"
-                                id="productName"
-                                label="Product Name"
-                                fullWidth
-                                style={{ display: "block" }}
-                                required
-                                placeholder='Chicken Marsala'
-                                onChange={e => setProducts({ ...products, name: e.target.value })}
-                                value={products?.name}
-                            />
-                        </Typography>
-                        <Typography m={2}>
-                            <TextField
-                                type="text"
-                                variant="filled"
-                                id="productPrice"
-                                label="Product Price"
-                                fullWidth
-                                style={{ display: "block" }}
-                                required
-                                placeholder='20.00'
-                                onChange={e => setProducts({ ...products, price: e.target.value })}
-                                value={products?.price}
-                            />
-                        </Typography>
-                        <Typography m={2}>
-                            <TextField
-                                type="text"
-                                variant="filled"
-                                label="Product Description"
-                                fullWidth
-                                style={{ display: "block" }}
-                                required
-                                id="productDesc"
-                                placeholder='Fried chicken in marsala sauce'
-                                onChange={e => setProducts({ ...products, description: e.target.value })}
-                                value={products?.description}
-                            />
-                        </Typography>
-                    </Grid>
-                    {/* Add another product */}
-                    {addProduct ?
-                        <AddProduct
-                            addSection={addSection}
-                            setAddSection={setAddSection}
-                            addProduct={addProduct}
-                            setAddProduct={setAddProduct}
-                            menu={menu}
-                            setMenu={setMenu}
-                            products={products}
-                            setProducts={setProducts} />
-                        :
-                        <Button onClick={() => {
+                  )
+                })}
+          </div>
+        )
+      })}
+      {section.sectionName.length > 0 ? sectionHead : null}
+    </div>
+  )
 
-                            setAddProduct(true)
-                        }}>
-                            Add another product
-                        </Button>
-                    }
+  const menuDisplay = emptyMenu ? sectionHead : menuItems
 
+  return (
+    <Grid container m={2}>
+      <Card m={3} p={2} elevate={2} style={{ margin: '0 auto' }}>
+        <CardContent p={2}>
+          <Typography variant="h3">Your Menu Information</Typography>
 
-                {/* Add another section */}
-                {addSection ?
-                    <AddSection
-                        addSection={addSection}
-                        setAddSection={setAddSection}
-                        addProduct={addProduct}
-                        setAddProduct={setAddProduct} />
-                    :
-                    <Button onClick={() => { setAddSection(true) }}>
-                        Add a menu section
-                    </Button>
+          <div className="MenuSection">
+            <Typography m={2}>
+              <TextField
+                type="text"
+                variant="filled"
+                id="SectionName"
+                label="Menu Section"
+                fullWidth
+                style={{ display: 'block' }}
+                required
+                placeholder="Main Course"
+                onChange={(e) =>
+                  setSection({ ...section, sectionName: e.target.value })
                 }
-
-                <Button variant="outlined" type="submit" onClick={(e) => { handleSubmit(e) }}>Register</Button>
-            </CardContent>
-        </Card>
-        </Grid >
-    );
+                value={section.sectionName}
+              />
+            </Typography>
+            {section.sectionName.length > 0 ? (
+              <Button
+                variant="outlined"
+                type="submit"
+                onClick={() => {
+                  if (section.sectionName === '') return
+                  setMenu([...menu, section])
+                  setSection({ sectionName: '', products: [] })
+                  setProduct({ name: '', price: '', description: '' })
+                }}
+              >
+                Save Section
+              </Button>
+            ) : null}
+          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              if (section.sectionName === '') return
+              setSection({
+                ...section,
+                products: [...section.products, product]
+              })
+              setProduct({ name: '', price: '', description: '' })
+              setIsEditingProduct(false)
+            }}
+          >
+            <div>
+              <Grid m={3}>
+                <Typography m={2}>
+                  <TextField
+                    type="text"
+                    variant="filled"
+                    id="productName"
+                    label="Product Name"
+                    fullWidth
+                    style={{ display: 'block' }}
+                    required
+                    placeholder="Chicken Marsala"
+                    onChange={(e) =>
+                      setProduct({ ...product, name: e.target.value })
+                    }
+                    value={product.name}
+                    disabled={!isEditingProduct}
+                  />
+                </Typography>
+                <Typography m={2}>
+                  <TextField
+                    type="text"
+                    variant="filled"
+                    id="productPrice"
+                    label="Product Price"
+                    fullWidth
+                    style={{ display: 'block' }}
+                    required
+                    placeholder="20.00"
+                    onChange={(e) =>
+                      setProduct({ ...product, price: e.target.value })
+                    }
+                    value={product.price}
+                    disabled={!isEditingProduct}
+                  />
+                </Typography>
+                <Typography m={2}>
+                  <TextField
+                    type="text"
+                    variant="filled"
+                    label="Product Description"
+                    fullWidth
+                    style={{ display: 'block' }}
+                    required
+                    id="productDesc"
+                    placeholder="Fried chicken in marsala sauce"
+                    onChange={(e) =>
+                      setProduct({ ...product, description: e.target.value })
+                    }
+                    value={product.description}
+                    disabled={!isEditingProduct}
+                  />
+                </Typography>
+              </Grid>
+            </div>
+            <div>
+              {!isEditingProduct ? (
+                <Button
+                  type="button"
+                  onClick={() =>
+                    section.sectionName === ''
+                      ? alert('Please enter a section name')
+                      : setIsEditingProduct(true)
+                  }
+                >
+                  Add New Product
+                </Button>
+              ) : (
+                <Button type="submit">Save Product</Button>
+              )}
+            </div>
+          </form>
+        </CardContent>
+      <Transitionfood 
+        menu={menu}
+        section={section}
+        product={product}
+      />
+      </Card>
+    </Grid>
+  )
 }
-
-
-export default MenuCreate;

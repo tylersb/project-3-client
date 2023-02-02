@@ -27,7 +27,7 @@ function AllRestaurants() {
             alignItems="baseline"
             spacing={1}
         >
-        {allRestaurants.map(restaurant =>{
+        {allRestaurants?.map(restaurant =>{
             return <RestaurantCard restaurant={restaurant} key={restaurant._id}/>
         })}
         </Stack>
