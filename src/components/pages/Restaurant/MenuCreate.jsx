@@ -94,6 +94,7 @@ export default function ScrollDialog({ menu, setMenu }) {
     price: '',
     description: ''
   })
+  const [isEditing, setIsEditing] = useState(false)
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true)
@@ -129,7 +130,18 @@ export default function ScrollDialog({ menu, setMenu }) {
           value={section.sectionName}
         />
       </div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          if(section.sectionName === '') return
+          setSection({
+            ...section,
+            products: [...section.products, product]
+          })
+          setProduct({ name: '', price: '', description: '' })
+          setIsEditing(false)
+        }}
+      >
         <div>
           <label htmlFor="Products">Product Name:</label>
           <TextField
@@ -137,6 +149,9 @@ export default function ScrollDialog({ menu, setMenu }) {
             variant="filled"
             id="productName"
             placeholder="Chicken Marsala"
+            onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            value={product.name}
+            disabled={!isEditing}
           />
         </div>
         <div>
@@ -146,6 +161,9 @@ export default function ScrollDialog({ menu, setMenu }) {
             variant="filled"
             id="productPrice"
             placeholder="20.00"
+            onChange={(e) => setProduct({ ...product, price: e.target.value })}
+            value={product.price}
+            disabled={!isEditing}
           />
         </div>
         <div>
@@ -155,9 +173,19 @@ export default function ScrollDialog({ menu, setMenu }) {
             variant="filled"
             id="productName"
             placeholder="Fried chicken in marsala sauce"
+            onChange={(e) =>
+              setProduct({ ...product, description: e.target.value })
+            }
+            value={product.description}
+            disabled={!isEditing}
           />
         </div>
-        <Button>Add another product</Button>
+        <div>
+          <Button type="button"
+          onClick={() => setIsEditing(true)}
+          >Enter New Product</Button>
+          <Button type="submit">Save Product</Button>
+        </div>
       </form>
       <Button>Add a menu section</Button>
     </>
