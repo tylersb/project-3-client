@@ -20,7 +20,7 @@ function UseAddress({ user, deliveryAddress, handleUpdateAddress }) {
                     value={name}
                     fullWidth
                     onChange={(e) => setName(e.target.value)}
-                    style={{ marginRight: "5px", maxWidth: "550px" }}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
                     required
                     disabled
                 />
@@ -34,7 +34,7 @@ function UseAddress({ user, deliveryAddress, handleUpdateAddress }) {
                     value={street}
                     fullWidth
                     onChange={(e) => setStreet(e.target.value)}
-                    style={{ marginRight: "5px", maxWidth: "550px" }}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
                     disabled
                     required
                 />
@@ -43,7 +43,6 @@ function UseAddress({ user, deliveryAddress, handleUpdateAddress }) {
                 direction="row"
                 justifyContent="center"
                 alignItems="baseline"
-                spacing={1}
                 marginBottom={2}
             >
                 <TextField

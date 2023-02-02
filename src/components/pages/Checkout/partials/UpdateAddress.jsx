@@ -10,7 +10,7 @@ function UpdateAddress({ user, handleConfirmAddress }) {
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
     return (
-        <div>
+        <div style={{margin: "2%"}}>
             <Typography>
                 <TextField
                     variant="filled"
@@ -20,7 +20,7 @@ function UpdateAddress({ user, handleConfirmAddress }) {
                     value={name}
                     fullWidth
                     onChange={(e) => setName(e.target.value)}
-                    style={{ marginRight: "5px", maxWidth: "550px" }}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
                     required
                 />
             </Typography>
@@ -34,7 +34,7 @@ function UpdateAddress({ user, handleConfirmAddress }) {
                     value={street}
                     fullWidth
                     onChange={(e) => setStreet(e.target.value)}
-                    style={{ marginRight: "5px", maxWidth: "550px" }}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
                     required
                 />
             </Typography>
@@ -43,7 +43,6 @@ function UpdateAddress({ user, handleConfirmAddress }) {
                 direction="row"
                 justifyContent="center"
                 alignItems="baseline"
-                spacing={1}
                 marginBottom={2}
             >
                 <TextField

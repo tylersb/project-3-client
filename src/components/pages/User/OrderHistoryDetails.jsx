@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 
-function OrderHistoryDetails({product}) {
-    return ( 
+function OrderHistoryDetails({ product }) {
+    return (
         <div>
             <Typography>
                 You last enjoyed:
@@ -16,7 +16,7 @@ function OrderHistoryDetails({product}) {
                 {product.quantity}
             </Typography>
         </div>
-     );
+    );
 }
 
 export default OrderHistoryDetails;

@@ -14,7 +14,6 @@ import { useState, useEffect } from 'react'
 export default function Profile({ currentUser, handleLogout }) {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
-  console.log(currentUser)
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -48,15 +47,18 @@ export default function Profile({ currentUser, handleLogout }) {
       <div className='leftDrawer'>
         <Card>
           <CardContent>
-            <Typography variant='h6'>
+            <Typography variant='h5' color="secondary">
               Account Information
             </Typography>
-            <Typography>Username: {currentUser?.name}</Typography>
-            <Typography>Email: {currentUser?.email}</Typography>
-            <Typography>Address:</Typography>
+            <Typography color="secondary">Username: </Typography>
+            <Typography>{currentUser?.name}</Typography>
+            <Typography color="secondary">Email: </Typography>
+            <Typography>{currentUser?.email}</Typography>
+            <Typography color="secondary">Address:</Typography>
             <Typography>{currentUser?.address?.street}</Typography>
             <Typography>{currentUser?.address?.city}, {currentUser?.address?.state} {currentUser?.address?.zip}</Typography>
-            <Typography>Phone: {currentUser?.phone}</Typography>
+            <Typography color="secondary">Phone:</Typography>
+            <Typography>{currentUser?.phone}</Typography>
           </CardContent>
         </Card>
       </div>
@@ -88,10 +90,13 @@ export default function Profile({ currentUser, handleLogout }) {
       <div className='pastOrders'>
         <Card>
           <CardContent>
-            {orderList ? orderList : 
+            {orderList.length > 0 ? orderList : 
              <Typography gutterBottom variant="h5" component="div">
-             Find what you're craving.
+             Previous Orders
            </Typography>}
+           <Typography gutterBottom variant="h6" component="div" color="secondary">
+            Yikes! Don't you eat? You haven't placed any orders.
+           </Typography>
           </CardContent>
         </Card>
       </div>
