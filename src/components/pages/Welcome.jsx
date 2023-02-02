@@ -13,7 +13,7 @@ export default function Welcome() {
   return (
     <Container>
       <Card sx={{ width: '100%' }}>
-        <CardMedia component="img" height="140" image={Pizza} alt="pizza" />
+        <CardMedia component="img" height="300" image={Pizza} alt="pizza" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Hungry Hippos
