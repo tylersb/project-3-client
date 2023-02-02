@@ -47,7 +47,7 @@ export default function Profile({ currentUser, handleLogout }) {
     <Box style={{margin: "0 auto"}}>
       <Grid container spacing={2} m={3}>
       {/* <div className='leftDrawer'> */}
-        <Grid item xs={12} md={3} >
+        <Grid item xs={12} sm={6} md={3} >
         <Card>
           <CardContent>
             <Typography variant='h5' color="secondary">
