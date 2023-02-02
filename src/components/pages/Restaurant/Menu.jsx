@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 
+
 // create function component Menu
 export default function Menu(props) {
   // state is menuItems, setMenuItems is the function to update state, same applies to selectedItem, and cart
@@ -36,7 +37,7 @@ export default function Menu(props) {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
   }
 
-  const menu = restaurant.menu?.map((section, idx) => {
+  const menu = restaurant.menu?.map((section, id) => {
     return (
       <div key={section._id} style={{ 
         display: "flex", 
@@ -54,7 +55,7 @@ export default function Menu(props) {
                alignItems: "center", 
                margin: "0.5rem 0"
                }}>
-              <img src={item.image} alt={item.description} style={{ width: "100%", height: "100px" }} />
+            <img src={item.image} alt={item.description} style={{ width: "100%", height: "auto" }} />    
               <span
                 onClick={() => handleSelection(item)}
                 style={{ cursor: 'pointer' }}
