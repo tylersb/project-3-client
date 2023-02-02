@@ -84,7 +84,7 @@ export default function Profile({ currentUser, handleLogout }) {
 
       {/* <div className='browseRestaurants'> */}
 
-      <Grid item xs={12} md={6} ml={4}>
+      <Grid item xs={12} md={8} ml={4}>
         <Link to='/restaurants'>
           <Box m={3}>
           <Card  >

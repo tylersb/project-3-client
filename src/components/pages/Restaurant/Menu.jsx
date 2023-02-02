@@ -3,7 +3,7 @@ import Reviews from '../../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
 import { Link, useParams } from 'react-router-dom'
-import Card from '@mui/material/Card'
+import {Card, Box, Grid} from '@mui/material'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
@@ -111,13 +111,28 @@ export default function Menu(props) {
     //     margin: '1rem',
     //   }}
     // >
-    <div className="container">
-      <div className="restaurantInfo">
+    // <div className="container">
+      <Box style={{margin: "0 auto"}}>
+        <Grid container  spacing={2} m={3}>
+      {/* <div className="restaurantInfo"> */}
+        <Grid item xs={12} md={3}>
         <Typography variant="h1" gutterBottom m={3}>
           Menu{' '}
         </Typography>
-      </div>
-      <div className="menu">
+
+      {/* <div className="reviews"> */}
+        {selectedItem && (
+          <p style={{ margin: '1rem 0' }}>Selected: {selectedItem.name}</p>
+        )}
+        <Reviews
+          restaurantId={restaurant._id}
+          currentUser={props.currentUser}
+        />
+      {/* </div> */}
+        </Grid>
+      {/* </div> */}
+      {/* <div className="menu"> */}
+        <Grid item xs={12} md={8} ml={4}>
         <div>{menu}</div>
         <Button
       color='secondary'
@@ -126,20 +141,14 @@ export default function Menu(props) {
           Checkout
         </Link>
       </Button>
-      </div>
-      <div className="reviews">
-        {selectedItem && (
-          <p style={{ margin: '1rem 0' }}>Selected: {selectedItem.name}</p>
-        )}
-        <Reviews
-          restaurantId={restaurant._id}
-          currentUser={props.currentUser}
-        />
-      
-      </div>
-      
+      {/* </div> */}
+      </Grid>
 
-    </div>
+        
+
+    {/* </div> */}
+    </Grid>
+    </Box>
   )
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
 }
