@@ -2,6 +2,8 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import { Button, Card, CardContent, Grid } from '@mui/material'
 import { useState } from 'react'
+import Transitionfood from '../../TransitionFood'
+
 
 export default function MenuCreate({
   setMenu,
@@ -19,7 +21,6 @@ export default function MenuCreate({
     description: ''
   })
   const [isEditingProduct, setIsEditingProduct] = useState(false)
-  const [isEditingSection, setIsEditingSection] = useState(false)
 
   const currentProduct =
     product.name.length + product.price.length + product.description.length <
@@ -212,6 +213,11 @@ export default function MenuCreate({
             </div>
           </form>
         </CardContent>
+      <Transitionfood 
+        menu={menu}
+        section={section}
+        product={product}
+      />
       </Card>
     </Grid>
   )
