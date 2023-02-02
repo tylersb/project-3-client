@@ -64,7 +64,7 @@ export default function Register({ currentUser, setCurrentUser }) {
 
 			<h1>Register for an account:</h1>
 
-			<p>{msg}</p>
+			{msg ? (<p>{msg}</p>) : null}
 			<div style={{ width: '80%', margin: '0 auto' }}>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor='name' style={{
