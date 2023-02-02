@@ -14,6 +14,7 @@ import SubHeaderNavigation from './SubHeaderNavigation'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
+
 export default function Navbar({ currentUser, handleLogout }) {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -37,16 +38,16 @@ export default function Navbar({ currentUser, handleLogout }) {
   // array of pages for nav menu
   const pages = [
     {
-      name: 'All Restaurants',
+      name: 'Profile',
+      link: '/profile'
+    },
+    {
+      name: 'Restaurants',
       link: '/restaurants'
     },
     {
       name: 'Checkout',
       link: '/checkout'
-    },
-    {
-      name: 'Add Restaurant',
-      link: '/newrestaurant'
     }
   ]
 
@@ -55,17 +56,13 @@ export default function Navbar({ currentUser, handleLogout }) {
   currentUser
     ? (settings = [
         {
-          name: 'Profile',
-          link: '/profile',
-          click: handleCloseUserMenu
-        },
-        {
           name: 'Logout',
           link: '/',
           click: handleLogout
         }
       ])
-    : (settings = [
+    : 
+    (settings = [
         {
           name: 'Login',
           link: '/login',
@@ -173,11 +170,11 @@ export default function Navbar({ currentUser, handleLogout }) {
                 </Button>
               ))}
             </Box>
-            <SubHeaderNavigation />
+            
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <ManageAccountsIcon />
+                  {currentUser ? <Button>Logout</Button> :  <Button>Login</Button>}
                 </IconButton>
               </Tooltip>
               <Menu
