@@ -68,7 +68,7 @@ export default function Welcome() {
             variant='contained'
             color="secondary"
             component={Link} 
-            to="/signup">
+            to="/register">
               Sign up here
             </Button>
           </CardActions>
