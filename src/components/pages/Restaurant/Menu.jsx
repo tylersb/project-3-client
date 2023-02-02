@@ -91,22 +91,6 @@ export default function Menu(props) {
   })
 
   return (
-<<<<<<< HEAD
-    <div
-      style={{
-        margin: '0 auto',
-        width: '40vw',
-      }}
-    >
-      <h1>Menu</h1>
-      <div>{menu}</div>
-      {selectedItem && <p>Selected: {selectedItem.name}</p>}
-      <Reviews
-        restaurantId={restaurant?._id}
-        currentUser={props.currentUser}
-      />
-    </div>
-=======
     // <div
     //   style={{
     //     display: "flex",
@@ -140,7 +124,6 @@ export default function Menu(props) {
 
 
     // </div>
->>>>>>> main
   )
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
 }

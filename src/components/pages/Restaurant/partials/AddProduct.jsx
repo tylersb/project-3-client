@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 
-function AddMoreProduct({ products, setProducts }) {
+export default function AddMoreProduct({ products, setProducts }) {
 
     return (
         <Grid m={3}>

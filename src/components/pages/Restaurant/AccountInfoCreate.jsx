@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 
-function AccountInfoCreate({ handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName, restaurantDescription, setRestaurantDescription }) {
+export default function AccountInfoCreate({ handleAddAddress, msg, email, setEmail, phone, setPhone, accountHolderName, setAccountHolderName, restaurantName, setRestaurantName, restaurantDescription, setRestaurantDescription }) {
 	const [address, setAddress] = useState({
 		street: '',
 		city: '',
