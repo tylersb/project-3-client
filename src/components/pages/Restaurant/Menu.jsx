@@ -41,6 +41,7 @@ export default function Menu(props) {
         <div>
           {section.products.map((item) => (
             <div key={item._id}>
+              <img src={item.image} alt={item.description}></img>
               <span
                 onClick={() => handleSelection(item)}
                 style={{ cursor: 'pointer' }}

@@ -81,6 +81,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { useState, useEffect, useRef, Fragment } from 'react'
 import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box'
 
 export default function ScrollDialog({ menu, setMenu }) {
   const [open, setOpen] = useState(false)
@@ -116,7 +117,7 @@ export default function ScrollDialog({ menu, setMenu }) {
   }, [open])
 
   const menuSection = (
-    <>
+    <div>
       <div className="MenuSection">
         <label htmlFor="SectionName">Section Name:</label>
         <TextField
@@ -133,7 +134,7 @@ export default function ScrollDialog({ menu, setMenu }) {
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          if(section.sectionName === '') return
+          if (section.sectionName === '') return
           setSection({
             ...section,
             products: [...section.products, product]
@@ -181,15 +182,61 @@ export default function ScrollDialog({ menu, setMenu }) {
           />
         </div>
         <div>
-          <Button type="button"
-          onClick={() => setIsEditing(true)}
-          >Enter New Product</Button>
+          <Button
+            type="button"
+            onClick={() =>
+              section.sectionName === ''
+                ? alert('Please enter a section name')
+                : setIsEditing(true)
+            }
+          >
+            Enter New Product
+          </Button>
           <Button type="submit">Save Product</Button>
         </div>
       </form>
       <Button>Add a menu section</Button>
-    </>
+    </div>
   )
+
+  const currentProduct =
+    product.name.length + product.price.length + product.description.length <
+    1 ? null : (
+      <div>
+        <h5>
+          {product.price.length > 0 ? '($' + product.price + ')' : ''}{' '}
+          {product.name}
+        </h5>
+        <h5>{product.description}</h5>
+      </div>
+    )
+
+  const sectionHead = (
+    <div key={section.sectionName}>
+      <h3>{section.sectionName}</h3>
+      {section.products.length < 1
+        ? currentProduct
+        : section.products.map((product) => {
+            return (
+              <div key={product.name}>
+                <h5>
+                  {product.price.length > 0 ? '($' + product.price + ')' : ''}{' '}
+                  {product.name}
+                </h5>
+                <h5>{product.description}</h5>
+              </div>
+            )
+          })}
+    </div>
+  )
+
+  const emptyMenu = menu.length < 1
+
+  const menuItems = menu.map((section) => {
+    return { sectionHead }
+  })
+
+  
 
   return (
     <>
@@ -201,9 +248,31 @@ export default function ScrollDialog({ menu, setMenu }) {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">Menu</DialogTitle>
+        <DialogTitle
+          id="scroll-dialog-title"
+          sx={{ flex: 1, justifyContent: 'center' }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            Menu
+          </Box>
+        </DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
-          {menuSection}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            {menuSection}
+            {emptyMenu ? sectionHead : menuItems}
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
