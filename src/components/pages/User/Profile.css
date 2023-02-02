@@ -1,14 +1,9 @@
 .container {
-    position: absolute;
-    padding: 3%;
+    /* padding: 3%;
     width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-areas: 
-    'menu main'
-    'menu orderHistory'
-    ;
-    grid-template-columns: 1fr 2fr;
+    height: 100%; */
+    display: flex;
+
 }
 
 .leftDrawer{
