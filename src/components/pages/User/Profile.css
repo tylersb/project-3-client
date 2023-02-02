@@ -5,11 +5,10 @@
     height: 100%;
     display: grid;
     grid-template-areas: 
-    'menu main main'
-    'menu orderHistory orderHistory'
+    'menu main'
+    'menu orderHistory'
     ;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 3fr;
+    grid-template-columns: 1fr 2fr;
 }
 
 .leftDrawer{

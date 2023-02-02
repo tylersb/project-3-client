@@ -65,8 +65,10 @@ export default function Profile({ currentUser, handleLogout }) {
             </Typography>
             <Typography variant='h6' mt={2} mb={2}>
               Own a restaurant? Join us!
-              <Button to="/newrestaurant" variant='contained'>
+              <Button variant='contained'>
+                <Link to='/newrestaurant'>
                 Add Your Restaurant
+                </Link>
               </Button>
             </Typography>
             <Typography variant='h6' mt={4} mb={2}>
