@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import AccountInfoCreate from './AccountInfoCreate'
 import MenuCreate from './MenuCreate'
+import CustomizedStepper from '../../CustomizedStepper'
 
 export default function RegisterRestaurant({ currentUser }) {
   // state for the controlled form
@@ -23,19 +24,18 @@ export default function RegisterRestaurant({ currentUser }) {
   const [accountInfoComplete, setAccountInfoComplete] = useState(false)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '80%'
-      }}
-    >
-      <AccountInfoCreate
-        setAccountInfoComplete={setAccountInfoComplete}
-        restaurantInfo={restaurantInfo}
-        setRestaurantInfo={setRestaurantInfo}
-        style={{ width: '50%' }}
-      />
-      <MenuCreate menu={menu} setMenu={setMenu} />
-    </div>
+    <>
+      <br />
+      <CustomizedStepper />
+      <div>
+        <AccountInfoCreate
+          setAccountInfoComplete={setAccountInfoComplete}
+          restaurantInfo={restaurantInfo}
+          setRestaurantInfo={setRestaurantInfo}
+          style={{ width: '50%' }}
+        />
+        <MenuCreate menu={menu} setMenu={setMenu} />
+      </div>
+    </>
   )
 }

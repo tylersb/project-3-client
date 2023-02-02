@@ -14,10 +14,7 @@ export default function AccountInfoCreate({
   }
 
   return (
-    <Box
-      component="div"
-      sx={{ p: 2, m: 20, border: '1px dashed grey', width: '35%' }}
-    >
+    <>
       <h1>Restaurant Account Information:</h1>
 
       <div style={{ width: '80%', margin: '0 auto' }}>
@@ -123,6 +120,6 @@ export default function AccountInfoCreate({
         </Button>
         </form>
       </div>
-    </Box>
+    </>
   )
 }
