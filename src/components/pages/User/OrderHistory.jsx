@@ -1,49 +1,17 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import OrderHistoryDetails from './OrderHistoryDetails'
 
 export default function OrderHistory(props) {
-  const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(true)
+ 
 
-  useEffect(() => {
-    const getOrders = async () => {
-      try {
-        if (!props.userId) {
-          return
-        }
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/orders/user/${props?.userId}`
-        )
-        setOrders(response.data)
-      } catch (error) {
-        console.error(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    getOrders()
-  }, [props.userId])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  const orderList = orders.map((order) => {
-    return (
-      <div
-        key={order._id}
-        style={{
-          border: '1px solid black',
-          margin: '1rem',
-          padding: '1rem',
-          width: '50%'
-        }}
-      >
-        <Link to={`/orders/${order._id}`}>{order._id}</Link>
-      </div>
-    )
+    ///checking if orders have been placed\\\\
+const orderProducts = 
+props.orders.products ? 
+props.orders?.products.map(product => {
+    return <OrderHistoryDetails product={product}/>
   })
+  :
+  "You haven't placed any orders yet."
 
   return (
     <div>
@@ -55,7 +23,18 @@ export default function OrderHistory(props) {
           alignItems: 'center'
         }}
       >
-        {orderList}
+        <div
+        key={props.order._id}
+        style={{
+          border: '1px solid black',
+          margin: '1rem',
+          padding: '1rem',
+          width: '50%'
+        }}
+      >
+        <Link to={`/orders/${props.order._id}`}>{props.order._id}</Link>
+      </div>
+        {orderProducts}
       </div>
     </div>
   )
