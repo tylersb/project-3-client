@@ -1,17 +1,39 @@
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import { Button, Card, CardContent, Grid } from '@mui/material'
-import { useState } from 'react'
 import AddSection from './partials/AddSection'
 import AddProduct from './partials/AddProduct'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import { useState, useEffect, useRef, Fragment } from 'react'
+import Box from '@mui/material/Box'
+import MenuScroll from '../../MenuScroll'
 
-export default function MenuCreate({ products, setProducts, setMenu, menu, handleSubmit }) {
+export default function MenuCreate({
+  products,
+  setProducts,
+  setMenu,
+  menu,
+  handleSubmit
+}) {
   const [addSection, setAddSection] = useState(false)
   const [addProduct, setAddProduct] = useState(false)
+  const [section, setSection] = useState({
+    sectionName: '',
+    products: []
+  })
+  const [product, setProduct] = useState({
+    name: '',
+    price: '',
+    description: ''
+  })
+  const [isEditing, setIsEditing] = useState(false)
 
   return (
     <Grid container m={2}>
-      <Card m={3} p={2} elevate={2} style={{ width: '50%', margin: '0 auto' }}>
+      <Card m={3} p={2} elevate={2} style={{ margin: '0 auto' }}>
         <CardContent p={2}>
           <Typography variant="h3">Your Menu Information</Typography>
 
@@ -133,6 +155,7 @@ export default function MenuCreate({ products, setProducts, setMenu, menu, handl
             Register
           </Button>
         </CardContent>
+        <MenuScroll menu={menu} setMenu={setMenu} />
       </Card>
     </Grid>
   )

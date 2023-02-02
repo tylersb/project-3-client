@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import axios from 'axios'
 import AccountInfoCreate from './AccountInfoCreate'
 import MenuCreate from './MenuCreate'
 import CustomizedStepper from '../../CustomizedStepper'
+import ChaChaSlide from '../../ChaChaSlide'
 
 export default function RegisterRestaurant({ currentUser }) {
   // state for the controlled form
@@ -11,7 +11,6 @@ export default function RegisterRestaurant({ currentUser }) {
     restaurantDescription: '',
     accountHolderName: '',
     email: '',
-    password: '',
     phone: '',
     address: {
       street: '',
@@ -21,20 +20,24 @@ export default function RegisterRestaurant({ currentUser }) {
     }
   })
   const [menu, setMenu] = useState([])
-  const [accountInfoComplete, setAccountInfoComplete] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
 
   return (
     <>
       <br />
-      <CustomizedStepper />
+      <CustomizedStepper 
+        activeStep={activeStep}
+      />
       <div>
-        <AccountInfoCreate
-          setAccountInfoComplete={setAccountInfoComplete}
+        <ChaChaSlide
           restaurantInfo={restaurantInfo}
           setRestaurantInfo={setRestaurantInfo}
-          style={{ width: '50%' }}
-        />
-        <MenuCreate menu={menu} setMenu={setMenu} />
+          menu={menu}
+          setMenu={setMenu}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+         />
+
       </div>
     </>
   )

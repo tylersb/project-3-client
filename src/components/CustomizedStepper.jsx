@@ -171,12 +171,14 @@ ColorlibStepIcon.propTypes = {
 
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
-export default function CustomizedStepper() {
+export default function CustomizedStepper({
+  activeStep,
+}) {
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper
         alternativeLabel
-        activeStep={1}
+        activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
         {steps.map((label) => (
