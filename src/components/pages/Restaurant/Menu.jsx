@@ -4,8 +4,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
 import { width, height } from '@mui/system'
 import { useParams } from 'react-router-dom'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
 import axios from 'axios'
-import {Grid, Paper, Button} from '@mui/material';
+import { Grid, Paper, Button } from '@mui/material';
+import './Menu.css'
+import Checkout from '../Checkout/Checkout'
+
 
 // create function component Menu
 export default function Menu(props) {
@@ -35,42 +41,57 @@ export default function Menu(props) {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
   }
 
-  const menu = restaurant?.menu?.map((section, idx) => {
+  const menu = restaurant.menu?.map((section, id) => {
     return (
-      <div key={section._id}>
-        <h3>{section.sectionName}</h3>
-        <div>
-          {section.products.map((item) => (
-            <div key={item._id}>
-              <img src={item.image} alt={item.description}
-              style={{width: '100px', height: '100px'}}
-              ></img>
-              <span
-                onClick={() => handleSelection(item)}
-                style={{ cursor: 'pointer' }}
-              >
-                {item.name} - ${item.price}
-              </span>
-              <IconButton
-                color="success"
-                aria-label="add to shopping cart"
-                onClick={() =>
-                  props.handleAddToCart({
-                    name: item.name,
-                    price: item.price
-                  })
-                }
-              >
-                <AddShoppingCartIcon />
-              </IconButton>
-            </div>
-          ))}
-        </div>
+      <div key={section._id} style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "1rem"
+      }}>
+        <Card style={{ width: "80%" }}>
+          <CardContent>
+            <Typography variant="h5">{section.sectionName}</Typography>
+            {section.products.map((item) => (
+              <div key={item._id} style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                margin: "0.5rem 0"
+              }}>
+                <img src={item.image} alt={item.description} style={{ width: "100px", height: "100px", borderRadius: "10px" }} />
+                <span
+                  onClick={() => handleSelection(item)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {item.name} - ${item.price}
+                  <Typography>
+                    {item.description}
+                  </Typography>
+                </span>
+                <IconButton
+                  color="success"
+                  aria-label="add to shopping cart"
+                  onClick={() =>
+                    props.handleAddToCart({
+                      name: item.name,
+                      price: item.price
+                    })
+                  }
+                >
+                  <AddShoppingCartIcon />
+                </IconButton>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </div>
+
     )
   })
 
   return (
+<<<<<<< HEAD
     <div
       style={{
         margin: '0 auto',
@@ -85,6 +106,41 @@ export default function Menu(props) {
         currentUser={props.currentUser}
       />
     </div>
+=======
+    // <div
+    //   style={{
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     alignItems: "center",
+    //     margin: '1rem',
+    //   }}
+    // >
+      <div className='container'>
+        <div className='restaurantInfo'>
+          <Typography variant="h1" gutterBottom m={3}>Menu </Typography>
+
+        </div>
+        <div className='menu'>
+          <div>{menu}</div>
+        </div>
+        <div className='reviews'>
+          {selectedItem && <p style={{ margin: "1rem 0" }}>Selected: {selectedItem.name}</p>}
+          <Reviews
+            restaurantId={restaurant._id}
+            currentUser={props.currentUser}
+          />
+        </div>
+        <div className='checkout'>
+         <Checkout
+         cart={props.cart}
+         currentUser={props.currentUser}
+         restaurant={restaurant} />
+        </div>
+      </div>
+
+
+    // </div>
+>>>>>>> main
   )
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
 }

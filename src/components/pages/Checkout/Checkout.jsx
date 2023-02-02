@@ -137,10 +137,10 @@ function Checkout({ cart, currentUser, restaurant }) {
 
     return (
         <>
-            <Container>
+            <Container m={2}>
 
                 <div className="itemSection">
-                    <Typography variant="h3" gutterBottom>Checkout </Typography>
+                    <Typography variant="h1" gutterBottom m={3}>Checkout </Typography>
 
                     {addItemErrorMsg && (
                         <Typography className="error">{addItemErrorMsg}</Typography>)}
@@ -157,7 +157,17 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         <Typography variant="h4" color="text.secondary" gutterBottom>
                                             Order Details
                                         </Typography>
-                                        {items}
+
+                                        {items.length > 0 ? items : 
+                                        <div>
+                                        <Typography variant="h6" color="text.secondary" gutterBottom>
+                                        You haven't placed any orders in your checkout yet. 
+                                        </Typography>
+                                        <Typography variant="h6" color="text.secondary" gutterBottom>
+                                        Go find some grub!
+                                        </Typography>
+                                        </div>}
+                                        
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -192,7 +202,9 @@ function Checkout({ cart, currentUser, restaurant }) {
                 <form onSubmit={handleSubmit}>
                     <Button
                         type="submit"
-                        variant="contained">
+                        variant="contained"
+                        sx={{ marginBottom: "20px", margin: "10px", width: "30%" }}
+                        >
                         Checkout
                     </Button>
                 </form>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Button, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
 function UpdateAddress({ user, handleConfirmAddress }) {
@@ -10,62 +10,70 @@ function UpdateAddress({ user, handleConfirmAddress }) {
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
     return (
-        <Stack
-        justifyContent="center"
-        alignItems="baseline"
-        spacing={1}
-        >
-            <div style={{display: "flex", margin: "5px"}}>
-            <TextField
-                variant="filled"
-                label="Name"
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={{ marginRight: "5px"}}
-                required
-            />
-            <TextField
-                variant="filled"
-                label="Street Address"
-                type="text"
-                name="deliveryStreet"
-                value={street}
-                onChange={(e) => setStreet(e.target.value)}
-                required
-            />
-            </div>
-            <div style={{display: "flex", margin: "5px"}}>
-            <TextField
-                variant="filled"
-                label="City"
-                type="text"
-                name="deliveryCity"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-            />
-            <TextField
-                variant="filled"
-                label="State"
-                type="text"
-                name="deliveryState"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                required
-            />
-            <TextField
-                variant="filled"
-                label="Zip Code"
-                type="number"
-                max="99999"
-                name="deliveryZip"
-                value={zip}
-                onChange={(e) => setZip(e.target.value)}
-                required
-            />
-            </div>
+        <div style={{margin: "2%"}}>
+            <Typography>
+                <TextField
+                    variant="filled"
+                    label="Name"
+                    type="text"
+                    name="name"
+                    value={name}
+                    fullWidth
+                    onChange={(e) => setName(e.target.value)}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
+                    required
+                />
+            </Typography>
+
+            <Typography>
+                <TextField
+                    variant="filled"
+                    label="Street Address"
+                    type="text"
+                    name="deliveryStreet"
+                    value={street}
+                    fullWidth
+                    onChange={(e) => setStreet(e.target.value)}
+                    style={{ marginRight: "5px", maxWidth: "570px" }}
+                    required
+                />
+            </Typography>
+
+            <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="baseline"
+                marginBottom={2}
+            >
+                <TextField
+                    variant="filled"
+                    label="City"
+                    type="text"
+                    name="deliveryCity"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                />
+                <TextField
+                    variant="filled"
+                    label="State"
+                    type="text"
+                    name="deliveryState"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    required
+                />
+                <TextField
+                    variant="filled"
+                    label="Zip Code"
+                    type="number"
+                    max="99999"
+                    name="deliveryZip"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    required
+                />
+            </Stack>
             <Button
                 type="submit"
                 variant="contained"
@@ -78,7 +86,7 @@ function UpdateAddress({ user, handleConfirmAddress }) {
                 })}>
                 Confirm Delivery Address
             </Button>
-        </Stack>
+        </div>
     );
 }
 

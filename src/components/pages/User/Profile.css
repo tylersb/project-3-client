@@ -1,0 +1,33 @@
+.container {
+    position: absolute;
+    padding: 3%;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    'menu main main'
+    'menu orderHistory orderHistory'
+    ;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 3fr;
+}
+
+.leftDrawer{
+    grid-area: menu;
+    padding: 2%;
+    text-align: start;
+}
+
+.browseRestaurants{
+    grid-area: main;
+    padding: 2%;
+}
+.browseRestaurants:hover{
+    opacity: 0.6;
+}
+
+.pastOrders {
+    grid-area: orderHistory;
+    padding: 2%;
+}
+
