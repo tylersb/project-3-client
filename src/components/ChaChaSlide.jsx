@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box'
-import Switch from '@mui/material/Switch'
 import Slide from '@mui/material/Slide'
 import { useState, useRef } from 'react'
 import AccountInfoCreate from './pages/Restaurant/AccountInfoCreate'
 import MenuCreate from './pages/Restaurant/MenuCreate'
-import Accordian from './Accordians'
 
 export default function ChaChaSlide({
   restaurantInfo,
@@ -12,8 +10,7 @@ export default function ChaChaSlide({
   menu,
   setMenu,
   activeStep,
-  setActiveStep,
-  handleSubmit
+  setActiveStep
 }) {
   const [checked, setChecked] = useState(false)
   const containerRef = useRef(null)
@@ -25,6 +22,10 @@ export default function ChaChaSlide({
   return (
     <Box ref={containerRef}>
       <Box>
+        {/* <FormControlLabel
+          control={<Switch checked={checked} onChange={handleChange} />}
+          label="Show from target"
+        /> */}
         <Box
           sx={{
             w: '50vw'
@@ -46,7 +47,6 @@ export default function ChaChaSlide({
                 setRestaurantInfo={setRestaurantInfo}
                 ChaChaRealSmooth={handleChange}
               />
-              {/* <Accordian /> */}
             </Box>
           </Slide>
           <Slide
@@ -58,22 +58,12 @@ export default function ChaChaSlide({
             {...(checked ? { timeout: 600 } : {})}
           >
             <Box>
-              <MenuCreate menu={menu} setMenu={setMenu} 
+              <MenuCreate
+                menu={menu}
+                setMenu={setMenu}
                 activeStep={activeStep}
                 setActiveStep={setActiveStep}
               />
-            </Box>
-          </Slide>
-          <Slide
-            direction="left"
-            in={checked}
-            container={containerRef.current}
-            mountOnEnter
-            appear={true}
-            {...(checked ? { timeout: 600 } : {})}
-          >
-            <Box>
-              <Accordian />
             </Box>
           </Slide>
         </Box>
