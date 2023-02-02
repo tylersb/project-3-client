@@ -67,8 +67,8 @@ function App() {
         active: '#fb8c00'
       },
       background: {
-        default: '#fff',
-        paper: '#fff'
+        default: '#D3D3D3',
+        paper: '#D3D3D3'
       }
     },
     typography: {

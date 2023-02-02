@@ -16,7 +16,7 @@
     grid-area: menu;
     padding: 2%;
     text-align: start;
-    }
+}
 
 .browseRestaurants{
     grid-area: main;
