@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UseAddress from "./partials/UseAddress";
 import UpdateAddress from "./partials/UpdateAddress";
-import { Button, Typography, Grid, Container, Card, CardContent, Table, TableBody, TableContainer, Paper } from '@mui/material';
+import { Button, Typography, Grid, Container, Card, CardContent, Table, TableBody, TableContainer, Paper, Box } from '@mui/material';
 import CardComponent from "./partials/CardComponent";
 
 
@@ -124,7 +124,7 @@ function Checkout({ cart, currentUser, restaurant }) {
     let items = checkoutItems.products.map((item, idx) => {
         // console.log(item)
         return (
-            <Grid item key={`item${idx}`}>
+            <Grid item key={`item${idx}`} xs={12} md={12} style={{textAlign: "center"}}>
                 <CardComponent
                     item={item}
                     handleAddItem={handleAddItem}
@@ -157,7 +157,8 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         <Typography variant="h4" color="text.secondary" gutterBottom>
                                             Order Details
                                         </Typography>
-
+                                        <Box style={{margin: "0 auto"}}>
+                                        <Grid container>
                                         {items.length > 0 ? items : 
                                         <div>
                                         <Typography variant="h6" color="text.secondary" gutterBottom>
@@ -167,6 +168,8 @@ function Checkout({ cart, currentUser, restaurant }) {
                                         Go find some grub!
                                         </Typography>
                                         </div>}
+                                        </Grid>
+                                        </Box>
                                         
                                     </TableBody>
                                 </Table>
