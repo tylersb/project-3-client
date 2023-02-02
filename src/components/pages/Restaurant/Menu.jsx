@@ -3,7 +3,7 @@ import Reviews from '../../Reviews'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import IconButton from '@mui/material/IconButton'
 import { Link, useParams } from 'react-router-dom'
-import {Card, Box, Grid} from '@mui/material'
+import { Card, Box, Grid } from '@mui/material'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
@@ -80,7 +80,7 @@ export default function Menu(props) {
                   {item.name} - ${item.price}
                   <Typography>{item.description}</Typography>
                 </span>
-                
+
                 <IconButton
                   color="success"
                   aria-label="add to shopping cart"
@@ -103,51 +103,59 @@ export default function Menu(props) {
   })
 
   return (
-    // <div
-    //   style={{
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center",
-    //     margin: '1rem',
-    //   }}
-    // >
-    // <div className="container">
-      <Box style={{margin: "0 auto"}}>
-        <Grid container  spacing={2} m={3}>
-      {/* <div className="restaurantInfo"> */}
+
+    <Box style={{ margin: "0 auto" }}>
+      <Grid container spacing={2} m={3}>
+        {/* <div className="restaurantInfo"> */}
         <Grid item xs={12} md={3}>
-        <Typography variant="h1" gutterBottom m={3}>
-          Menu{' '}
-        </Typography>
+          <Card>
+            <CardContent>
+              <Typography variant="h1" gutterBottom m={3}>
+                Menu{' '}
+              </Typography>
+              <Typography variant="h6" gutterBottom m={3}>
+                Restaurant Name: {restaurant.restaurantName}
+              </Typography>
+              <Typography color='secondary'>
+                Restaurant Description:
+              </Typography>
+              <Typography>{restaurant.restaurantDescription}</Typography>
+              <Typography color='secondary'>
+                Restaurant Phone:
+              </Typography>
+              <Typography >{restaurant.phone}</Typography>
+              <Typography color='secondary'>
+                Restaurant Address:
+              </Typography>
+              <Typography >{restaurant.address?.street}</Typography>
+              <Typography>
+                {restaurant.address?.city}, {restaurant.address?.state}, {restaurant.address?.zip}
+              </Typography>
 
-      {/* <div className="reviews"> */}
-        {selectedItem && (
-          <p style={{ margin: '1rem 0' }}>Selected: {selectedItem.name}</p>
-        )}
-        <Reviews
-          restaurantId={restaurant._id}
-          currentUser={props.currentUser}
-        />
-      {/* </div> */}
+              {selectedItem && (
+                <p style={{ margin: '1rem 0' }}>Selected: {selectedItem.name}</p>
+              )}
+              <Reviews
+                restaurantId={restaurant._id}
+                currentUser={props.currentUser}
+              />
+            </CardContent>
+          </Card>
         </Grid>
-      {/* </div> */}
-      {/* <div className="menu"> */}
+
         <Grid item xs={12} md={8} ml={4}>
-        <div>{menu}</div>
-        <Button
-      color='secondary'
-      variant='contained'>
-        <Link to='/Checkout'>
-          Checkout
-        </Link>
-      </Button>
-      {/* </div> */}
+          <div>{menu}</div>
+          <Button
+            color='secondary'
+            variant='contained'>
+            <Link to='/Checkout'>
+              Checkout
+            </Link>
+          </Button>
+
+        </Grid>
+
       </Grid>
-
-        
-
-    {/* </div> */}
-    </Grid>
     </Box>
   )
   // if selectedItem is not null, display the name of the selected item, && is a conditional operator that checks if the first value is true, if it is, it displays the second value
