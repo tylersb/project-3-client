@@ -16,6 +16,7 @@ export default function Menu(props) {
 
   const fetchRestaurant = async (restaurantId) => {
     try {
+      console.log()
       axios.get(`${process.env.REACT_APP_SERVER_URL}/restaurants/${restaurantId}`)
         .then(response => {
           setRestaurant(response.data)
@@ -34,7 +35,7 @@ export default function Menu(props) {
     setSelectedItem(item) // updates the state of selectedItem with the item that was clicked
   }
 
-  const menu = restaurant.menu?.map((section, idx) => {
+  const menu = restaurant?.menu?.map((section, idx) => {
     return (
       <div key={section._id}>
         <h3>{section.sectionName}</h3>
@@ -78,7 +79,7 @@ export default function Menu(props) {
       <div>{menu}</div>
       {selectedItem && <p>Selected: {selectedItem.name}</p>}
       <Reviews
-        restaurantId={restaurant._id}
+        restaurantId={restaurant?._id}
         currentUser={props.currentUser}
       />
     </div>

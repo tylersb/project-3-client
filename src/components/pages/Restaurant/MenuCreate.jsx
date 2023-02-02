@@ -196,6 +196,18 @@ export default function ScrollDialog({ menu, setMenu }) {
         </div>
       </form>
       <Button>Add a menu section</Button>
+      <Button
+        variant="outlined"
+        type="submit"
+        onClick={() => {
+          if (section.sectionName === '') return
+          setMenu([...menu, section])
+          setSection({ sectionName: '', products: [] })
+          setProduct({ name: '', price: '', description: '' })
+        }}
+      >
+        Save Section
+      </Button>
     </div>
   )
 
@@ -212,11 +224,12 @@ export default function ScrollDialog({ menu, setMenu }) {
     )
 
   const sectionHead = (
-    <div key={section.sectionName}>
+    <div>
       <h3>{section.sectionName}</h3>
-      {section.products.length < 1
-        ? currentProduct
-        : section.products.map((product) => {
+      {section.products.length > 0
+        ? 
+        <div>
+        {section.products.map((product) => {
             return (
               <div key={product.name}>
                 <h5>
@@ -227,16 +240,43 @@ export default function ScrollDialog({ menu, setMenu }) {
               </div>
             )
           })}
+          {currentProduct}
+        </div>
+        : currentProduct}
     </div>
   )
 
   const emptyMenu = menu.length < 1
 
-  const menuItems = menu.map((section) => {
-    return { sectionHead }
-  })
+  const menuItems = (
+    <div>
+      {menu.map((s) => {
+        return (
+          <div key={s.sectionName}>
+            <h3>{s.sectionName}</h3>
+            {s.products.length < 1
+              ? null
+              : s.products.map((product) => {
+                  return (
+                    <div key={product.name}>
+                      <h5>
+                        {product.price.length > 0
+                          ? '($' + product.price + ')'
+                          : ''}{' '}
+                        {product.name}
+                      </h5>
+                      <h5>{product.description}</h5>
+                    </div>
+                  )
+                })}
+          </div>
+        )
+      })}
+      {section.sectionName.length > 0 ? sectionHead : null}
+    </div>
+  )
 
-  
+  const menuDisplay = emptyMenu ? sectionHead : menuItems
 
   return (
     <>
@@ -270,8 +310,13 @@ export default function ScrollDialog({ menu, setMenu }) {
               alignItems: 'center'
             }}
           >
-            {menuSection}
-            {emptyMenu ? sectionHead : menuItems}
+            <Box>{menuSection}</Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >{menuDisplay}</Box>
           </Box>
         </DialogContent>
         <DialogActions>
