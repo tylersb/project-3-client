@@ -85,7 +85,7 @@ export default function Profile({ currentUser, handleLogout }) {
             <Box m={3} className='browseRestaurants'>
               <Card  >
                 <CardMedia
-                  sx={{ height: 140 }}
+                  sx={{ height: 300 }}
                   image={Burger}
                   title="Burger"
                 />
